@@ -17,7 +17,6 @@ myApp.service('pageInfoService', function() {
                     callback(model);
                 });
             }
-
         });
     };
 });
@@ -29,7 +28,7 @@ myApp.service('apiService', function($http, $q) {
 			var d = $q.defer();
 			$http({
 					method	: 'POST', 
-					url		: 'http://localhost:3000/magic' /* 'http://linkfire.com/api/1.0/links/create'*/,
+					url		  : 'http://linkfire.com/api/1.0/links/create',
 					data    : angular.toJson(postData)  
 			}).success(function(data, status, headers){
 				console.log("DEBUGGING: success");
@@ -44,15 +43,11 @@ myApp.service('apiService', function($http, $q) {
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, $window) {
-    
-    $scope.show = false;
-	console.log($scope.show);
-	
+
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
         $scope.newLink = "Fetching shortlink fron Linkfire.com...";
-        
         $scope.pageInfos = $scope.getPostData(info.url, info.title);
         console.log("calling getLinkfireLink");
         apiService.getLinkfireLink($scope.pageInfos)
@@ -66,7 +61,6 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 				console.log(error);
 				$scope.newLink = "Error handling your request!";
 			});		
-        $scope.$apply();
     });
     
     $scope.getPostData = function(newUrl, newTitle){
@@ -78,9 +72,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 				"url" : newUrl, 
 				"title" : newTitle, 
 				"description": "some stuff" 
-				
-
-			}    
+			}
     }
 
     
