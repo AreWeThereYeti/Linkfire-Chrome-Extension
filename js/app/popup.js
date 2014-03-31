@@ -44,15 +44,10 @@ myApp.service('apiService', function($http, $q) {
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, $window) {
-    
-    
-	
-	
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
         $scope.newLink = "Fetching shortlink fron Linkfire.com...";
-        
         $scope.pageInfos = $scope.getPostData(info.url, info.title);
         console.log("calling getLinkfireLink");
         apiService.getLinkfireLink($scope.pageInfos)
@@ -66,25 +61,23 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 				console.log(error);
 				$scope.newLink = "Error handling your request!";
 			});		
-        $scope.$apply();
     });
     
     $scope.getPostData = function(newUrl, newTitle){
 	    return postData = 
 	    	{
-				token : "8f967fc1880401be9eb992998d1ac70fd0297ffd", //string - right now my token
-				user_id : 1065,
+				"token": "8f967fc1880401be9eb992998d1ac70fd0297ffd", //string - right now my token
+				"user_id": 1065,
 				/*
 				domain_id(optional)
 				team_id(optional)
 				*/
-				url : newUrl, //string
-				title : newTitle, //string
-				description: "some stuff" //string
-				
+				"url": newUrl, //string
+				"title" : newTitle, //string
+        "description": "some stuff" //string
 				/* thumbnail(URL encoded) (optional) //string */
 
-			}    
+			}
     }
 
     
