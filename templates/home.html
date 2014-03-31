@@ -5,22 +5,47 @@
 		  </ul>
 	</div>
 
-	<div class="layout-default" ng-show="true">
-		<header>
-		    <h2>Here you go! {{urlIsLoaded}}</h2>
-		</header>
+	<div class="layout-default" ng-show="show == false">
 		
+		<h2>Here you go! </h2>
+				
 		<h2>Webage info:</h2>
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-
+		<div class="url-thumbnail"></div>
+		<div class="url-data">	
 			    <div>{{title}}</div>
 				<div>{{url}}</div>
-				<!-- <div>{{pageInfos}}</div> -->
-			</div>
+		</div>
+		
+		<div class="new-link">
+		    <h2>New Link:</h2>
+			<div>{{newLink}}</div>
+			<button class="copy-link" ng-show="false">Copy Link</button>
+		</div>
+	</div>
+	
+	<div class="layout-custom-url" ng-show="false">
+		
+		<div class="manual-url"  >
+			<form id="url-form" >
+				<label for="form-URL">URL:</label>
+				<input type="text" id="form-URL" name="form-URL" placeholder="Enter URL" size="50"  required />
+				<input type="submit">
+			</form>
 		</div>
 
-	    <h2>New Link:</h2>
-		<div>{{newLink}}</div>
+				
+		<div class="onCreatedlink" ng-show="false">
+			<h2>Webage info:</h2>
+			<div class="url-thumbnail"></div>
+			<div class="url-data">	
+				    <div>{{title}}</div>
+					<div>{{url}}</div>
+			</div>
+			
+			<div class="new-link" >
+			    <h2>New Link:</h2>
+				<div>{{newLink}}</div>
+			</div>
+		</div>
 	</div>
 </div>

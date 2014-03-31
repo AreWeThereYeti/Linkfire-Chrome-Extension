@@ -1,8 +1,18 @@
-/*
-body {
-  font-family: Helvetica, sans-serif;
+
+@font-face {
+    font-family: 'allerregular'; /*a name to be used later*/
+    src: url('../fonts/Aller/Regular/aller-regular-webfont.eot'); /*URL to font*/
 }
-*/
+
+@font-face {
+    font-family: 'allerlight'; /*a name to be used later*/
+    src: url('../fonts/Aller/Light/aller-light-webfont.eot'); /*URL to font*/
+}
+
+body {
+  font-family: 'allerregular', sans-serif;
+}
+
 
 #popup {
   min-width: 500px;
@@ -14,6 +24,19 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+input[type="submit"]{
+    width: 140px;
+    display: block;
+    background-color: #F04E23;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    -moz-transition: background-color 0.3s ease-in-out;
+    -o-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    border: 0;
+    color: white;
 }
 
 #actionbar {

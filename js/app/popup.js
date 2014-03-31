@@ -17,7 +17,6 @@ myApp.service('pageInfoService', function() {
                     callback(model);
                 });
             }
-
         });
     };
 });
@@ -29,8 +28,8 @@ myApp.service('apiService', function($http, $q) {
 			var d = $q.defer();
 			$http({
 					method	: 'POST', 
-					url		: 'http://linkfire.com/api/1.0/links/create',
-					data    : postData  
+					url		  : 'http://linkfire.com/api/1.0/links/create',
+					data    : angular.toJson(postData)  
 			}).success(function(data, status, headers){
 				console.log("DEBUGGING: success");
 				d.resolve(data);
@@ -44,6 +43,7 @@ myApp.service('apiService', function($http, $q) {
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, $window) {
+
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
@@ -66,17 +66,12 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
     $scope.getPostData = function(newUrl, newTitle){
 	    return postData = 
 	    	{
-				"token": "8f967fc1880401be9eb992998d1ac70fd0297ffd", //string - right now my token
-				"user_id": 1065,
-				/*
-				domain_id(optional)
-				team_id(optional)
-				*/
-				"url": newUrl, //string
-				"title" : newTitle, //string
-        "description": "some stuff" //string
-				/* thumbnail(URL encoded) (optional) //string */
+				"token" : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
+				"user_id" : 1065,
 
+				"url" : newUrl, 
+				"title" : newTitle, 
+				"description": "some stuff" 
 			}
     }
 
