@@ -84,10 +84,15 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 			    // this callback will be called asynchronously
 			    // when the response is available
 				$scope.newLink = data.link.url;
-				
+				if($scope.autoCopy){
+					$scope.copyToClipboard($scope.newLink);
+				}
 			}, function(error){
 				console.log(error);
 				$scope.newLink = "Error handling your request!";
+				if($scope.autoCopy){
+					$scope.copyToClipboard($scope.newLink);
+				}
 			});		
     });
 
