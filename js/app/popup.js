@@ -1,11 +1,8 @@
-﻿//myApp.config(['$httpProvider', function ($httpProvider) {
-//  // ...
-//
-//  // delete header from client:
-//  // http://stackoverflow.com/questions/17289195/angularjs-post-data-to-external-rest-api
-//  $httpProvider.defaults.useXDomain = true;
-//  delete $httpProvider.defaults.headers.common['X-Requested-With'];
-//}]);
+﻿// Modifies $httpProvider for correct server communication (POST variable format)
+angular.module('myApp', [], function($httpProvider) {
+  // Use x-www-form-urlencoded Content-Type
+  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+});
 
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
@@ -32,17 +29,20 @@ myApp.service('pageInfoService', function() {
 myApp.service('apiService', function($http, $q) {
     
 		this.getLinkfireLink = function(postData){
+      console.log(JSON.stringify(postData));
 			var d = $q.defer();
 			$http({
-					method	: 'POST', 
-					url		  : 'http://linkfire.com/api/1.0/links/create',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data    :  postData
+					method	: 'POST',
+					url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
+          headers : {'Content-type' : 'application/json'},
+          data    : JSON.stringify(postData)
 			}).success(function(data, status, headers){
 				console.log("DEBUGGING: success");
-				d.resolve(data);
+        console.log(status);
+        d.resolve(data);
 			}).error(function(data, status, headers){
-				console.log("DEBUGGING: error");
+        console.log(status);
+        console.log("DEBUGGING: error");
 				d.reject(status);
 			});
 			return d.promise;
@@ -51,7 +51,6 @@ myApp.service('apiService', function($http, $q) {
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, $window) {
-    $scope.show = true;
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
@@ -68,27 +67,18 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 				$scope.newLink = "Error handling your request!";
 			});		
     });
-    
-    $scope.getPostData = function(newUrl, newTitle){
-	    return postData =
-	    	{
-				'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
-				"user_id" : 1065,
-				"url" : newUrl,
-				"title" : newTitle,
-				"description": "some stuff"
-			}
-/*      var postData = new Array();
-      postData.token = "8f967fc1880401be9eb992998d1ac70fd0297ffd";
-      postData['user_id'] = 1065;
-      postData['url'] = newUrl;
-      postData['title'] = newTitle;
-      postData['description'] = 'some stuff';
-      console.log(postData);
-      return postData*/
 
-    };
-
+  $scope.getPostData = function(newUrl, newTitle){
+    console.log(newUrl + ' and ' + newTitle)
+    return postData =
+    {
+      'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
+      "user_id" : 302,
+      "url" : newUrl,
+      "title" : newTitle,
+      "description": "some stuff"
+    }
+  };
     
     $scope.copyToClipboard = function(text){
 	    var copyDiv = document.createElement('div');
