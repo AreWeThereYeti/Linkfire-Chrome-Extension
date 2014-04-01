@@ -1,5 +1,3 @@
-
-﻿
 myApp.service('storageCheckService', function() {
     this.getSettings = function(callback) {
         var settings = {};
@@ -9,14 +7,13 @@ myApp.service('storageCheckService', function() {
             if (JSON.stringify(storage).length > 0){
                 settings.copy = storage.copy;
                 settings.url = storage.url;
-								callback(settings);
-								}
+				callback(settings);
+			}
 
             
         });
     };
 });
-
 
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
@@ -61,7 +58,6 @@ myApp.service('apiService', function($http, $q) {
     
 });
 
-
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
 
 	
@@ -79,7 +75,6 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 
 
   pageInfoService.getInfo(function (info) {
-
         $scope.title = info.title;
         $scope.url = info.url;
         $scope.newLink = "Fetching shortlink fron Linkfire.com...";

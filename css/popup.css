@@ -14,7 +14,7 @@ body {
   color: #ffffff;
   background: #333943;
 }
-
+.ng-hide { display:none!important; }
 
 #popup {
   min-width: 500px;
