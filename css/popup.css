@@ -14,7 +14,14 @@ body {
   color: #ffffff;
   background: #333943;
 }
-.ng-hide { display:none!important; }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.ng-hide { 
+	display:none!important; 
+}
 
 #popup {
   min-width: 500px;
@@ -37,6 +44,10 @@ body {
     background-size: 77px 77px;
     height: 77px;
     width: 77px;
+}
+
+input[type="text"]{
+color: black;
 }
 
 input[type="submit"], button{

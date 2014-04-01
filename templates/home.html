@@ -25,17 +25,18 @@
 		</div>
 	</div>
 	
-	<div class="layout-custom-url" ng-show="!autoUrl">
+	<div class="layout-custom-url" ng-show="!autoUrl" >
 		<div class="manual-url"  >
 			<form id="url-form" >
-				<label for="form-URL">URL:</label>
-				<input type="text" id="form-URL" name="form-URL" placeholder="Enter URL" size="50"  required />
-				<input type="submit">
+				<input type="text" id="form-URL" ng-model="custom.url" placeholder="Enter Page Url" size="50"  required />
+				<input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" size="50"  required />
+				<input type="text" id="form-description" ng-model="custom.description" placeholder="Page Description" size="50"  required />
+				<button class="get-link" ng-click="createLink(custom)">Get Link</button>
 			</form>
 		</div>
 
 				
-		<div class="onCreatedlink">
+		<div class="onCreatedlink" ng-show="linkCreated">
 			<h2>Webage info:</h2>
 			<div class="url-thumbnail"></div>
 			<div class="url-data">	

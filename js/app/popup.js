@@ -7,10 +7,8 @@ myApp.service('storageCheckService', function() {
             if (JSON.stringify(storage).length > 0){
                 settings.copy = storage.copy;
                 settings.url = storage.url;
-				callback(settings);
-			}
-
-            
+								callback(settings);
+								}            
         });
     };
 });
@@ -60,6 +58,7 @@ myApp.service('apiService', function($http, $q) {
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
 
+	$scope.linkCreated = false;
 	
 	storageCheckService.getSettings(function(settings){
 		
@@ -71,31 +70,55 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 			$scope.autoCopy =true;
 		}
 		console.log("storageCheck!!! $scope.autoUrl:"+$scope.autoUrl+"$scope.autoCopy:"+$scope.autoCopy);	
-	});	
+		
 
-
-  pageInfoService.getInfo(function (info) {
-        $scope.title = info.title;
-        $scope.url = info.url;
-        $scope.newLink = "Fetching shortlink fron Linkfire.com...";
-        $scope.pageInfos = $scope.getPostData(info.url, info.title);
-        apiService.getLinkfireLink($scope.pageInfos)
-        	.then(function(data) {
+		if($scope.autoUrl){
+		  pageInfoService.getInfo(function (info) {
+		        $scope.title = info.title;
+		        $scope.url = info.url;
+		        $scope.newLink = "Fetching shortlink fron Linkfire.com...";
+		        $scope.pageInfos = $scope.getPostData(info.url, info.title);
+		        apiService.getLinkfireLink($scope.pageInfos)
+		        	.then(function(data) {
+					    // this callback will be called asynchronously
+					    // when the response is available
+						$scope.newLink = data;
+						if($scope.autoCopy){
+							$scope.copyToClipboard($scope.newLink);
+						}
+					}, function(error){
+						console.log(error);
+						$scope.newLink = "Error handling your request!";
+						if($scope.autoCopy){
+							$scope.copyToClipboard($scope.newLink);
+						}
+					});		
+		    });
+		}
+   });
+   $scope.createLink = function(input){
+   	console.log("createLink med: "+input.url+" og "+input.title);
+   	$scope.pageInfos = $scope.getPostData(input.url, input.title);
+	    apiService.getLinkfireLink($scope.pageInfos)
+	    	.then(function(data) {
 			    // this callback will be called asynchronously
 			    // when the response is available
-				$scope.newLink = data;
-				if($scope.autoCopy){
-					$scope.copyToClipboard($scope.newLink);
-				}
-			}, function(error){
-				console.log(error);
-				$scope.newLink = "Error handling your request!";
-				if($scope.autoCopy){
-					$scope.copyToClipboard($scope.newLink);
-				}
-			});		
-    });
-    
+			    $scope.linkCreated = true;
+					$scope.newLink = data;
+					if($scope.autoCopy){
+						$scope.copyToClipboard($scope.newLink);
+					}
+					
+				}, function(error){
+						console.log(error);
+						$scope.newLink = "Error handling your request!";
+						if($scope.autoCopy){
+							$scope.copyToClipboard($scope.newLink);
+							}
+						$scope.linkCreated = true;
+
+				});
+   }
     $scope.getPostData = function(newUrl, newTitle){
 	    return postData =
 	    	{
