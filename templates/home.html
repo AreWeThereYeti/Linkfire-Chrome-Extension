@@ -20,7 +20,7 @@
 			<div class="new-link">
 			    <h2>New Link:</h2>
 				<div>{{newLink}}</div>
-				<button class="copy-link" ng-show="!autoCopy">Copy Link</button>
+				<button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy">Copy Link</button>
 			</div>
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 			<div class="new-link" >
 			    <h2>New Link:</h2>
 				<div>{{newLink}}</div>
-				<button class="copy-link" ng-show="!autoCopy">Copy Link</button>
+				<button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy">Copy Link</button>
 			</div>
 		</div>
 	</div>
