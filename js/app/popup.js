@@ -1,16 +1,17 @@
+
 myApp.service('storageCheckService', function() {
     this.getSettings = function(callback) {
         var settings = {};
 
         chrome.storage.local.get(['copy', 'url'],
-        function (storage) {
+          function (storage) {
             if (JSON.stringify(storage).length > 0){
                 settings.copy = storage.copy;
                 settings.url = storage.url;
-								callback(settings);
-								}            
-        });
-    };
+				callback(settings);
+				}            
+		  }
+    )};
 });
 
 myApp.service('pageInfoService', function() {
@@ -38,17 +39,18 @@ myApp.service('pageInfoService', function() {
 myApp.service('apiService', function($http, $q) {
     
 		this.getLinkfireLink = function(postData){
+      console.log(JSON.stringify(postData));
 			var d = $q.defer();
 			$http({
-					method	: 'POST', 
-					url		  : 'http://linkfire.com/api/1.0/links/create',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data    :  postData
+					method	: 'POST',
+					url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
+          headers : {'Content-type' : 'application/json'},
+          data    : JSON.stringify(postData)
 			}).success(function(data, status, headers){
 				console.log("DEBUGGING: success");
-				d.resolve(data);
+        d.resolve(data);
 			}).error(function(data, status, headers){
-				console.log("DEBUGGING: error");
+        console.log("DEBUGGING: error");
 				d.reject(status);
 			});
 			return d.promise;
@@ -139,6 +141,17 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 
     };
 
+  $scope.getPostData = function(newUrl, newTitle){
+    console.log(newUrl + ' and ' + newTitle)
+    return postData =
+    {
+      'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
+      "user_id" : 302,
+      "url" : newUrl,
+      "title" : newTitle,
+      "description": "some stuff"
+    }
+  };
     
     $scope.copyToClipboard = function(text){
 	    var copyDiv = document.createElement('div');
