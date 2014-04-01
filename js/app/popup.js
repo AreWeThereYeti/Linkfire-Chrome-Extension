@@ -1,4 +1,21 @@
 ﻿
+myApp.service('storageCheckService', function() {
+    this.getSettings = function(callback) {
+        var settings = {};
+
+        chrome.storage.local.get(['copy', 'url'],
+        function (storage) {
+            if (JSON.stringify(storage).length > 0){
+                settings.copy = storage.copy;
+                settings.url = storage.url;
+								callback(settings);
+								}
+
+            
+        });
+    };
+});
+
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
         var model = {};
@@ -42,9 +59,23 @@ myApp.service('apiService', function($http, $q) {
     
 });
 
-myApp.controller("PageController", function ($scope, pageInfoService, apiService, $window) {
+myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
 
-    pageInfoService.getInfo(function (info) {
+	
+	storageCheckService.getSettings(function(settings){
+		
+		if(JSON.stringify(settings).length > 0){
+			$scope.autoUrl = settings.url;
+			$scope.autoCopy = settings.copy;
+		}else{
+			$scope.autoUrl = true;
+			$scope.autoCopy =true;
+		}
+		console.log("storageCheck!!! $scope.autoUrl:"+$scope.autoUrl+"$scope.autoCopy:"+$scope.autoCopy);	
+	});	
+
+
+  pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
         $scope.newLink = "Fetching shortlink fron Linkfire.com...";

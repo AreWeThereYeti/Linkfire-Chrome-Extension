@@ -1,11 +1,12 @@
 myApp.controller("SettingsCtrl", function ($scope){
 
+	//note: I have made a service that gets copy+url settings 'storageCheckService.getSettings(function(settings))'
 	
 	// checks chrome local storage for settings and sets variables accordingly
 	chrome.storage.local.get(['copy', 'url'], function(result) {
         console.log("results: "+JSON.stringify(result));    
 
-        if(JSON.stringify(result).length){
+       if(JSON.stringify(result).length){
 	      $scope.copy = result.copy;
 		  $scope.url = result.url;
 		  console.log("getting: "+$scope.copy+" and "+$scope.url);  
@@ -16,7 +17,7 @@ myApp.controller("SettingsCtrl", function ($scope){
 		  $scope.url = true;
         }
         $scope.$apply();
-     }); //hvad hvis der retuneres en fejl?
+     });
 
 
     // checks chrome local storage for settings and sets variables accordingly
