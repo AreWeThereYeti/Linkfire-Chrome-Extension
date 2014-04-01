@@ -1,7 +1,17 @@
-﻿// Modifies $httpProvider for correct server communication (POST variable format)
-angular.module('myApp', [], function($httpProvider) {
-  // Use x-www-form-urlencoded Content-Type
-  $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+﻿
+myApp.service('storageCheckService', function() {
+    this.getSettings = function(callback) {
+        var settings = {};
+
+        chrome.storage.local.get(['copy', 'url'],
+        function (storage) {
+            if (JSON.stringify(storage).length > 0){
+                settings.copy = storage.copy;
+                settings.url = storage.url;
+				        callback(settings);
+			      }
+        });
+    };
 });
 
 myApp.service('pageInfoService', function() {
@@ -38,10 +48,8 @@ myApp.service('apiService', function($http, $q) {
           data    : JSON.stringify(postData)
 			}).success(function(data, status, headers){
 				console.log("DEBUGGING: success");
-        console.log(status);
         d.resolve(data);
 			}).error(function(data, status, headers){
-        console.log(status);
         console.log("DEBUGGING: error");
 				d.reject(status);
 			});
@@ -50,8 +58,23 @@ myApp.service('apiService', function($http, $q) {
     
 });
 
-myApp.controller("PageController", function ($scope, pageInfoService, apiService, $window) {
-    pageInfoService.getInfo(function (info) {
+myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
+
+	
+	storageCheckService.getSettings(function(settings){
+		
+		if(JSON.stringify(settings).length > 0){
+			$scope.autoUrl = settings.url;
+			$scope.autoCopy = settings.copy;
+		}else{
+			$scope.autoUrl = true;
+			$scope.autoCopy =true;
+		}
+		console.log("storageCheck!!! $scope.autoUrl:"+$scope.autoUrl+"$scope.autoCopy:"+$scope.autoCopy);	
+	});	
+
+
+  pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
         $scope.newLink = "Fetching shortlink fron Linkfire.com...";
@@ -60,7 +83,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
         	.then(function(data) {
 			    // this callback will be called asynchronously
 			    // when the response is available
-				$scope.newLink = data;
+				$scope.newLink = data.link.url;
 				
 			}, function(error){
 				console.log(error);

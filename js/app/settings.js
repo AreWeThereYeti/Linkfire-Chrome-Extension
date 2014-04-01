@@ -1,46 +1,32 @@
 myApp.controller("SettingsCtrl", function ($scope){
 
+	//note: I have made a service that gets copy+url settings 'storageCheckService.getSettings(function(settings))'
 	
-/*
+	// checks chrome local storage for settings and sets variables accordingly
 	chrome.storage.local.get(['copy', 'url'], function(result) {
-        if(result.length){
+        console.log("results: "+JSON.stringify(result));    
+
+       if(JSON.stringify(result).length){
 	      $scope.copy = result.copy;
 		  $scope.url = result.url;
 		  console.log("getting: "+$scope.copy+" and "+$scope.url);  
 	        
+        }else{
+	      console.log("first run!");  
+ 	      $scope.copy = true;
+		  $scope.url = true;
         }
-     } //hvad hvis der retuneres en fejl?
-     );
+        $scope.$apply();
+     });
 
-     
-	$scope.storeChanges = function(){	
+
+    // checks chrome local storage for settings and sets variables accordingly
+	$scope.storeChanges = function(){
+		console.log("setting: "+$scope.copy+" and "+$scope.url);	
 		chrome.storage.local.set({
 	        'copy': $scope.copy,
 	        'url': $scope.url
 			});
-	}*/
-		
-	/*
-if(localStorage.getItem('copy')!=null){
-		console.log("STORAGE!");
-			$scope.copy = localStorage.getItem('copy');
-			$scope.url = localStorage.getItem('url');		
-			
-	}else{
-		console.log("setting to true!");
-			$scope.copy= true;
-			$scope.url= true;
-						
 	}
-*/
-	
-
-		//console.log(localStorage.getItem('copy')+"-----"+localStorage.getItem('url'));
-/*
-		localStorage.setItem('copy', $scope.copy);
-		localStorage.setItem('url', $scope.url); 
-		}
-*/
-
-	
+			
 });
