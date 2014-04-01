@@ -1,7 +1,7 @@
 <div class="settings">
 	<div id="actionbar">
 		  <ul class="list-inline">
-		    <li><a class="glyphicon glyphicon-arrow-left" href="#/"></a></li>
+		    <li><a class="glyphicon glyphicon-arrow-left" ng-click="storeChanges()" href="#/"></a></li>
 		  </ul>
 	</div>
 	
@@ -26,14 +26,14 @@
 			<div class="row">
 				<label for="auto-url">Auto url:</label>
 				<input id="auto-url" type="checkbox"
-			          ng-model="auto.url"
+			          ng-model="url"
 			          placeholder="Enter email" />
 			    <p>Loads url of current webpage automatically</p>
 			</div>
 			<div class="row">
 			    <label for="auto-url">Auto copy:</label>
 				<input id="auto-copy" type="checkbox"
-			          ng-model="auto.copy"
+			          ng-model="copy" value="true"
 			          label="Enter password" />
 			   <p>Copy new url to clipboard automatically</p>
 			</div>
