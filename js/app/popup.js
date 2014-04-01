@@ -1,3 +1,4 @@
+
 ﻿
 myApp.service('storageCheckService', function() {
     this.getSettings = function(callback) {
@@ -15,6 +16,7 @@ myApp.service('storageCheckService', function() {
         });
     };
 });
+
 
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
@@ -41,12 +43,12 @@ myApp.service('pageInfoService', function() {
 myApp.service('apiService', function($http, $q) {
     
 		this.getLinkfireLink = function(postData){
-			console.log("DEBUGGING- postdata: "+JSON.stringify(postData));
 			var d = $q.defer();
 			$http({
 					method	: 'POST', 
 					url		  : 'http://linkfire.com/api/1.0/links/create',
-					data    : angular.toJson(postData)  
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          data    :  postData
 			}).success(function(data, status, headers){
 				console.log("DEBUGGING: success");
 				d.resolve(data);
@@ -58,6 +60,7 @@ myApp.service('apiService', function($http, $q) {
 		};
     
 });
+
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
 
@@ -76,16 +79,15 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 
 
   pageInfoService.getInfo(function (info) {
+
         $scope.title = info.title;
         $scope.url = info.url;
         $scope.newLink = "Fetching shortlink fron Linkfire.com...";
         $scope.pageInfos = $scope.getPostData(info.url, info.title);
-        console.log("calling getLinkfireLink");
         apiService.getLinkfireLink($scope.pageInfos)
         	.then(function(data) {
 			    // this callback will be called asynchronously
 			    // when the response is available
-			    console.log("requesting new link: "+JSON.stringify(data));
 				$scope.newLink = data;
 				
 			}, function(error){
@@ -95,16 +97,24 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
     });
     
     $scope.getPostData = function(newUrl, newTitle){
-	    return postData = 
+	    return postData =
 	    	{
-				"token" : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
+				'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
 				"user_id" : 1065,
-
-				"url" : newUrl, 
-				"title" : newTitle, 
-				"description": "some stuff" 
+				"url" : newUrl,
+				"title" : newTitle,
+				"description": "some stuff"
 			}
-    }
+/*      var postData = new Array();
+      postData.token = "8f967fc1880401be9eb992998d1ac70fd0297ffd";
+      postData['user_id'] = 1065;
+      postData['url'] = newUrl;
+      postData['title'] = newTitle;
+      postData['description'] = 'some stuff';
+      console.log(postData);
+      return postData*/
+
+    };
 
     
     $scope.copyToClipboard = function(text){
