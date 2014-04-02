@@ -89,7 +89,7 @@ myApp.service('apiService', function($http, $q) {
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
-
+  $scope.fetching = true;
 	$scope.linkCreated = false;
 	
 	storageCheckService.getSettings(function(settings){
@@ -105,7 +105,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 
 
 		if($scope.autoUrl){
-		  pageInfoService.getInfo(function (info) {
+      pageInfoService.getInfo(function (info) {
 		        $scope.title = info.title;
 		        $scope.url = info.url;
 		        $scope.newLink = "Fetching shortlink fron Linkfire.com...";
@@ -114,7 +114,8 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		        	.then(function(data) {
 					    // this callback will be called asynchronously
 					    // when the response is available
-						$scope.newLink = data;
+              $scope.fetching = false;
+						  $scope.newLink = data.link.url;
 						if($scope.autoCopy){
 							$scope.copyToClipboard($scope.newLink);
 						}
