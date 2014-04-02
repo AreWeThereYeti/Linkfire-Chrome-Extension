@@ -1,12 +1,4 @@
 myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
-
-
-  $scope.view = 'loginview';
-
-  $scope.$on('loggedIn', function() {
-    $scope.view = 'loginview';
-  });
-
   // checking auth status
 	storageCheckService.dummyGetAuth(function(status){
 		if(JSON.stringify(status.user).length>0){
