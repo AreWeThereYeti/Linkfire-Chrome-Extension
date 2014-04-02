@@ -46,7 +46,7 @@ body {
     width: 77px;
 }
 
-input[type="text"]{
+input[type="text"],[type="password"]{
 color: black;
 }
 

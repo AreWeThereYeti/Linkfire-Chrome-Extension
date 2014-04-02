@@ -1,5 +1,35 @@
 ﻿
-myApp.service('storageCheckService', function() {
+myApp.service('storageCheckService', function($q) {
+    
+    this.dummySetId = function(args) {
+	    chrome.storage.local.set({
+	        'user': args.email
+			});
+			console.log("setting user: "+args.email);
+    };
+    
+    this.setId = function(args) {
+	    chrome.storage.local.set({
+	        'token': args.token,
+	        'id': args.user_id
+			});
+
+    };
+    
+    this.dummyGetAuth = function(callback) {
+        var user = {};
+        chrome.storage.local.get(['user'],
+          function (storage) {
+          	console.log("checking: "+storage.user);
+            if (JSON.stringify(storage).length > 0){
+                user.user = storage.user;
+                console.log("setting: "+user.user);
+
+								callback(user);
+				}            
+		  }
+    )};
+    
     this.getSettings = function(callback) {
         var settings = {};
 
@@ -64,15 +94,15 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 	
 	storageCheckService.getSettings(function(settings){
 		
-		if(JSON.stringify(settings).length > 0){
+		if(JSON.stringify(settings).length > 2){
 			$scope.autoUrl = settings.url;
 			$scope.autoCopy = settings.copy;
 		}else{
 			$scope.autoUrl = true;
 			$scope.autoCopy =true;
 		}
-		console.log("storageCheck!!! $scope.autoUrl:"+$scope.autoUrl+"$scope.autoCopy:"+$scope.autoCopy);	
 		
+
 
 		if($scope.autoUrl){
 		  pageInfoService.getInfo(function (info) {
@@ -154,30 +184,5 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 	}
 });
 
-myApp.module('linkfireWebappApp')
-  .service('loginService', function LoginService($rootScope, $http, $q, $window) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-
-    /*Api. Should be moved to CONFIG*/
-    var API_ENDPOINT =  'http://localhost:8080'
-
-    // urls   ------ OBS!!! Setup for specific use. Move to config when ready
-    var urlAuth = API_ENDPOINT + '/authenticate';
-
-    this.Login = function (params) {
-      console.log("loginfunction")
-      $http.post(urlAuth, params)
-        .success(function (data, status, headers, config) {
-          $window.sessionStorage.token = data.token;
-        })
-        .error(function (data, status, headers, config) {
-          // Erase the token if the user fails to log in
-          delete $window.sessionStorage.token;
-
-          // Handle login errors here
-          var message = 'Error: Invalid user or password';
-        });
-    };
-  });
 
 
