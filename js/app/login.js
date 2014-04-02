@@ -1,6 +1,7 @@
 myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
 	// checking auth status
 	storageCheckService.dummyGetAuth(function(status){
+
 		if(JSON.stringify(status.user).length>0){
 			console.log("length: "+JSON.stringify(status.user).length);
 			$location.path("/home");
@@ -9,21 +10,28 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 	});
 
 	$scope.send = function(user){
-		console.log("posting: "+JSON.stringify(user));
 		
+		
+		$scope.user.pass = CryptoJS.SHA1(user.pass);
+		console.log("pass: "+user.pass);
+		console.log("pass: "+CryptoJS.SHA1("nosser"));
+
 		// implements login request
-		/*
-loginService.login(user)
+		console.log("posting: "+user.pass);
+		loginService.login(user)
 			.then(function(data){
 				//set userdata
-				storageCheckService.set(data);
+				storageCheckService.setId(data);
 				$location.path("/home");
 			},function(error){
 				//handle Error
+				console.log("error on login...");
 		});
-*/
+
+/*
 		storageCheckService.dummySetId(user);
 		$location.path("/home");
+*/
 		
 	}
 	
@@ -38,7 +46,7 @@ myApp.service('loginService', function LoginService($rootScope, $http, $q, $wind
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     /*Api. Should be moved to CONFIG*/
-    var API_ENDPOINT =  'http://linkfire.test.dev.rocketlabs.dk'
+    var API_ENDPOINT =  'http://linkfire.com'
 
     // urls   ------ OBS!!! Setup for specific use. Move to config when ready
     var urlAuth = API_ENDPOINT + '/api/1.0/auth/login';
