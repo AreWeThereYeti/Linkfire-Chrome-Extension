@@ -16,23 +16,24 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 	      console.log("first run!");  
  	      $scope.copy = true;
  				$scope.url = true;
-        }
+        $scope.username = result.user;
+       }
         $scope.$apply();
      });
 
 
     // checks chrome local storage for settings and sets variables accordingly
 	$scope.storeChanges = function(){
-		console.log("setting: "+$scope.copy+" and "+$scope.url);	
 		chrome.storage.local.set({
 	        'copy': $scope.copy,
 	        'url': $scope.url
 			});
-	}
+    $location.path("/home");
+
+  };
 	$scope.signOut = function(){
-		console.log("signing out: "+$scope.user);	
+		console.log("signing out: "+$scope.user);
 		chrome.storage.local.clear();
 		$location.path("/");	
 		}
-		
 });

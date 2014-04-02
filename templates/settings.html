@@ -1,15 +1,15 @@
 <div class="settings">
 	<div id="actionbar">
 		  <ul class="list-inline">
-		    <li><a class="glyphicon glyphicon-arrow-left" ng-click="storeChanges()" href="#/"></a></li>
+		    <li><a class="glyphicon glyphicon-arrow-left" ng-click="storeChanges()"></a></li>
 		  </ul>
 	</div>
 	
 	<h1>Settings</h1>
 	<div class="user-info">
-		<p>Logged in as: <span>{{username}}</span></p>
+		<p class="loggedin">Logged in as: </p>
+        <span class="loggedinas">{{username}}</span>
 		<button class="sign-out" ng-click="signOut()" >Sign out</button>
-
 	</div>
 	<div class="customize-auto">
 		<form ng-submit="save()">

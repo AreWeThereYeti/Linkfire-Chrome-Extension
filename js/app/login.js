@@ -1,5 +1,5 @@
 myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
-	// checking auth status
+  // checking auth status
 	storageCheckService.dummyGetAuth(function(status){
 
 		if(JSON.stringify(status.user).length>0){
@@ -15,6 +15,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 		$scope.user.pass = CryptoJS.SHA1(user.pass);
 		console.log("pass: "+user.pass);
 		console.log("pass: "+CryptoJS.SHA1("nosser"));
+
 
 		// implements login request
 		console.log("posting: "+user.pass);
@@ -32,6 +33,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 		storageCheckService.dummySetId(user);
 		$location.path("/home");
 */
+
 		
 	}
 	

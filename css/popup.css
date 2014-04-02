@@ -23,21 +23,25 @@ body {
 	display:none!important; 
 }
 
+.hide{
+    display: none !important;
+}
+
 h1{
     font-size: 22px;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 10px;
 }
 
 p{
     font-family: 'allerlight', sans-serif;
     margin: 0 0 5px;
-    display: inline-block;
 }
 
 span{
     color: #838C9B;
-    margin-left: 20px;
+    margin-left: 10px;
+    display: inline-block;
 }
 
 .container {
@@ -102,11 +106,35 @@ input[type="submit"], button{
     color: white;
     height: 32px;
     display: inline-block;
-    margin-left: 30px;
 }
 
 input[type="submit"]:hover, button:hover{
     background-color: #B53C1C;
+}
+
+.user-info .loggedin{
+    color: #838C9B;
+    margin-bottom: 0px;
+}
+
+.user-info .loggedinas{
+    color: white;
+    margin-left: 0px;
+    width: 160px
+}
+
+.new-link p, .user-info p {
+    margin-right: 15px;
+}
+.new-link .newlink{
+    margin-right: 15px;
+    color: #F04E23;
+    font-size: 16px;
+    margin-left: 0px;
+}
+
+.new-link span{
+    font-size: 10px;
 }
 
 .customize-auto input{
@@ -115,8 +143,22 @@ input[type="submit"]:hover, button:hover{
     vertical-align: baseline;
 }
 
+.user-login{
+}
+
+.user-login a {
+    color: #F04E23;
+    text-decoration: none;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+.user-login a:hover{
+    color: #B53C1C;
+}
+
 .user-info{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 #actionbar {
