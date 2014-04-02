@@ -34,5 +34,4 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 		chrome.storage.local.clear();
 		$location.path("/");	
 		}
-		
 });
