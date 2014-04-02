@@ -108,7 +108,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
       pageInfoService.getInfo(function (info) {
 		        $scope.title = info.title;
 		        $scope.url = info.url;
-		        $scope.newLink = "Fetching shortlink fron Linkfire.com...";
+		        $scope.newLink = "Fetching shortlink from Linkfire.com...";
 		        $scope.pageInfos = $scope.getPostData(info.url, info.title);
 		        apiService.getLinkfireLink($scope.pageInfos)
 		        	.then(function(data) {

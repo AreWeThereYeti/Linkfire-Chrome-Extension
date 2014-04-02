@@ -7,9 +7,9 @@
 	
 	<h1>Settings</h1>
 	<div class="user-info">
-		<p>Logged in as: <span>{{username}}</span></p>
+		<p class="loggedin">Logged in as: </p>
+        <span class="loggedinas">{{username}}</span>
 		<button class="sign-out" ng-click="signOut()" >Sign out</button>
-
 	</div>
 	<div class="customize-auto">
 		<form ng-submit="save()">

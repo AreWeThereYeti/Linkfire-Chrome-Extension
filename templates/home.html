@@ -16,7 +16,7 @@
 			
 			<div class="new-link">
 			    <h1>Linkfired link</h1>
-				<p>{{newLink}}</p>
+				<span class="newlink">{{newLink}}</span>
                 <span ng-show="autoCopy && fetching == false">Copied to clipboard</span>
                 <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy && fetching == false">Copy Link</button>
 			</div>
