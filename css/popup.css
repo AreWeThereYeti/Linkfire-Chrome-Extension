@@ -24,7 +24,7 @@ body {
 }
 
 .hide{
-    display: none;
+    display: none !important;
 }
 
 h1{
@@ -147,6 +147,11 @@ input[type="submit"]:hover, button:hover{
 
 .user-info{
     margin-bottom: 15px;
+}
+
+.user-info span{
+    display: inline-block;
+    width: 50px;
 }
 
 #actionbar {

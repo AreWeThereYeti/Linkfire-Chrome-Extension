@@ -21,7 +21,7 @@ myApp.service('storageCheckService', function($q) {
         chrome.storage.local.get(['user'],
           function (storage) {
           	console.log("checking: "+storage.user);
-            if (JSON.stringify(storage).length > 0){
+            if (JSON.stringify(storage.user)){
                 user.user = storage.user;
                 console.log("setting: "+user.user);
 
