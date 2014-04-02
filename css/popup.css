@@ -111,6 +111,15 @@ input[type="submit"]:hover, button:hover{
 .new-link p, .user-info p {
     margin-right: 15px;
 }
+.new-link p{
+    margin-right: 15px;
+    color: #F04E23;
+    font-size: 16px;
+}
+
+.new-link span{
+    font-size: 10px;
+}
 
 .customize-auto input{
     width: 30%;
