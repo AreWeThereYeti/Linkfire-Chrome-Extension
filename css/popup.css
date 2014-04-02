@@ -23,6 +23,10 @@ body {
 	display:none!important; 
 }
 
+.hide{
+    display: none !important;
+}
+
 h1{
     font-size: 22px;
     margin-top: 10px;
@@ -32,12 +36,12 @@ h1{
 p{
     font-family: 'allerlight', sans-serif;
     margin: 0 0 5px;
-    display: inline-block;
 }
 
 span{
     color: #838C9B;
     margin-left: 10px;
+    display: inline-block;
 }
 
 .container {
@@ -108,13 +112,25 @@ input[type="submit"]:hover, button:hover{
     background-color: #B53C1C;
 }
 
+.user-info .loggedin{
+    color: #838C9B;
+    margin-bottom: 0px;
+}
+
+.user-info .loggedinas{
+    color: white;
+    margin-left: 0px;
+    width: 160px
+}
+
 .new-link p, .user-info p {
     margin-right: 15px;
 }
-.new-link p{
+.new-link .newlink{
     margin-right: 15px;
     color: #F04E23;
     font-size: 16px;
+    margin-left: 0px;
 }
 
 .new-link span{

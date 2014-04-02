@@ -17,9 +17,13 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
  	      $scope.copy = true;
  				$scope.url = true;
         $scope.username = result.user;
+<<<<<<< HEAD
 
        }
 
+=======
+       }
+>>>>>>> develop
         $scope.$apply();
      });
 
@@ -31,11 +35,10 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 	        'copy': $scope.copy,
 	        'url': $scope.url
 			});
-	}
+	};
 	$scope.signOut = function(){
-		console.log("signing out: "+$scope.user);	
+		console.log("signing out: "+$scope.user);
 		chrome.storage.local.clear();
 		$location.path("/");	
 		}
-		
 });

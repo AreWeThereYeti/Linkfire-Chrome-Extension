@@ -12,16 +12,6 @@
 		"default_popup": "popup.html",
 		"default_title": "AngularJSChromeEx"
 	},
-	"content_scripts": [ {
-	"js": [ "js/lib/jquery-1.8.2.min.js", "js/app/content.js" ],
-	"matches": [ "*://*/*" ],
-	"run_at": "document_start"
-	} ],
-	"options_page": "options/index.html",
-	"background": {
-     "scripts": ["js/app/background.js"],
-     "persistent": false
-   },
 	"minimum_chrome_version": "18",
 	"permissions": [ "http://*/*", "https://*/*", "storage", "contextMenus", "cookies", "tabs", "notifications" ]
 
