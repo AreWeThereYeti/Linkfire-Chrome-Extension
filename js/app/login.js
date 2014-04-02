@@ -1,5 +1,13 @@
 myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
-	// checking auth status
+
+
+  $scope.view = 'loginview';
+
+  $scope.$on('loggedIn', function() {
+    $scope.view = 'loginview';
+  });
+
+  // checking auth status
 	storageCheckService.dummyGetAuth(function(status){
 		if(JSON.stringify(status.user).length>0){
 			console.log("length: "+JSON.stringify(status.user).length);
@@ -10,7 +18,6 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 
 	$scope.send = function(user){
 		console.log("posting: "+JSON.stringify(user));
-		
 		// implements login request
 		/*
 loginService.login(user)
@@ -22,8 +29,10 @@ loginService.login(user)
 				//handle Error
 		});
 */
+
 		storageCheckService.dummySetId(user);
-		$location.path("/home");
+    $scope.view = '';
+    $location.path("/home");
 		
 	}
 	

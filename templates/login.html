@@ -1,9 +1,9 @@
-<div class="user-login"">
+<div class="user-login" ng-class="hide : view === 'loginview'">
     <h1></h1>
     <h1>Login</h1>
 	<form ng-submit="send(user)">
 	  <input type="text" ng-model="user.email" placeholder="Enter email" />
-	  <input type="password" ng-model="user.password" placeholder="Enter password" />
+        <input type="password" ng-model="user.password" placeholder="Enter password" />
 	  <input type="submit" value="Login" />
         <a href="" ng-click= "goToLinkfire()">Don't have a Linkfire account yet?</a>
     </form>
