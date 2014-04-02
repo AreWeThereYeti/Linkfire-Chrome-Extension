@@ -23,6 +23,10 @@ body {
 	display:none!important; 
 }
 
+.hide{
+    display: none;
+}
+
 h1{
     font-size: 22px;
     margin-top: 10px;

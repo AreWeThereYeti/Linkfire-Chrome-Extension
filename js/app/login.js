@@ -23,6 +23,7 @@ loginService.login(user)
 		});
 */
 		storageCheckService.dummySetId(user);
+    $scope.hideLogin = true;
 		$location.path("/home");
 		
 	}

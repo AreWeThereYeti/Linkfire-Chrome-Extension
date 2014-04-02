@@ -6,8 +6,6 @@
 	</div>
 
 	<div class="layout-default" ng-show="autoUrl">
-		
-
 		<div class="onCreatedlink">
 			<h1>Original link</h1>
 			<div class="url-thumbnail"></div>
@@ -25,8 +23,8 @@
 		</div>
 	</div>
 	
-	<div class="layout-custom-url" ng-show="!autoUrl" >
-		<div class="manual-url"  >
+	<div class="layout-custom-url hide" ng-show="!autoUrl" ng-class="{hide: autourl}">
+		<div class="manual-url">
 			<form id="url-form" >
 				<input type="text" id="form-URL" ng-model="custom.url" placeholder="Enter Page Url" size="50"  required />
 				<input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" size="50"  required />
