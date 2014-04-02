@@ -1,9 +1,7 @@
-﻿
-myApp.service('storageCheckService', function($q) {
-    
+﻿myApp.service('storageCheckService', function($q) {
     this.dummySetId = function(args) {
 	    chrome.storage.local.set({
-	        'user': args.email
+	      'user': args.email
 			});
 			console.log("setting user: "+args.email);
     };
@@ -17,32 +15,30 @@ myApp.service('storageCheckService', function($q) {
     };
     
     this.dummyGetAuth = function(callback) {
-        var user = {};
-        chrome.storage.local.get(['user'],
-          function (storage) {
-          	console.log("checking: "+storage.user);
-            if (JSON.stringify(storage.user)){
-                user.user = storage.user;
-                console.log("setting: "+user.user);
-
-								callback(user);
-				}            
+    var user = {};
+    chrome.storage.local.get(['user'],
+      function (storage) {
+        console.log("checking: "+storage.user);
+        if (JSON.stringify(storage.user)){
+          user.user = storage.user;
+          console.log("setting: "+user.user);
+          callback(user);
+			  }
 		  }
     )};
     
     this.getSettings = function(callback) {
-        var settings = {};
-
-        chrome.storage.local.get(['copy', 'url'],
-          function (storage) {
-            if (JSON.stringify(storage).length > 0){
-                settings.copy = storage.copy;
-                settings.url = storage.url;
-				callback(settings);
-				}            
-		  }
-    )};
-});
+      var settings = {};
+      chrome.storage.local.get(['copy', 'url'],
+        function (storage) {
+          if (JSON.stringify(storage).length > 0){
+            settings.copy = storage.copy;
+            settings.url = storage.url;
+            callback(settings);
+          }
+        }
+      )};
+    });
 
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
