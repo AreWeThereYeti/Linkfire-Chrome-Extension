@@ -10,23 +10,25 @@ myApp.service('storageCheckService', function($q) {
     
     this.setId = function(args) {
 	    chrome.storage.local.set({
+	    		'user': args.user.email,
 	        'token': args.token,
-	        'id': args.user_id
+	        'id': args.user.id
 			});
 
     };
     
-    this.dummyGetAuth = function(callback) {
+    this.getAuth = function(callback) {
         var user = {};
-        chrome.storage.local.get(['user'],
+        chrome.storage.local.get(['user','token','id'],
           function (storage) {
 
           	console.log("checking: "+storage.user);
             if (JSON.stringify(storage.user)){
 
                 user.user = storage.user;
-                console.log("setting: "+user.user);
-
+                user.token = storage.token;
+                user.id = storage.id;
+                
 								callback(user);
 				}            
 		  }
@@ -111,8 +113,9 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		        $scope.title = info.title;
 		        $scope.url = info.url;
 		        $scope.newLink = "Fetching shortlink from Linkfire.com...";
-		        $scope.pageInfos = $scope.getPostData(info.url, info.title);
-		        apiService.getLinkfireLink($scope.pageInfos)
+		        $scope.pageInfos = $scope.getPostData(info.url, info.title); //the getPostData() is async <----- issue
+		        console.log("pageInfos: "+JSON.stringify($scope.pageInfos));
+		        apiService.getLinkfireLink($scope.pageInfos)  
 		        	.then(function(data) {
 					    // this callback will be called asynchronously
 					    // when the response is available
@@ -152,26 +155,23 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 						$scope.linkCreated = true;
 				});
    }
-    $scope.getPostData = function(newUrl, newTitle){
-	    return postData =
-	    	{
-				'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
-				"user_id" : 1065,
-				"url" : newUrl,
-				"title" : newTitle,
-				"description": "some stuff"
-			}
-    };
-
+   
+   /// THIS FUNCTION NEEDS TO GET DONE
   $scope.getPostData = function(newUrl, newTitle){
-    return postData =
-    {
-      'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
-      "user_id" : 302,
-      "url" : newUrl,
-      "title" : newTitle,
-      "description": "some stuff"
-    }
+  	var postData = {};
+  	storageCheckService.getAuth(function(user){
+  			console.log("request from : "+JSON.stringify(user));
+				postData =
+		    {
+		      'token' : user.token,
+		      "user_id" : user.id,
+		      "url" : newUrl,
+		      "title" : newTitle,
+		      "description" : "This link was created with the Linkfire Chrome extension"
+		    }
+  	});
+  	return postData;
+
   };
     
     $scope.copyToClipboard = function(text){

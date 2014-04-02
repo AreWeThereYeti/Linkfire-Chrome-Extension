@@ -1,6 +1,6 @@
 myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
   // checking auth status
-	storageCheckService.dummyGetAuth(function(status){
+	storageCheckService.getAuth(function(status){
 
 		if(JSON.stringify(status.user).length>0){
 			console.log("length: "+JSON.stringify(status.user).length);
@@ -9,19 +9,19 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 		}
 	});
 
-	$scope.send = function(user){
+	$scope.login = function(user){
 		
-		
-		$scope.user.pass = CryptoJS.SHA1(user.pass);
-		console.log("pass: "+user.pass);
-		console.log("pass: "+CryptoJS.SHA1("nosser"));
-
-
-		// implements login request
-		console.log("posting: "+user.pass);
-		loginService.login(user)
+		var post = {
+			email: user.email,
+			password: user.pass//CryptoJS.SHA1(user.pass)
+		}
+			console.log("post: "+post.email+" - "+post.password);
+			console.log(JSON.stringify(post));
+		loginService.login(post)
 			.then(function(data){
 				//set userdata
+				console.log("logged in: "+JSON.stringify(data));
+
 				storageCheckService.setId(data);
 				$location.path("/home");
 			},function(error){
@@ -29,7 +29,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 				console.log("error on login...");
 		});
 
-/*
+/*  //use this in stead of loginService.login to bypass user login through the test api
 		storageCheckService.dummySetId(user);
 		$location.path("/home");
 */
@@ -48,29 +48,28 @@ myApp.service('loginService', function LoginService($rootScope, $http, $q, $wind
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     /*Api. Should be moved to CONFIG*/
-    var API_ENDPOINT =  'http://linkfire.com'
+    var API_ENDPOINT =  'http://linkfire.test.dev.rocketlabs.dk'
 
     // urls   ------ OBS!!! Setup for specific use. Move to config when ready
     var urlAuth = API_ENDPOINT + '/api/1.0/auth/login';
 
     this.login = function (params) {
       console.log("loginfunction")
+      var pass = CryptoJS.SHA1(params.password);
       var d = $q.defer();
-      $http.post(urlAuth, params)
+      $http({	
+					method	: 'POST',
+					url		  : urlAuth,
+          headers : {'Content-type' : 'application/json'},
+          data    : {email: params.email, password: pass.toString(CryptoJS.enc.Hex)}
+			})
         .success(function (data, status, headers, config) {
         	d.resolve(data);
-          //$window.sessionStorage.token = data.token;
         })
         .error(function (data, status, headers, config) {
          
          	d.reject(status);
-/*
-          // Erase the token if the user fails to log in
-          delete $window.sessionStorage.token;
 
-          // Handle login errors here
-          var message = 'Error: Invalid user or password';
-*/
         });
         return d.promise;
     };

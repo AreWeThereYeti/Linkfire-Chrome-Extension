@@ -9,14 +9,14 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
        if(JSON.stringify(result.copy)){
 	      $scope.copy = result.copy;
 				$scope.url = result.url;
-				$scope.username = result.user;
+				$scope.userEmail = result.user;
 		  console.log("getting: "+$scope.copy+" and "+$scope.url);  
 	        
         }else{
 	      console.log("first run!");  
  	      $scope.copy = true;
  				$scope.url = true;
-        $scope.username = result.user;
+        $scope.userEmail = result.user;
        }
         $scope.$apply();
      });
