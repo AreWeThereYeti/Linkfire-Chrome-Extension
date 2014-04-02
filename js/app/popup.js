@@ -84,7 +84,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		        	.then(function(data) {
 					    // this callback will be called asynchronously
 					    // when the response is available
-						$scope.newLink = data;
+						$scope.newLink = data.link.url;
 						if($scope.autoCopy){
 							$scope.copyToClipboard($scope.newLink);
 						}
