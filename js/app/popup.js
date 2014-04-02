@@ -1,4 +1,4 @@
-
+﻿
 myApp.service('storageCheckService', function() {
     this.getSettings = function(callback) {
         var settings = {};
@@ -106,19 +106,17 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 			    // this callback will be called asynchronously
 			    // when the response is available
 			    $scope.linkCreated = true;
-					$scope.newLink = data;
+					$scope.newLink = data.link.url;
 					if($scope.autoCopy){
 						$scope.copyToClipboard($scope.newLink);
 					}
 					
 				}, function(error){
-						console.log(error);
 						$scope.newLink = "Error handling your request!";
 						if($scope.autoCopy){
 							$scope.copyToClipboard($scope.newLink);
 							}
 						$scope.linkCreated = true;
-
 				});
    }
     $scope.getPostData = function(newUrl, newTitle){
@@ -130,19 +128,9 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 				"title" : newTitle,
 				"description": "some stuff"
 			}
-/*      var postData = new Array();
-      postData.token = "8f967fc1880401be9eb992998d1ac70fd0297ffd";
-      postData['user_id'] = 1065;
-      postData['url'] = newUrl;
-      postData['title'] = newTitle;
-      postData['description'] = 'some stuff';
-      console.log(postData);
-      return postData*/
-
     };
 
   $scope.getPostData = function(newUrl, newTitle){
-    console.log(newUrl + ' and ' + newTitle)
     return postData =
     {
       'token' : "8f967fc1880401be9eb992998d1ac70fd0297ffd",
@@ -165,5 +153,31 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 	    document.body.removeChild(copyDiv);
 	}
 });
+
+myApp.module('linkfireWebappApp')
+  .service('loginService', function LoginService($rootScope, $http, $q, $window) {
+    // AngularJS will instantiate a singleton by calling "new" on this function
+
+    /*Api. Should be moved to CONFIG*/
+    var API_ENDPOINT =  'http://localhost:8080'
+
+    // urls   ------ OBS!!! Setup for specific use. Move to config when ready
+    var urlAuth = API_ENDPOINT + '/authenticate';
+
+    this.Login = function (params) {
+      console.log("loginfunction")
+      $http.post(urlAuth, params)
+        .success(function (data, status, headers, config) {
+          $window.sessionStorage.token = data.token;
+        })
+        .error(function (data, status, headers, config) {
+          // Erase the token if the user fails to log in
+          delete $window.sessionStorage.token;
+
+          // Handle login errors here
+          var message = 'Error: Invalid user or password';
+        });
+    };
+  });
 
 
