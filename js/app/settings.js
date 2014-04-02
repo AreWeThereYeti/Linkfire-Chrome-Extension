@@ -17,13 +17,7 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
  	      $scope.copy = true;
  				$scope.url = true;
         $scope.username = result.user;
-<<<<<<< HEAD
-
        }
-
-=======
-       }
->>>>>>> develop
         $scope.$apply();
      });
 
