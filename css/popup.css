@@ -37,7 +37,7 @@ p{
 
 span{
     color: #838C9B;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .container {
@@ -102,11 +102,14 @@ input[type="submit"], button{
     color: white;
     height: 32px;
     display: inline-block;
-    margin-left: 30px;
 }
 
 input[type="submit"]:hover, button:hover{
     background-color: #B53C1C;
+}
+
+.new-link p, .user-info p {
+    margin-right: 15px;
 }
 
 .customize-auto input{
