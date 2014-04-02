@@ -26,7 +26,12 @@ loginService.login(user)
 		$location.path("/home");
 		
 	}
-
+	
+	$scope.goToLinkfire = function(){
+	  var newURL = "http://linkfire.com/";
+		chrome.tabs.create({ url: newURL });	
+	}
+	
 });
 
 myApp.service('loginService', function LoginService($rootScope, $http, $q, $window) {
