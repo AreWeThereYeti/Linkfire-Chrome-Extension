@@ -16,7 +16,10 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 	      console.log("first run!");  
  	      $scope.copy = true;
  				$scope.url = true;
-        }
+        $scope.username = result.user;
+
+       }
+
         $scope.$apply();
      });
 
