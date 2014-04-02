@@ -127,6 +127,20 @@ input[type="submit"]:hover, button:hover{
     vertical-align: baseline;
 }
 
+.user-login{
+}
+
+.user-login a {
+    color: #F04E23;
+    text-decoration: none;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+.user-login a:hover{
+    color: #B53C1C;
+}
+
 .user-info{
     margin-bottom: 15px;
 }
