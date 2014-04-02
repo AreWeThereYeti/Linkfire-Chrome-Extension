@@ -5,7 +5,7 @@
 		  </ul>
 	</div>
 	
-	<h2>Settings</h2>
+	<h1>Settings</h1>
 	<div class="user-info">
 		<p>Logged in as: <span>{{username}}</span></p>
 		<button class="sign-out" ng-click="signOut()" >Sign out</button>
@@ -13,21 +13,17 @@
 	</div>
 	<div class="customize-auto">
 		<form ng-submit="save()">
-			<div class="row">
 				<label for="auto-url">Auto url:</label>
 				<input id="auto-url" type="checkbox"
 			          ng-model="url"
 			          placeholder="Enter email" />
 			    <p>Loads url of current webpage automatically</p>
-			</div>
-			<div class="row">
 			    <label for="auto-url">Auto copy:</label>
 				<input id="auto-copy" type="checkbox"
 			          ng-model="copy" value="true"
 			          label="Enter password" />
 			   <p>Copy new url to clipboard automatically</p>
-			</div>
-		
+
 		</form>
 	</div>
 </div>
