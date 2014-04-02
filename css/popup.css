@@ -1,12 +1,12 @@
 
 @font-face {
     font-family: 'allerregular'; /*a name to be used later*/
-    src: url('../fonts/Aller/Regular/aller-regular-webfont.eot'); /*URL to font*/
+    src: url('../fonts/Aller/Regular/aller-regular-webfont.eot?') format('eot'), url('../fonts/Aller/Regular/aller-regular-webfont.woff') format('woff'), url('../fonts/Aller/Regular/aller-regular-webfont.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'allerlight'; /*a name to be used later*/
-    src: url('../fonts/Aller/Light/aller-light-webfont.eot'); /*URL to font*/
+    src: url('../fonts/Aller/Light/aller-light-webfont.eot?') format('eot'), url('../fonts/Aller/Light/aller-light-webfont.woff') format('woff'), url('../fonts/Light/Regular/aller-light-webfont.ttf') format('truetype');
 }
 
 body {
@@ -23,35 +23,74 @@ body {
 	display:none!important; 
 }
 
+h1{
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p{
+    font-family: 'allerlight', sans-serif;
+    margin: 0 0 5px;
+    display: inline-block;
+}
+
+span{
+    color: #838C9B;
+    margin-left: 20px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 #popup {
-  min-width: 500px;
-  width: 500px;
-  min-height: 10px;
-  height: 300px;
-  margin: 12px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    min-width: 300px;
+    width: 300px;
+    height: 225px;
+    margin: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .container{
     border-radius: 5px;
 }
 
-#logo{
-    background: url("../img/logo.png") no-repeat;
-    background-size: 77px 77px;
-    height: 77px;
-    width: 77px;
+.url-data p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    color: #838C9B;
+
+    overflow: hidden;
 }
 
+#logo{
+    background: url("../img/logo.png") no-repeat;
+    background-size: 114px 21px;
+    height: 21px;
+    width: 114px;
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+}
+
+
 input[type="text"]{
-color: black;
+    color: black;
+    width: 100%;
+    margin-bottom: 15px;
+    height: 32px;
 }
 
 input[type="submit"], button{
-    width: 140px;
+    width: 120px;
     display: block;
     background-color: #F04E23;
     cursor: pointer;
@@ -62,6 +101,8 @@ input[type="submit"], button{
     border: 0;
     color: white;
     height: 32px;
+    display: inline-block;
+    margin-left: 30px;
 }
 
 input[type="submit"]:hover, button:hover{
@@ -69,11 +110,9 @@ input[type="submit"]:hover, button:hover{
 }
 
 #actionbar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+
 }
 #actionbar a {
-  font-size: 2.2rem;
-  color: #ffffff;
+    font-size: 2.0rem;
+    color: #ffffff;
 }
