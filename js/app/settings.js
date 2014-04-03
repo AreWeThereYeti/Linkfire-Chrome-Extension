@@ -32,7 +32,7 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 
   };
 	$scope.signOut = function(){
-		console.log("signing out: "+$scope.user);
+		console.log("signing out: "+$scope.userEmail);
 		chrome.storage.local.clear();
 		$location.path("/");	
 		}

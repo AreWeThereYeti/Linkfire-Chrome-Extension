@@ -75,23 +75,87 @@ myApp.service('apiService', function($http, $q) {
 		this.getLinkfireLink = function(postData){
       console.log("getLinkfireLink: "+JSON.stringify(postData));
 			var d = $q.defer();
-			$http({
-					method	: 'POST',
-					url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
-          headers : {'Content-type' : 'application/json'},
-          data    : JSON.stringify(postData)
-			}).success(function(data, status, headers){
-				console.log("DEBUGGING: success");
-        d.resolve(data);
-			}).error(function(data, status, headers){
-        console.log("DEBUGGING: error");
-				d.reject(status);
+			 			 
+				
+			var duplicate = false;
+			var shortlinkId = {};
+		// check links[] array in chrome.storage.local for duplicate links and sets duplicate true/false accordingly
+			chrome.storage.local.get('links', function (result) {
+            	angular.forEach(result.links, function(value, key){
+								if(value.original_url==postData.url){
+									duplicate = true;
+									shortlinkId = value.id;
+									console.log("duplicate link!!!");
+								}
+							});  	
+			
+			
+					if(duplicate==true){
+						$http({
+								method	: 'POST',
+								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/get',
+			          headers : {'Content-type' : 'application/json'},
+			          data    : {
+			          						"token":postData.token,
+			          						"user_id":postData.user_id, 
+														"id":shortlinkId
+													}
+						}).success(function(data, status, headers){
+							console.log("DEBUGGING: Retrieved existing link");
+			        d.resolve(data);
+						}).error(function(data, status, headers){
+			        if(status==400){
+								console.log("Error: "+status+". Missing or invalid parameters.");
+							} else if(status==401){
+								console.log("Error: "+status+". User doesn’t have access to the link.");
+							} else if(status==403){
+								console.log("Error: "+status+". Expired or invalid token.");
+							} else if(status==500){
+								console.log("Error: "+status+". Internal error. Contact support@linkfire.com.");
+							} else{
+								console.log("Error: "+status);
+							}
+							d.reject(status);
+						});
+					}else{
+						$http({
+								method	: 'POST',
+								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
+			          headers : {'Content-type' : 'application/json'},
+			          data    : JSON.stringify(postData)
+						}).success(function(data, status, headers){
+							console.log("DEBUGGING: Created new link");
+							
+			
+							// stores created link's original_url and id in the links array in storage
+							chrome.storage.local.get({links: []}, function (result) {
+								// the input argument is ALWAYS an object containing the queried keys
+								// so we select the key we need
+								var links = result.links;
+								links.push({original_url: data.link.original_url, id: data.link.id});
+								// set the new array value to the same key
+								chrome.storage.local.set({links: links}, function () {						
+								});
+							});
+			        d.resolve(data);
+						}).error(function(data, status, headers){
+			        if(status==400){
+								console.log("Error: "+status+". Missing or invalid parameters.");
+							} else if(status==403){
+								console.log("Error: "+status+". Expired or invalid token .");
+							} else if(status==500){
+								console.log("Error: "+status+". Internal error. Contact support@linkfire.com.");
+							} else{
+								console.log("Error: "+status);
+							}
+							d.reject(status);
+						});
+					}
 			});
 			return d.promise;
 		};
     
 });
-
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
   $scope.fetching = true;
 	$scope.linkCreated = false;

@@ -26,7 +26,15 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 				$location.path("/home");
 			},function(error){
 				//handle Error
-				console.log("error on login...");
+				if(error==400){
+					console.log("Error: "+error+". Missing or invalid parameters.");
+				} else if(error==401){
+					console.log("Error: "+error+". Incorrect e-mail or password.");
+				} else if(error==500){
+					console.log("Error: "+error+". Internal error. Contact support@linkfire.com.");
+				} else{
+					console.log("Error: "+error);
+				}
 		});
 
 /*  //use this in stead of loginService.login to bypass user login through the test api
