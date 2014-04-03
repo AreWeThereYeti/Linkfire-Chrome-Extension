@@ -73,7 +73,7 @@ myApp.service('pageInfoService', function() {
 myApp.service('apiService', function($http, $q) {
     
 		this.getLinkfireLink = function(postData){
-      console.log(JSON.stringify(postData));
+      console.log("getLinkfireLink: "+JSON.stringify(postData));
 			var d = $q.defer();
 			$http({
 					method	: 'POST',
@@ -92,7 +92,7 @@ myApp.service('apiService', function($http, $q) {
     
 });
 
-myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService) {
+myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
   $scope.fetching = true;
 	$scope.linkCreated = false;
 	
@@ -107,37 +107,37 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		}
 		
 
-
 		if($scope.autoUrl){
       pageInfoService.getInfo(function (info) {
 		        $scope.title = info.title;
 		        $scope.url = info.url;
 		        $scope.newLink = "Fetching shortlink from Linkfire.com...";
-		        $scope.pageInfos = $scope.getPostData(info.url, info.title); //the getPostData() is async <----- issue
-		        console.log("pageInfos: "+JSON.stringify($scope.pageInfos));
-		        apiService.getLinkfireLink($scope.pageInfos)  
+		        $scope.getPostData(info.url, info.title) 
+		        	.then(function(postData) {
+		        apiService.getLinkfireLink(postData)  
 		        	.then(function(data) {
-					    // this callback will be called asynchronously
-					    // when the response is available
-              $scope.fetching = false;
-						  $scope.newLink = data.link.url;
-						if($scope.autoCopy){
-							$scope.copyToClipboard($scope.newLink);
-						}
-					}, function(error){
-						console.log(error);
-						$scope.newLink = "Error handling your request!";
-						if($scope.autoCopy){
-							$scope.copyToClipboard($scope.newLink);
-						}
-					});		
-		    });
+	              $scope.fetching = false;
+							  $scope.newLink = data.link.url;
+							if($scope.autoCopy){
+								$scope.copyToClipboard($scope.newLink);
+								}
+								}, function(error){
+									console.log(error);
+									$scope.newLink = "Error handling your request!";
+									if($scope.autoCopy){
+										$scope.copyToClipboard($scope.newLink);
+									}
+								});
+							});		
+					});
 		}
    });
+   
    $scope.createLink = function(input){
    	console.log("createLink med: "+input.url+" og "+input.title);
-   	$scope.pageInfos = $scope.getPostData(input.url, input.title);
-	    apiService.getLinkfireLink($scope.pageInfos)
+   	$scope.getPostData(input.url, input.title)
+   	.then(function(postData) {
+	    apiService.getLinkfireLink(postData)
 	    	.then(function(data) {
 			    // this callback will be called asynchronously
 			    // when the response is available
@@ -154,10 +154,11 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 							}
 						$scope.linkCreated = true;
 				});
+			});
    }
    
-   /// THIS FUNCTION NEEDS TO GET DONE
   $scope.getPostData = function(newUrl, newTitle){
+  	var d = $q.defer();
   	var postData = {};
   	storageCheckService.getAuth(function(user){
   			console.log("request from : "+JSON.stringify(user));
@@ -169,8 +170,10 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		      "title" : newTitle,
 		      "description" : "This link was created with the Linkfire Chrome extension"
 		    }
+		    console.log("getPostData returning : "+JSON.stringify(postData));
+				d.resolve(postData);
   	});
-  	return postData;
+  	return d.promise;
 
   };
     
