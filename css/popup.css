@@ -19,12 +19,12 @@ body {
     display: none !important;
 }
 
-.ng-hide { 
-	display:none!important; 
+.hide,.ng-hide{
+    display: none !important;
 }
 
-.hide{
-    display: none !important;
+.show, .ng-show{
+    display: block !important;
 }
 
 h1{
@@ -110,6 +110,15 @@ input[type="submit"], button{
 
 input[type="submit"]:hover, button:hover{
     background-color: #B53C1C;
+}
+
+input.ng-invalid{
+    outline: 1px solid #F04E23;
+}
+
+button[disabled], html input[disabled]{
+    background-color: #C7C7C7;
+    pointer-events : none;
 }
 
 .user-info .loggedin{

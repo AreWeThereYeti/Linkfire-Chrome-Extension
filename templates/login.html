@@ -1,10 +1,15 @@
 <div class="user-login" ng-cloak>
     <h1></h1>
     <h1>Login</h1>
-	<form ng-submit="login(user)">
-	  <input type="text" ng-model="user.email" placeholder="Enter email" />
-	  <input type="password" ng-model="user.pass" placeholder="Enter password" />
-	  <input type="submit" value="Login" />
+	<form name="loginform" ng-submit="login(user)" novalidate>
+	  <input type="email" ng-model="user.email" placeholder="Enter email" required/>
+	  <input type="password" ng-model="user.pass" placeholder="Enter password" required/>
+        <p class="modal-error" ng-show="loginform.user.email.$dirty && loginform.user.email.$invalid">
+            <span ng-show="loginform.user.email.$error.required">Input email.</span>
+            <span ng-show="loginform.user.email.$error.email">This is not a valid email.</span>
+            <span ng-show="loginform.user.email.$error.unique">Email eksisterer allerede i systemet.</span>
+        </p>
+	  <input ng-disabled="loginform.$invalid" type="submit" value="Login" />
         <a href="" ng-click= "goToLinkfire()">Don't have a Linkfire account yet?</a>
     </form>
 </div>
