@@ -23,7 +23,8 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 				storageCheckService.setId(data);
 				$location.path("/home");
 			},function(error){
-				//handle Error
+        $scope.login_in = false;
+        //handle Error
 				if(error==400){
 					console.log("Error: "+error+". Missing or invalid parameters.");
 				} else if(error==401){
@@ -63,9 +64,7 @@ myApp.service('loginService', function LoginService($rootScope, $http, $q, $wind
         	d.resolve(data);
         })
         .error(function (data, status, headers, config) {
-         
          	d.reject(status);
-
         });
         return d.promise;
     };

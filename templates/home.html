@@ -21,13 +21,13 @@
 			</div>
 		</div>
 	</div>
-    <div class="layout-custom-url" ng-class="{hide: url, show: !url}">
+    <div class="layout-custom-url" ng-class="{hide: url, show: !url}" ng-cloak>
         <div class="manual-url">
             <form id="url-form" form="customform" ng-submit="createLink(custom)" novalidate>
-                <input type="url" id="form-URL" ng-model="custom.url" placeholder="Http://example.com"  ng-required="true" />
-                <input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" ng-required="true" />
-                <input type="text" id="form-description" ng-model="custom.description" placeholder="Page Description" ng-required="true" />
-                <input type="submit" value="Submit" ng-disabled="customform.$invalid" class="get-link" />
+                <input type="text" id="form-URL" ng-model="custom.url" ng-minlength="4" placeholder="Http://example.com" required/>
+                <input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" required/>
+                <input type="text" id="form-description" ng-model="custom.description" placeholder="Page Description" required/>
+                <input type="submit" value="Submit" ng-disabled="customform.$valid" class="get-link" />
             </form>
         </div>
         <div class="onCreatedlink" ng-show="linkCreated">
