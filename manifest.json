@@ -13,6 +13,6 @@
 		"default_title": "AngularJSChromeEx"
 	},
 	"minimum_chrome_version": "18",
-	"permissions": [ "http://*/*", "https://*/*", "storage", "contextMenus", "cookies", "tabs", "notifications" ]
+	"permissions": [ "http://*/*", "storage", "tabs"]
 
 }
