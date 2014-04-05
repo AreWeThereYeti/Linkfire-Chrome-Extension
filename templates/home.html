@@ -30,28 +30,16 @@
                 <input type="submit" value="Submit" ng-disabled="form.$invalid" class="get-link" />
             </form>-->
             <form id="url-form" name="form" ng-submit="createLink(custom)" novalidate>
-                <input type="text" id="form-URL" ng-model="custom.url" ng-minlength="4" placeholder="Http://example.com" required/>
+                <input type="uel" id="form-URL" ng-model="custom.url" ng-minlength="4" placeholder="Http://example.com" required/>
                 <input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" required/>
                 <input type="text" id="form-description" ng-model="custom.description" placeholder="Page Description" required/>
-                <p class="modal-error" ng-show="loginform.user.email.$dirty && loginform.user.email.$invalid">
-                    <span ng-show="loginform.user.email.$error.required">Input email.</span>
-                    <span ng-show="loginform.user.email.$error.email">This is not a valid email.</span>
-                    <span ng-show="loginform.user.email.$error.unique">Email eksisterer allerede i systemet.</span>
-                </p>
                 <input ng-disabled="form.$invalid" type="submit" value="Submit" class="get-link" />
             </form>
         </div>
         <div class="onCreatedlink" ng-show="linkCreated">
-            <h2>Webage info:</h2>
-            <div class="url-thumbnail"></div>
-            <div class="url-data">
-                <div>{{title}}</div>
-                <div>{{url}}</div>
-            </div>
-
-            <div class="new-link" >
-                <h2>New Link:</h2>
-                <div>{{newLink}}</div>
+            <div class="new-link copy-link" >
+                <h1>Linkfired</h1>
+                <span class="newlink">{{newLink}}</span>
                 <button  class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy" >Copy Link</button>
             </div>
         </div>
