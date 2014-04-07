@@ -22,12 +22,19 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 		chrome.storage.local.set({
       'copy': $scope.copy,
       'url': $scope.url
+	  }, function(){
+	   if(!$scope.url){
+		   $location.path("/custom");
+		 }else{
+			 $location.path("/home");
+		 }
+		 $scope.$apply();	 
 	  });
   };
 
   // sign out user and clear all data in chrome local storage
 	$scope.signOut = function(){
 		chrome.storage.local.clear();
-		$location.path("/");	
+		$location.path("/login");	
 		}
 });

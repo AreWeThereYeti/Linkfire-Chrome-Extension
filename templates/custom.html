@@ -1,0 +1,22 @@
+<div>
+	<div id="actionbar">
+        <a class="glyphicon glyphicon-cog" href="#/settings"></a>
+	</div>
+    <div ng-class="{hide : autoUrl, show : !autoUrl}" class="layout-custom hide-url">
+        <div class="manual-url">
+            <form id="url-form" name="form" ng-submit="createLink(custom)" novalidate>
+                <input type="uel" id="form-URL" ng-model="custom.url" ng-minlength="4" placeholder="Http://example.com" required/>
+                <input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" required/>
+                <input type="text" id="form-description" ng-model="custom.description" placeholder="Page Description" required/>
+                <input ng-disabled="form.$invalid" type="submit" value="Submit" class="get-link" />
+            </form>
+        </div>
+        <div class="onCreatedlink" ng-show="linkCreated">
+            <div class="new-link copy-link" >
+                <h1>Linkfired</h1>
+                <span class="newlink">{{newLink}}</span>
+                <button  class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy" >Copy Link</button>
+            </div>
+        </div>
+    </div>
+</div>

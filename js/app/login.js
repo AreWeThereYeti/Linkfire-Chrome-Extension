@@ -1,13 +1,5 @@
 myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
   
-  // checking auth status. will redirect to /home if user is logged in
-	storageCheckService.getAuth(function(status){
-
-		if(JSON.stringify(status.user).length>0){
-			$location.path("/home");
-			$scope.$apply();
-		}
-	});
 
 	$scope.login = function(user){
 		
