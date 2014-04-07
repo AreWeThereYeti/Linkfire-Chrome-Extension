@@ -224,7 +224,6 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 				d.resolve(postData);
   	});
   	return d.promise;
-
   };
     // function for copying to the clipboard
     $scope.copyToClipboard = function(text){

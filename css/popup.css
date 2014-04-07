@@ -154,7 +154,8 @@ button[disabled], html input[disabled]{
     vertical-align: baseline;
 }
 
-.user-login{
+.user-login h1{
+    margin-top: 0px;
 }
 
 .user-login a {
@@ -172,6 +173,11 @@ button[disabled], html input[disabled]{
     margin-bottom: 5px;
 }
 
+
+
+#actionbar{
+    height: 26px;
+}
 #actionbar a {
     font-size: 2.0rem;
     color: #ffffff;
