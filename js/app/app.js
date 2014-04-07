@@ -1,11 +1,19 @@
 ﻿var myApp = angular.module('AngularChromeEx', ['ngRoute'])
 .config(function($routeProvider) {
   $routeProvider
+    .when('/', {
+      templateUrl: 'templates/load.html',
+      controller: 'LoadController'
+    })
     .when('/home', {
       templateUrl: 'templates/home.html',
       controller: 'PageController'
     })
-    .when('/', {
+		.when('/custom', {
+      templateUrl: 'templates/custom.html',
+      controller: 'PageController'
+    })
+    .when('/login', {
       templateUrl: 'templates/login.html',
       controller: 'LoginController'
     })
@@ -13,5 +21,5 @@
       templateUrl: 'templates/settings.html',
       controller: 'SettingsCtrl'
     })
-    .otherwise({redirectTo: '/'});
+    .otherwise({redirectTo: '/login'});
 });
