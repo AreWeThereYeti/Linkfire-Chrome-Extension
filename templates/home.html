@@ -1,18 +1,17 @@
 <div>
 	<div id="actionbar">
-		  <ul class="list-inline">
-		    <li><a class="glyphicon glyphicon-cog" href="#/settings"></a></li>
-		  </ul>
+        <a class="glyphicon glyphicon-cog" href="#/settings"></a>
 	</div>
-	<div class="layout-default" ng-show="autoUrl">
+
+	<div class="layout-default" ng-class="{hide:!autoUrl}" >
 		<div class="onCreatedlink">
 			<h1>Original link</h1>
 			<div class="url-thumbnail"></div>
-			<div class="url-data">	
+			<div class="url-data">
 				    <p>{{title}}</p>
 					<p>{{url}}</p>
 			</div>
-			
+
 			<div class="new-link">
 			    <h1>Linkfired link</h1>
 				<span class="newlink">{{newLink}}</span>
@@ -21,14 +20,8 @@
 			</div>
 		</div>
 	</div>
-    <div class="layout-custom-url" ng-class="{hide: url, show: !url}" ng-cloak>
+    <div ng-class="{hide : autoUrl, show : !autoUrl}" class="layout-custom hide-url">
         <div class="manual-url">
-<!--            <form id="url-form" form="form" ng-submit="createLink(custom)" novalidate>
-                <input type="text" id="form-URL" ng-model="custom.url" ng-minlength="4" placeholder="Http://example.com" required/>
-                <input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" required/>
-                <input type="text" id="form-description" ng-model="custom.description" placeholder="Page Description" required/>
-                <input type="submit" value="Submit" ng-disabled="form.$invalid" class="get-link" />
-            </form>-->
             <form id="url-form" name="form" ng-submit="createLink(custom)" novalidate>
                 <input type="uel" id="form-URL" ng-model="custom.url" ng-minlength="4" placeholder="Http://example.com" required/>
                 <input type="text" id="form-title" ng-model="custom.title" placeholder="Page Title" required/>
@@ -44,6 +37,4 @@
             </div>
         </div>
     </div>
-	
-
 </div>

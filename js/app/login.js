@@ -9,7 +9,6 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 		}
 	});
 
-	
 	$scope.login = function(user){
 		
 		var post = {
@@ -41,7 +40,6 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 	  var newURL = "http://linkfire.com/";
 		chrome.tabs.create({ url: newURL });	
 	}
-	
 });
 
 myApp.service('loginService', function LoginService($rootScope, $http, $q, $window) {

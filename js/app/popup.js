@@ -1,46 +1,39 @@
-﻿
 ﻿// service for performing chrome.storage checks. chrome.storage checks are asynchronous
 myApp.service('storageCheckService', function($q) {
+  this.setId = function(args) {
+    chrome.storage.local.set({
+      'user': args.user.email,
+      'token': args.token,
+      'id': args.user.id
+    });
+  };
 
-    this.setId = function(args) {
-	    chrome.storage.local.set({
-	    		'user': args.user.email,
-	        'token': args.token,
-	        'id': args.user.id
-			});
+  this.getAuth = function(callback) {
+    var user = {};
+    chrome.storage.local.get(['user','token','id'],
+      function (storage) {
+        console.log("checking: "+storage.user);
+        if (JSON.stringify(storage.user)){
+          user.user = storage.user;
+          user.token = storage.token;
+          user.id = storage.id;
+          callback(user);
+        }
+      }
+    );
+  };
 
+  this.getSettings = function(callback) {
+    var settings = {};
+    chrome.storage.local.get(['copy', 'url'],
+      function (storage) {
+        if (JSON.stringify(storage).length > 0){
+          settings.copy = storage.copy;
+          settings.url = storage.url;
+          callback(settings);
+        }
+      });
     };
-
-    this.getAuth = function(callback) {
-        var user = {};
-        chrome.storage.local.get(['user','token','id'],
-          function (storage) {
-
-          	console.log("checking: "+storage.user);
-            if (JSON.stringify(storage.user)){
-
-                user.user = storage.user;
-                user.token = storage.token;
-                user.id = storage.id;
-                
-								callback(user);
-						}            
-					}
-				);
-    };
-    
-    this.getSettings = function(callback) {
-        var settings = {};
-
-        chrome.storage.local.get(['copy', 'url'],
-          function (storage) {
-            if (JSON.stringify(storage).length > 0){
-                settings.copy = storage.copy;
-                settings.url = storage.url;
-								callback(settings);
-						}            
-					});
-				};
 });
 
 // service for retrieving info from the active browser tab 
@@ -75,7 +68,6 @@ myApp.service('apiService', function($http, $q) {
 								if(value.original_url==postData.url){
 									duplicate = true;
 									shortlinkId = value.id;
-									console.log("duplicate link!!!");
 								}
 							});  	
 			
@@ -108,6 +100,7 @@ myApp.service('apiService', function($http, $q) {
 							d.reject(status);
 						});
 					}else{
+
 				// queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session  		
 						$http({
 								method	: 'POST',
@@ -148,7 +141,6 @@ myApp.service('apiService', function($http, $q) {
 		};
     
 });
-
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
   $scope.fetching = true;

@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+    opacity: 0;
+}
 
 @font-face {
     font-family: 'allerregular'; /*a name to be used later*/
@@ -15,15 +19,17 @@ body {
   background: #333943;
 }
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
+
+
 
 .hide,.ng-hide{
     display: none !important;
 }
 
+
+
 .show, .ng-show{
+
     display: block !important;
 }
 
@@ -45,6 +51,7 @@ span{
 }
 
 .container {
+    height: 100%;
     margin-right: auto;
     margin-left: auto;
     padding-left: 10px;
@@ -62,16 +69,11 @@ span{
     user-select: none;
 }
 
-.container{
-    border-radius: 5px;
-}
-
 .url-data p{
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
     color: #838C9B;
-
     overflow: hidden;
 }
 
@@ -170,12 +172,13 @@ button[disabled], html input[disabled]{
     margin-bottom: 5px;
 }
 
-#actionbar {
-
-}
 #actionbar a {
     font-size: 2.0rem;
     color: #ffffff;
+}
+
+.new-link{
+ margin-bottom: 10px;
 }
 
 .new-link h1{
@@ -183,9 +186,48 @@ button[disabled], html input[disabled]{
 }
 
 .onCreatedlink .new-link h1{
-    display: inline-block;
+
 }
 
 .copy-link h1{
     margin-top: 0px;
 }
+
+/*Animations*/
+.layout-default, .layout-custom-url, .settings{
+    -webkit-animation: fadein 0.2s; /* Safari and Chrome */
+    -moz-animation: fadein 0.2s; /* Firefox */
+    -ms-animation: fadein 0.2s; /* Internet Explorer */
+    -o-animation: fadein 0.2s; /* Opera */
+    animation: fadein 0.2s;
+    height: 100%;
+}
+
+@keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    0% { opacity: 0; }
+    100%   { opacity: 1; }
+}​
+
+/* Opera */
+@-o-keyframes fadein {
+     0% { opacity: 0; }
+     100%   { opacity: 1; }
+ }​
