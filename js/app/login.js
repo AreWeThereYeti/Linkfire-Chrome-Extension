@@ -44,7 +44,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 myApp.service('loginService', function LoginService($rootScope, $http, $q, $window) {
     
     // defines the api url could be moved to config for consistency
-    var API_ENDPOINT =  'http://linkfire.test.dev.rocketlabs.dk'
+    var API_ENDPOINT =  'http://linkfire.com'
     var urlAuth = API_ENDPOINT + '/api/1.0/auth/login';
 
     this.login = function (params) {

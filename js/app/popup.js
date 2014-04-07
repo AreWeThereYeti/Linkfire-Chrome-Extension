@@ -76,7 +76,7 @@ myApp.service('apiService', function($http, $q) {
 					if(duplicate==true){
 						$http({
 								method	: 'POST',
-								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/get',
+								url		  : 'http://linkfire.com/api/1.0/links/get',
 			          headers : {'Content-type' : 'application/json'},
 			          data    : {
 			          						"token":postData.token,
@@ -105,7 +105,7 @@ myApp.service('apiService', function($http, $q) {
 				// queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session  		
 						$http({
 								method	: 'POST',
-								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
+								url		  : 'http://linkfire.com/api/1.0/links/create',
 			          headers : {'Content-type' : 'application/json'},
 			          data    : JSON.stringify(postData)
 						}).success(function(data, status, headers){

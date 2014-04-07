@@ -19,6 +19,11 @@ body {
   background: #333943;
 }
 
+.red{
+    color: #F04E23;
+    font-size: 20px;
+    vertical-align: sub;
+}
 
 
 
@@ -171,6 +176,11 @@ button[disabled], html input[disabled]{
 
 .user-info{
     margin-bottom: 5px;
+}
+
+.error{
+    margin-left: 0px;
+    color: #F04E23;
 }
 
 
