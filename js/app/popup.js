@@ -50,19 +50,24 @@ myApp.service('pageInfoService', function() {
                 model.url = tabs[0].url;
                 
 
-								// sends 'callback' message to contentscript requesting the Pageinfo action
-                    console.log("sending meta data request");
-								
+								// Sends 'callback' message to contentscript requesting the Pageinfo action. Response will be object containing meta data(description and thumbnail url) if its available, and nothing if its not. 								
                 chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
                     
-                    console.log("meta data request. response: "+JSON.stringify(response));
-                    
-                    //model.pageInfos = response;
-                    //callback(model);
+                    if(response.description){
+                    	console.log("meta data description added!");
+											model.description = response.description;
+                    }else{
+											model.description = "This link was created with the Linkfire Chrome extension";
+                    }
+                    if(response.thumb){
+                    	console.log("meta data thumb added!");
+											model.thumb = response.thumb;
+                    }else{
+											model.thumb = null;
+                    }                    
+                    callback(model);
                 });
 
-								
-								callback(model);
             }
         });
     };
@@ -178,9 +183,11 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
       pageInfoService.getInfo(function (info) {
 		        $scope.title = info.title;
 		        $scope.url = info.url;
+		        $scope.description = info.description;
+		        $scope.thumb = info.thumb;
 		        $scope.newLink = "Fetching shortlink from Linkfire.com...";
 		        // prepares data for api post in callback 
-		        $scope.getPostData(info.url, info.title) 
+		        $scope.getPostData(info.url, info.title, info.description, info.thumb) 
 		        	.then(function(postData) {
 		        		// queries api with callback postData
 				        apiService.getLinkfireLink(postData)  
@@ -202,8 +209,8 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
   
    // function for creating/retrieving link for setting state: autoUrl = false  
    $scope.createLink = function(input){
-   	// prepares data for api post in callback 
-   	$scope.getPostData(input.url, input.title)
+   	// prepares data for api post in callback. !!!does not consider the thumbnail of the requested links original url!!!
+   	$scope.getPostData(input.url, input.title, info.description, null)
    	.then(function(postData) {
    		// queries api with callback postData
 	    apiService.getLinkfireLink(postData)
@@ -223,18 +230,30 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
    }
 	 
 	 // function for preparing data for api post in callback. uses storage checks and is therefore async 
-  $scope.getPostData = function(newUrl, newTitle){
+  $scope.getPostData = function(newUrl, newTitle, newDesc, newThumb){
   	var d = $q.defer();
   	var postData = {};
   	// storage check to get user data
   	storageCheckService.getAuth(function(user){
-				postData =
-		    {
-		      'token' : user.token,
-		      "user_id" : user.id,
-		      "url" : newUrl,
-		      "title" : newTitle,
-		      "description" : "This link was created with the Linkfire Chrome extension"
+				if(newThumb){
+					postData =
+			    {
+			      'token' : user.token,
+			      "user_id" : user.id,
+			      "url" : newUrl,
+			      "title" : newTitle,
+			      "description" : newDesc,
+			      "thumbnail" : newThumb
+			    }
+		    }else{
+			   	postData =
+			    {
+			      'token' : user.token,
+			      "user_id" : user.id,
+			      "url" : newUrl,
+			      "title" : newTitle,
+			      "description" : newDesc
+			    } 
 		    }
 				d.resolve(postData);
   	});
