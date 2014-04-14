@@ -48,6 +48,20 @@ myApp.service('pageInfoService', function() {
             {
                 model.title = tabs[0].title;
                 model.url = tabs[0].url;
+                
+
+								// sends 'callback' message to contentscript requesting the Pageinfo action
+                    console.log("sending meta data request");
+								
+                chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
+                    
+                    console.log("meta data request. response: "+JSON.stringify(response));
+                    
+                    //model.pageInfos = response;
+                    //callback(model);
+                });
+
+								
 								callback(model);
             }
         });
