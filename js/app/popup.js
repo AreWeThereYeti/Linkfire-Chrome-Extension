@@ -184,11 +184,11 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		        $scope.description = info.description;
 		        $scope.thumb = info.thumb;
 		        $scope.newLink = "Fetching shortlink from Linkfire.com...";
-		        // prepares data for api post in callback 
-		        $scope.getPostData(info.url, info.title, info.description, info.thumb) 
+		        // prepares data for api post in callback
+		        $scope.getPostData(info.url, info.title, info.description, info.thumb)
 		        	.then(function(postData) {
 		        		// queries api with callback postData
-				        apiService.getLinkfireLink(postData)  
+				        apiService.getLinkfireLink(postData)
 				        	.then(function(data) {
 			              $scope.fetching = false;
 									  $scope.newLink = data.link.url;
@@ -200,7 +200,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 											console.log(error);
 											$scope.newLink = "Error handling your request!";
 									});
-							});		
+							});
 				});
 		}
   });
