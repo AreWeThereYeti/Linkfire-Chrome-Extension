@@ -13,10 +13,17 @@
     src: url('../fonts/Aller/Light/aller-light-webfont.eot?') format('eot'), url('../fonts/Aller/Light/aller-light-webfont.woff') format('woff'), url('../fonts/Light/Regular/aller-light-webfont.ttf') format('truetype');
 }
 
+html{
+    width: 440px;
+    height: 740px;
+}
+
 body {
-  font-family: 'allerregular', sans-serif;
-  color: #535353;
-  background: #f7f7f7;
+    width: 440px;
+    height: 740px;
+    font-family: 'allerregular', sans-serif;
+    color: #535353;
+    background: #f7f7f7;
 }
 
 h1{
@@ -30,11 +37,6 @@ p{
     margin: 0 0 5px;
 }
 
-span{
-    color: #535353;
-    margin-left: 10px;
-    display: inline-block;
-}
 
 .container {
     margin: 0px 20px 0px 20px;
@@ -122,10 +124,11 @@ button[disabled], html input[disabled]{
 
 .new-link .link{
     margin-right: 15px;
-    color: #F04E23;
-    font-size: 16px;
+    color: #9c9c9c;
+    font-size: 25px;
+    display: inline-block;
     margin-left: 15px;
-    margin-top: 5px;
+    margin-top: 7px;
 }
 
 .new-link span{
@@ -157,6 +160,47 @@ button[disabled], html input[disabled]{
     margin-bottom: 5px;
 }
 
+/*List items*/
+.list-items{
+
+}
+
+.list-items button{
+    background-color: #7c899a;
+}
+
+.list-items img{
+    vertical-align: top;
+}
+
+.list-items .clicks, .list-items .shares{
+    color: #7c899a;
+}
+
+.list-items .shares:before{
+    content: " ";
+}
+.list-items .shares:before{
+    content: " ";
+}
+
+.list-text-container{
+    width: 297px;
+}
+
+.list-text{
+    height: 50px;
+    background-color: #FFF;
+    margin-left: 10px;
+    height: 50px;
+}
+
+.list-text .link{
+    margin-left: 15px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
 /*Bottom bar*/
 #actionbar a {
     font-size: 2.0rem;
@@ -180,6 +224,12 @@ button[disabled], html input[disabled]{
     display: block;
 }
 
+/*Line*/
+.line{
+    border-top: 1px solid #EBEBEB;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 /*Animations*/
 .layout-default, .layout-custom-url, .settings{

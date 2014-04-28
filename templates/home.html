@@ -14,7 +14,7 @@
 			<div class="url-thumbnail"></div>
 			<div class="url-data">
 				    <p>{{title}}</p>
-					<p>{{url}}</p>
+                    <p>{{description}}</p>
 			</div>
 
 			<div class="new-link">
@@ -24,13 +24,27 @@
 		</div>
 	</div>
 
-    <div>
-        <ul>
-            <li>item1</li>
-            <li>item2</li>
-            <li>item2</li>
-        </ul>
+    <div class="line"></div>
+
+    <div class="list-items">
+        <img class="inlineblock" src="img/dummy_list.png" alt="list image"/>
+        <div class="inlineblock list-text-container">
+            <div class="list-text">
+              <span class="link">{{newLink}}</span>
+              <button class="copy-link" ng-click="copyToClipboard(newLink)">Copy</button>
+            </div>
+            <div>
+                <span class="clicks">
+                    1250 Clicks
+                </span>
+                <span class="shares">
+                    22 Shares
+                </span>
+            </div>
+        </div>
     </div>
+
+    <div class="line"></div>
 
     <div id="actionbar">
         <div>

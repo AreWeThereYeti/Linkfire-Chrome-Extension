@@ -182,7 +182,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
           $scope.url = info.url;
           $scope.description = info.description;
           $scope.thumb = info.thumb;
-          $scope.newLink = "Fetching shortlink from Linkfire.com...";
+          $scope.newLink = "Fetching shortlink";
           // prepares data for api post in callback
           $scope.getPostData(info.url, info.title, info.description, info.thumb)
             .then(function(postData) {
