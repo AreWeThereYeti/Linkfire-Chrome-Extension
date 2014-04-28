@@ -7,26 +7,12 @@ myApp.controller("LoadController", function ($location, storageCheckService, $sc
 		console.log("status.user: "+JSON.stringify(status.user));
 
 			storageCheckService.getSettings(function(settings){
-				if(settings.url == false){
-					console.log("getSettings url: "+settings.url);
-
-					$location.path("/custom");
-					$scope.$apply();	
-
-				} else{
-									console.log("getSettings url: "+settings.url);
-
-					$location.path("/home");
-					$scope.$apply();	
-				}
-				
+        $location.path("/home");
+        $scope.$apply();
 			});
 		} else {
-			console.log("Else");
-
-			$location.path("/login");	
-			$scope.$apply();
-
+        $location.path("/login");
+        $scope.$apply();
 		}
 	});
 

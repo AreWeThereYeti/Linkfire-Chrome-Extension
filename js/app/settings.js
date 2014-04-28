@@ -23,12 +23,8 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
       'copy': $scope.copy,
       'url': $scope.url
 	  }, function(){
-	   if(!$scope.url){
-		   $location.path("/custom");
-		 }else{
-			 $location.path("/home");
-		 }
-		 $scope.$apply();	 
+		  $location.path("/home");
+      $scope.$apply();
 	  });
   };
 
