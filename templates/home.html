@@ -1,12 +1,11 @@
 <div>
 
     <div class="imagecontainer">
-        <img src="img/dummy_top.jpg" alt="top_img">
-        <div>
-            <span>
-                <span ng-show="autoCopy && fetching == false">Copied to clipboard</span>
-            </span>
+        <div class="copied-container" ng-show="autoCopy && fetching == false">
+            <span class="copied" >Copied to clipboard</span>
         </div>
+        <img src="img/dummy_top.jpg" alt="top_img">
+
     </div>
 
 	<div class="layout-default">

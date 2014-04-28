@@ -51,6 +51,38 @@ p{
     user-select: none;
 }
 
+/*Login*/
+.logo{
+}
+
+.logo img{
+    margin: auto auto;
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.copied:before{
+    content: " ";
+    background-image: url("../img/check.png");
+    background-repeat: no-repeat;
+    background-size: 21px 16px;
+    width: 21px;
+    height: 16px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.copied-container{
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 15px;
+    left: 30%;
+    top: 15%;
+}
+
 .imagecontainer{
     margin-left: -20px;
 }
@@ -69,15 +101,23 @@ p{
     overflow: hidden;
 }
 
+input:focus{
+    outline: 0;
+}
+
+input[placeholder] {
+    padding-left: 10px;
+}
+
 input[type="text"], input{
+    border: 0;
     color: black;
     width: 100%;
     margin-bottom: 15px;
-    height: 32px;
+    height: 50px;
 }
 
 input[type="submit"], button{
-    width: 50px;
     display: block;
     background-color: #F04E23;
     cursor: pointer;
@@ -96,9 +136,9 @@ input[type="submit"]:hover, button:hover{
     background-color: #B53C1C;
 }
 
-input.ng-invalid{
-    outline: 1px solid #F04E23;
-}
+/*input.ng-invalid{*/
+    /*outline: 1px solid #F04E23;*/
+/*}*/
 
 button[disabled], html input[disabled]{
     background-color: #C7C7C7;
