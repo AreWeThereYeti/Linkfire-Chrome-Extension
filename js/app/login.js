@@ -19,7 +19,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 			.then(function(data){
 				//sets userdata in storage
 				storageCheckService.setId(data);
-				$location.path("/home");
+				$location.path("/home");			
 			},function(error){
         $scope.login_in = false;
         //handle Error
