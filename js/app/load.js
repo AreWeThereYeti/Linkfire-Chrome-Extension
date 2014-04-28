@@ -15,9 +15,6 @@ myApp.controller("LoadController", function ($location, storageCheckService, $sc
         $scope.$apply();
 		}
 	});
-
-			
-
 });
 
 
