@@ -9,10 +9,6 @@
       templateUrl: 'templates/home.html',
       controller: 'PageController'
     })
-		.when('/custom', {
-      templateUrl: 'templates/custom.html',
-      controller: 'PageController'
-    })
     .when('/login', {
       templateUrl: 'templates/login.html',
       controller: 'LoginController'

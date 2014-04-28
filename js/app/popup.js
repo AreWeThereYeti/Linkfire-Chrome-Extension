@@ -16,7 +16,6 @@ myApp.service('storageCheckService', function($q) {
           user.user = storage.user;
           user.token = storage.token;
           user.id = storage.id;
-          
         }
         callback(user);
       }
