@@ -1,11 +1,16 @@
 <div>
-	<div id="actionbar">
-        <a class="glyphicon glyphicon-cog" href="#/settings"></a>
-	</div>
+
+    <div class="imagecontainer">
+        <img src="img/dummy_top.jpg" alt="top_img">
+        <div>
+            <span>
+                <span ng-show="autoCopy && fetching == false">Copied to clipboard</span>
+            </span>
+        </div>
+    </div>
 
 	<div class="layout-default">
 		<div class="onCreatedlink">
-			<h1>Original link</h1>
 			<div class="url-thumbnail"></div>
 			<div class="url-data">
 				    <p>{{title}}</p>
@@ -13,11 +18,27 @@
 			</div>
 
 			<div class="new-link">
-			    <h1>Linkfired link</h1>
-				<span class="newlink">{{newLink}}</span>
-                <span ng-show="autoCopy && fetching == false">Copied to clipboard</span>
-                <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy && fetching == false">Copy Link</button>
+				<span class="link">{{newLink}}</span>
+                <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy && fetching == false">Copy</button>
 			</div>
 		</div>
 	</div>
+
+    <div>
+        <ul>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item2</li>
+        </ul>
+    </div>
+
+    <div id="actionbar">
+        <div>
+            <img src="img/user_dummy.png" alt="userdummy"/>
+            <span>Username Username</span>
+            <span>
+                <a class="glyphicon glyphicon-cog" href="#/settings"></a>
+            </span>
+        </div>
+    </div>
 </div>
