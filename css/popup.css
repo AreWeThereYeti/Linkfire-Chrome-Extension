@@ -179,9 +179,21 @@ button[disabled], html input[disabled]{
 
 .list-items .shares:before{
     content: " ";
+    background-image: url("../img/shares.png");
+    background-repeat: no-repeat;
+    background-size: 12px 14px;
+    width: 14px;
+    height: 12px;
+    display: inline-block;
 }
-.list-items .shares:before{
+.list-items .clicks:before{
     content: " ";
+    background-image: url("../img/clicks.png");
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
 }
 
 .list-text-container{
