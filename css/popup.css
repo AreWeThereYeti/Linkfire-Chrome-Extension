@@ -33,7 +33,7 @@ h1{
 }
 
 p{
-    font-family: 'allerlight', sans-serif;
+    font-family: 'aller', sans-serif;
     margin: 0 0 5px;
 }
 
@@ -55,11 +55,17 @@ p{
     margin-left: -20px;
 }
 
+.url-data{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .url-data p{
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
-    color: #838C9B;
+    color: #535353;
+    font-size: 14px;
     overflow: hidden;
 }
 
@@ -175,6 +181,7 @@ button[disabled], html input[disabled]{
 
 .list-items .clicks, .list-items .shares{
     color: #7c899a;
+    margin-right: 10px;
 }
 
 .list-items .shares:before{
@@ -182,9 +189,10 @@ button[disabled], html input[disabled]{
     background-image: url("../img/shares.png");
     background-repeat: no-repeat;
     background-size: 12px 14px;
-    width: 14px;
-    height: 12px;
+    width: 12px;
+    height: 14px;
     display: inline-block;
+    vertical-align: middle;
 }
 .list-items .clicks:before{
     content: " ";
@@ -194,6 +202,12 @@ button[disabled], html input[disabled]{
     width: 14px;
     height: 14px;
     display: inline-block;
+    vertical-align: middle;
+}
+
+.list-items .info{
+    margin-left: 10px;
+    margin-top: 15px;
 }
 
 .list-text-container{
@@ -211,12 +225,23 @@ button[disabled], html input[disabled]{
     margin-left: 15px;
     display: inline-block;
     margin-top: 15px;
+    color: #9C9C9C;
 }
 
 /*Bottom bar*/
 #actionbar a {
     font-size: 2.0rem;
-    color: #575757;
+    float: right;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 10px;
+    color: #6F6E6E;
+}
+
+.username{
+    font-size: 13px;
+    color: #9c9c9c;
+    margin-left: 5px;
 }
 
 /*Helpers*/
@@ -240,7 +265,9 @@ button[disabled], html input[disabled]{
 .line{
     border-top: 1px solid #EBEBEB;
     margin-top: 20px;
+    margin-left: -20px;
     margin-bottom: 20px;
+    margin-right: -20px;
 }
 
 /*Animations*/

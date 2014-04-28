@@ -16,6 +16,7 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
         $scope.userEmail = result.user;
        }
         $scope.$apply();
+
      });
   // checks chrome local storage for settings and sets variables accordingly
 	$scope.storeChanges = function(){
