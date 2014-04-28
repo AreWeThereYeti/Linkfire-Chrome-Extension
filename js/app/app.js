@@ -17,5 +17,7 @@
       templateUrl: 'templates/settings.html',
       controller: 'SettingsCtrl'
     })
-    .otherwise({redirectTo: '/login'});
+    .otherwise({
+      redirectTo: '/login'
+    });
 });
