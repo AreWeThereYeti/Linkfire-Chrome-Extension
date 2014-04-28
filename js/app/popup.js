@@ -176,33 +176,32 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
 		}
 		
 		// initiates extension behavior for default state autoUrl=true
-		if($scope.autoUrl){
 			// gets browser tab info
       pageInfoService.getInfo(function (info) {
-		        $scope.title = info.title;
-		        $scope.url = info.url;
-		        $scope.description = info.description;
-		        $scope.thumb = info.thumb;
-		        $scope.newLink = "Fetching shortlink from Linkfire.com...";
-		        // prepares data for api post in callback
-		        $scope.getPostData(info.url, info.title, info.description, info.thumb)
-		        	.then(function(postData) {
-		        		// queries api with callback postData
-				        apiService.getLinkfireLink(postData)
-				        	.then(function(data) {
-			              $scope.fetching = false;
-									  $scope.newLink = data.link.url;
-											if($scope.autoCopy){
-												// copies generates link to clipboard in default state: autoCopy=true
-												$scope.copyToClipboard($scope.newLink);
-											}
-									},function(error){
-											console.log(error);
-											$scope.newLink = "Error handling your request!";
-									});
-							});
-				});
-		}
+          $scope.title = info.title;
+          $scope.url = info.url;
+          $scope.description = info.description;
+          $scope.thumb = info.thumb;
+          $scope.newLink = "Fetching shortlink from Linkfire.com...";
+          // prepares data for api post in callback
+          $scope.getPostData(info.url, info.title, info.description, info.thumb)
+            .then(function(postData) {
+              // queries api with callback postData
+              apiService.getLinkfireLink(postData)
+                .then(function(data) {
+                  $scope.fetching = false;
+                  $scope.newLink = data.link.url;
+                    if($scope.autoCopy){
+                      // copies generates link to clipboard in default state: autoCopy=true
+                      $scope.copyToClipboard($scope.newLink);
+                    }
+                },function(error){
+                    console.log(error);
+                    $scope.newLink = "Error handling your request!";
+                });
+            });
+      });
+
   });
   
    // function for creating/retrieving link for setting state: autoUrl = false  
