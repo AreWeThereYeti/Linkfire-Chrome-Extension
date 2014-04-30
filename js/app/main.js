@@ -50,7 +50,7 @@ myApp.service('pageInfoService', function() {
 
 								// Sends 'callback' message to contentscript requesting the Pageinfo action. Response will be object containing meta data(description and thumbnail url) if its available, and nothing if its not. 								
                 chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
-                    
+
                     if(response.description){
                     	console.log("meta data description added!");
 											model.description = response.description;
@@ -62,10 +62,9 @@ myApp.service('pageInfoService', function() {
 											model.thumb = response.thumb;
                     }else{
 											model.thumb = null;
-                    }                    
-                    callback(model);
+                    }
+                  callback(model);
                 });
-
             }
         });
     };
@@ -73,135 +72,111 @@ myApp.service('pageInfoService', function() {
 
 // sevice for contacting the linkfire api
 myApp.service('apiService', function($http, $q) {
-    
-		this.getLinkfireLink = function(postData){
 
-			var d = $q.defer();
-			 			 	
-			var duplicate = false;
-			var shortlinkId = {};
-		// check links[] array in chrome.storage.local for duplicate links and sets duplicate true/false accordingly
-			chrome.storage.local.get('links', function (result) {
-            	angular.forEach(result.links, function(value, key){
-								if(value.original_url==postData.url){
-									duplicate = true;
-									shortlinkId = value.id;
-								}
-							});  	
-			
-					// queries /api/1.0/links/get for exsisting link data when link has been created from the same url during this user login session  		
-					if(duplicate==true){
-						$http({
-								method	: 'POST',
-								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/get',
-			          headers : {'Content-type' : 'application/json'},
-			          data    : {
-			          						"token":postData.token,
-			          						"user_id":postData.user_id, 
-														"id":shortlinkId
-													}
-						}).success(function(data, status, headers){
-							console.log("Retrieved existing link");
-			        d.resolve(data);
-						}).error(function(data, status, headers){
-			        if(status==400){
-								console.log("Error: "+status+". Missing or invalid parameters.");
-							} else if(status==401){
-								console.log("Error: "+status+". User doesn’t have access to the link.");
-							} else if(status==403){
-								console.log("Error: "+status+". Expired or invalid token.");
-							} else if(status==500){
-								console.log("Error: "+status+". Internal error. Contact support@linkfire.com.");
-							} else{
-								console.log("Error: "+status);
-							}
-							d.reject(status);
-						});
-					}else{
+		this.getLinkfireLink = function(postData) {
 
-				// queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
-						$http({
-								method	: 'POST',
-								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
-			          headers : {'Content-type' : 'application/json'},
-			          data    : JSON.stringify(postData)
-						}).success(function(data, status, headers){
-							console.log("Created new link");
+      var d = $q.defer();
 
-							// stores created link's original_url and id in the links array in storage
-							chrome.storage.local.get({links: []}, function (result) {
-								// the input argument is ALWAYS an object containing the queried keys
-								// so we select the key we need
-								var links = result.links;
-								links.push({original_url: data.link.original_url, id: data.link.id});
-								// set the new array value to the same key
-								chrome.storage.local.set({links: links}, function () {						
-								});
-							});
-							
-			        d.resolve(data);
-						
-						}).error(function(data, status, headers){
-			        if(status==400){
-								console.log("Error: "+status+". Missing or invalid parameters.");
-							} else if(status==403){
-								console.log("Error: "+status+". Expired or invalid token .");
-							} else if(status==500){
-								console.log("Error: "+status+". Internal error. Contact support@linkfire.com.");
-							} else{
-								console.log("Error: "+status);
-							}
-							d.reject(status);
-						});
-					}
-			});
-			return d.promise;
-		};
-    
+      var shortlinkId = {};
+
+      $http({
+        method: 'POST',
+        url: 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
+        headers: {'Content-type': 'application/json'},
+        data: {
+          "token": postData.token,
+          "user_id": postData.user_id,
+          "id": shortlinkId
+        }
+      }).success(function (data, status, headers) {
+        console.log("Retrieved existing link");
+        d.resolve(data);
+      }).error(function (data, status, headers) {
+        if (status == 400) {
+          console.log("Error: " + status + ". Missing or invalid parameters.");
+        } else if (status == 401) {
+          console.log("Error: " + status + ". User doesn’t have access to the link.");
+        } else if (status == 403) {
+          console.log("Error: " + status + ". Expired or invalid token.");
+        } else if (status == 500) {
+          console.log("Error: " + status + ". Internal error. Contact support@linkfire.com.");
+        } else {
+          console.log("Error: " + status);
+        }
+        d.reject(status);
+      });
+      return d.promise;
+    }
+
+    this.getLinkfireData = function(postData){
+
+      var d = $q.defer();
+      // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
+          $http({
+              method	: 'GET',
+              url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
+              headers : {'Content-Type' : 'application/json'},
+              params    : {
+                          "token":  postData.token,
+                          "user_id":postData.user_id,
+                          "url":    postData.url
+                        }
+          }).success(function(data, status, headers){
+            d.resolve(data);
+
+          }).error(function(data, status, headers){
+            if(status==400){
+              console.log("Error: "+status+". Missing or invalid parameters.");
+            } else if(status==403){
+              console.log("Error: "+status+". Expired or invalid token .");
+            } else if(status==500){
+              console.log("Error: "+status+". Internal error. Contact support@linkfire.com.");
+            } else{
+              console.log("Error: "+status);
+            }
+            d.reject(status);
+          });
+      return d.promise;
+    }
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
-  $scope.fetching = true;
-	$scope.linkCreated = false;
+    $scope.fetching = true;
+    $scope.linkCreated = false;
 
-// checking storage for UI settings	
-	storageCheckService.getSettings(function(settings){
-		
-		if(JSON.stringify(settings).length > 2){
-			$scope.autoUrl = settings.url;
-			$scope.autoCopy = settings.copy;
-		}else{
-			$scope.autoUrl = true;
-			$scope.autoCopy =true;
-		}
-		
-		// initiates extension behavior for default state autoUrl=true
+    // checking storage for UI settings
+    storageCheckService.getSettings(function(settings){
+
+      if(JSON.stringify(settings).length > 2){
+        $scope.autoCopy = settings.copy;
+      }else{
+        $scope.autoCopy =true;
+      }
+
+      // initiates extension behavior for default state autoUrl=true
 			// gets browser tab info
       pageInfoService.getInfo(function (info) {
-          $scope.title = info.title;
-          $scope.url = info.url;
-          $scope.description = info.description;
-          $scope.thumb = info.thumb;
           $scope.newLink = "Fetching shortlink";
           // prepares data for api post in callback
-          $scope.getPostData(info.url, info.title, info.description, info.thumb)
+          $scope.getPostData(info.url, info.title, info.description)
             .then(function(postData) {
               // queries api with callback postData
-              apiService.getLinkfireLink(postData)
+              apiService.getLinkfireData(postData)
                 .then(function(data) {
+                  console.log('data is ' + data)
                   $scope.fetching = false;
-                  $scope.newLink = data.link.url;
-                    if($scope.autoCopy){
-                      // copies generates link to clipboard in default state: autoCopy=true
+                  $scope.title = data.title;
+                  $scope.description = data.description;
+
+                  $scope.createLink()
                       $scope.copyToClipboard($scope.newLink);
-                    }
+
                 },function(error){
                     console.log(error);
                     $scope.newLink = "Error handling your request!";
                 });
             });
       });
-
   });
   
    // function for creating/retrieving link for setting state: autoUrl = false  
