@@ -13,12 +13,8 @@ myApp.controller("LoadController", function ($location, storageCheckService, $sc
 		} else {
         $location.path("/login");
         $scope.$apply();
-
 		}
 	});
-
-			
-
 });
 
 

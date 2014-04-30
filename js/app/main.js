@@ -46,7 +46,7 @@ myApp.service('pageInfoService', function() {
             {
                 model.title = tabs[0].title;
                 model.url = tabs[0].url;
-                
+
 
 								// Sends 'callback' message to contentscript requesting the Pageinfo action. Response will be object containing meta data(description and thumbnail url) if its available, and nothing if its not. 								
                 chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
@@ -117,18 +117,14 @@ myApp.service('apiService', function($http, $q) {
 							}
 							d.reject(status);
 						});
-					}
+					}else{
 
-          else{
-
-				// queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session  		
+				// queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
 						$http({
 								method	: 'POST',
-								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
+								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
 			          headers : {'Content-type' : 'application/json'},
-			          data    : {
-                            "token":postData.token
-                          }
+			          data    : JSON.stringify(postData)
 						}).success(function(data, status, headers){
 							console.log("Created new link");
 
