@@ -79,13 +79,11 @@ myApp.service('apiService', function($http, $q) {
 
       $http({
         method: 'POST',
-        url: 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
-        headers: {'Content-type': 'application/json'},
-        data: {
-          JSON.stringify(postData)
-        }
+        url     :   'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
+        headers :   {'Content-type': 'application/json'},
+        data    :   JSON.stringify(postData)
+
       }).success(function (data, status, headers) {
-        console.log("Retrieved existing link");
         d.resolve(data);
       }).error(function (data, status, headers) {
         if (status == 400) {
@@ -164,11 +162,14 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
                   $scope.fetching = false;
                   $scope.title = data.title;
                   $scope.description = data.description;
-
-                  apiService.getLinkfireLink(postData);
-
-                  $scope.copyToClipboard($scope.newLink);
-
+                  apiService.getLinkfireLink(postData)
+                    .then(function(data){
+                      $scope.newLink = data.link.url;
+                      $scope.copyToClipboard($scope.newLink);
+                    }, function(error){
+                      console.log(error);
+                      $scope.newLink = "Error handling your request!";
+                    })
                 },function(error){
                     console.log(error);
                     $scope.newLink = "Error handling your request!";
