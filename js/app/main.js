@@ -117,14 +117,18 @@ myApp.service('apiService', function($http, $q) {
 							}
 							d.reject(status);
 						});
-					}else{
+					}
+
+          else{
 
 				// queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session  		
 						$http({
 								method	: 'POST',
-								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
+								url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
 			          headers : {'Content-type' : 'application/json'},
-			          data    : JSON.stringify(postData)
+			          data    : {
+                            "token":postData.token
+                          }
 						}).success(function(data, status, headers){
 							console.log("Created new link");
 
