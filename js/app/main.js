@@ -77,8 +77,6 @@ myApp.service('apiService', function($http, $q) {
 
       var d = $q.defer();
 
-      var shortlinkId = {};
-
       $http({
         method: 'POST',
         url: 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
@@ -122,6 +120,7 @@ myApp.service('apiService', function($http, $q) {
                           "url":    postData.url
                         }
           }).success(function(data, status, headers){
+            console.log('Your short link is served' + data)
             d.resolve(data);
 
           }).error(function(data, status, headers){
@@ -168,7 +167,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
                   $scope.title = data.title;
                   $scope.description = data.description;
 
-                  $scope.createLink(data)
+                  apiService.getLinkfireLink(postData);
 
                   $scope.copyToClipboard($scope.newLink);
 
