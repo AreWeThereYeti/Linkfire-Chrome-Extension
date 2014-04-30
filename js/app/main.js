@@ -168,8 +168,9 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
                   $scope.title = data.title;
                   $scope.description = data.description;
 
-                  $scope.createLink()
-                      $scope.copyToClipboard($scope.newLink);
+                  $scope.createLink(data)
+
+                  $scope.copyToClipboard($scope.newLink);
 
                 },function(error){
                     console.log(error);
@@ -179,58 +180,45 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
       });
   });
   
-   // function for creating/retrieving link for setting state: autoUrl = false  
-   $scope.createLink = function(input){
-   	// prepares data for api post in callback. !!!does not consider the thumbnail of the requested links original url!!!
-   	$scope.getPostData(input.url, input.title, info.description, null)
-   	.then(function(postData) {
-   		// queries api with callback postData
-	    apiService.getLinkfireLink(postData)
-	    	.then(function(data) {
-			    $scope.linkCreated = true;
-					$scope.newLink = data.link.url;
-					if($scope.autoCopy){
-						// copies generates link to clipboard in default state: autoCopy=true
-						$scope.copyToClipboard($scope.newLink);
-					}
-					
-				}, function(error){
-						$scope.newLink = "Error handling your request!";
-						$scope.linkCreated = true;
-				});
+   // function for creating/retrieving link for setting state: autoUrl = false
+    $scope.createLink = function(input){
+   	  // prepares data for api post in callback. !!!does not consider the thumbnail of the requested links original url!!!
+    	$scope.getPostData(input.url, input.title, input.description)
+   	  .then(function(postData) {
+   		  // queries api with callback postData
+	      apiService.getLinkfireLink(postData)
+	    	  .then(function(data) {
+            $scope.linkCreated = true;
+            $scope.newLink = data.link.url;
+            if($scope.autoCopy){
+              // copies generates link to clipboard in default state: autoCopy=true
+              $scope.copyToClipboard($scope.newLink);
+            }
+          }, function(error){
+            $scope.newLink = "Error handling your request!";
+            $scope.linkCreated = true;
+        });
 			});
-   }
-	 
-	 // function for preparing data for api post in callback. uses storage checks and is therefore async 
-  $scope.getPostData = function(newUrl, newTitle, newDesc, newThumb){
-  	var d = $q.defer();
-  	var postData = {};
-  	// storage check to get user data
-  	storageCheckService.getAuth(function(user){
-				if(newThumb){
-					postData =
-			    {
-			      'token' : user.token,
-			      "user_id" : user.id,
-			      "url" : newUrl,
-			      "title" : newTitle,
-			      "description" : newDesc,
-			      "thumbnail" : newThumb
-			    }
-		    }else{
-			   	postData =
-			    {
-			      'token' : user.token,
-			      "user_id" : user.id,
-			      "url" : newUrl,
-			      "title" : newTitle,
-			      "description" : newDesc
-			    } 
-		    }
-				d.resolve(postData);
-  	});
-  	return d.promise;
-  };
+    }
+
+    // function for preparing data for api post in callback. uses storage checks and is therefore async
+    $scope.getPostData = function(newUrl, newTitle, newDesc){
+      var d = $q.defer();
+      var postData = {};
+      // storage check to get user data
+      storageCheckService.getAuth(function(user){
+        postData =
+        {
+          'token' : user.token,
+          "user_id" : user.id,
+          "url" : newUrl,
+          "title" : newTitle,
+          "description" : newDesc
+        }
+        d.resolve(postData);
+      });
+      return d.promise;
+    };
     // function for copying to the clipboard
     $scope.copyToClipboard = function(text){
 	    var copyDiv = document.createElement('div');
