@@ -82,9 +82,7 @@ myApp.service('apiService', function($http, $q) {
         url: 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
         headers: {'Content-type': 'application/json'},
         data: {
-          "token": postData.token,
-          "user_id": postData.user_id,
-          "id": shortlinkId
+          JSON.stringify(postData)
         }
       }).success(function (data, status, headers) {
         console.log("Retrieved existing link");
