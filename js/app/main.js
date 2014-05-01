@@ -158,13 +158,26 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
               // queries api with callback postData
               apiService.getLinkfireData(postData)
                 .then(function(data) {
-                  console.log('data is ' + data)
-                  $scope.fetching = false;
-                  $scope.title = data.title;
-                  $scope.description = data.description;
+                  if(data.title == ''){
+                    $scope.title = 'We did not get a title';
+                  }
+
+                  else{
+                    $scope.title = data.title;
+                  }
+
+                  if (data.description == ''){
+                    $scope.description = 'We did not get a description';
+                  }
+
+                  else{
+                    $scope.description = data.description;
+                  }
+
                   apiService.getLinkfireLink(postData)
                     .then(function(data){
                       $scope.newLink = data.link.url;
+                      $scope.fetching = false;
                       $scope.copyToClipboard($scope.newLink);
                     }, function(error){
                       console.log(error);

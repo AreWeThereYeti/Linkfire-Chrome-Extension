@@ -5,18 +5,18 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
 	chrome.storage.local.get(['copy', 'url', 'user'], function(result) {
 
     if(JSON.stringify(result.copy)){
-	      $scope.copy = result.copy;
-				$scope.url = result.url;
-				$scope.userEmail = result.user;
-	        
-        }else{
- 	      $scope.copy = true;
- 				$scope.url = true;
-        $scope.userEmail = result.user;
-       }
-        $scope.$apply();
+      $scope.copy = result.copy;
+      $scope.url = result.url;
+      $scope.userEmail = result.user;
+    }
 
-     });
+    else{
+      $scope.copy = true;
+      $scope.url = true;
+      $scope.userEmail = result.user;
+    }
+      $scope.$apply();
+  });
   // checks chrome local storage for settings and sets variables accordingly
 	$scope.storeChanges = function(){
 		chrome.storage.local.set({

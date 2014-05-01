@@ -348,3 +348,11 @@ button[disabled], html input[disabled]{
      0% { opacity: 0; }
      100%   { opacity: 1; }
  }​
+
+.fetch{
+    background-image: url('../img/fetch.gif');
+    background-size: 16px 16px;
+    width: 16px;
+    heigh: 16px;
+    display: block;
+}

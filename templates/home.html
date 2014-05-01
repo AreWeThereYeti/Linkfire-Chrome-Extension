@@ -1,30 +1,25 @@
 <div>
-
     <div class="imagecontainer">
         <div class="copied-container" ng-show="autoCopy && fetching == false">
             <span class="copied" >Copied to clipboard</span>
         </div>
         <img src="img/dummy_top.jpg" alt="top_img">
-
     </div>
 
 	<div class="layout-default">
 		<div class="onCreatedlink">
 			<div class="url-thumbnail"></div>
 			<div class="url-data">
-				    <p>{{title}}</p>
-                    <p>{{description}}</p>
+                <p ng-class="{fetch : fetching == true}">{{title}}</p>
+                <p ng-class="{fetch : fetching == true}">{{description}}</p>
 			</div>
-
 			<div class="new-link">
 				<span class="link">{{newLink}}</span>
-                <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy && fetching == false">Copy</button>
+                <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching" ng-show="!autoCopy" ng-cloak>Copy</button>
 			</div>
 		</div>
 	</div>
-
     <div class="line"></div>
-
     <div class="list-items">
         <img class="inlineblock" src="img/dummy_list.png" alt="list image"/>
         <div class="inlineblock list-text-container">
@@ -42,9 +37,7 @@
             </div>
         </div>
     </div>
-
     <div class="line"></div>
-
     <div id="actionbar">
         <div>
             <img src="img/user_dummy.png" alt="userdummy"/>
