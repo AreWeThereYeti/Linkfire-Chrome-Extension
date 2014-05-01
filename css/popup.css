@@ -89,7 +89,9 @@ p{
 
 .url-data{
     margin-top: 10px;
+    height: 45px;
     margin-bottom: 10px;
+    display: block;
 }
 
 .url-data p{
@@ -301,6 +303,17 @@ button[disabled], html input[disabled]{
     display: block;
 }
 
+/*Loader*/
+.load{
+    background-image: url('../img/fetch.gif');
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    display: block;
+    position: absolute;
+}
+
 /*Line*/
 .line{
     border-top: 1px solid #EBEBEB;
@@ -348,11 +361,3 @@ button[disabled], html input[disabled]{
      0% { opacity: 0; }
      100%   { opacity: 1; }
  }​
-
-.fetch{
-    background-image: url('../img/fetch.gif');
-    background-size: 16px 16px;
-    width: 16px;
-    heigh: 16px;
-    display: block;
-}

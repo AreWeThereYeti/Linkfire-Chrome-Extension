@@ -51,7 +51,7 @@ myApp.service('pageInfoService', function() {
 								// Sends 'callback' message to contentscript requesting the Pageinfo action. Response will be object containing meta data(description and thumbnail url) if its available, and nothing if its not. 								
                 chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
 
-                    if(response.description){
+                    if(response.description == ''){
                     	console.log("meta data description added!");
 											model.description = response.description;
                     }else{
@@ -136,8 +136,9 @@ myApp.service('apiService', function($http, $q) {
 });
 
 myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
-    $scope.fetching = true;
-    $scope.linkCreated = false;
+  $scope.fetching = true;
+  $scope.linkCreated = false;
+  $scope.imgThumb = 'img/linkfire_logo.png'
 
     // checking storage for UI settings
     storageCheckService.getSettings(function(settings){
@@ -158,6 +159,8 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
               // queries api with callback postData
               apiService.getLinkfireData(postData)
                 .then(function(data) {
+                  $scope.fetching = false;
+
                   if(data.title == ''){
                     $scope.title = 'We did not get a title';
                   }
@@ -174,10 +177,21 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
                     $scope.description = data.description;
                   }
 
+                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
+                    if(data.thumbnailsPending[i].height > 10){
+                      var img = data.thumbnailsPending[i];
+
+                      alert('Billedet er mindre end 10 i højden');
+                      $scope.imgThumb = data.thumbnailsPending[i];
+                      break;
+                    }
+                  }
+
+                  $scope.imgThumb = data.thumbnailsPending[0];
+
                   apiService.getLinkfireLink(postData)
                     .then(function(data){
                       $scope.newLink = data.link.url;
-                      $scope.fetching = false;
                       $scope.copyToClipboard($scope.newLink);
                     }, function(error){
                       console.log(error);

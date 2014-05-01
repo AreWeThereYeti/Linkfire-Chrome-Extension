@@ -20,5 +20,5 @@
   },
   "minimum_chrome_version": "18",
   "permissions": [ "http://*/*", "storage", "tabs"],
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'; media-src 'self' filesystem:"
 }
