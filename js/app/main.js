@@ -177,7 +177,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
                     $scope.description = data.description;
                   }
 
-                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
+/*                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
                     if(data.thumbnailsPending[i].height > 10){
                       var img = data.thumbnailsPending[i];
 
@@ -185,7 +185,7 @@ myApp.controller("PageController", function ($scope, pageInfoService, apiService
                       $scope.imgThumb = data.thumbnailsPending[i];
                       break;
                     }
-                  }
+                  }*/
 
                   $scope.imgThumb = data.thumbnailsPending[0];
 
