@@ -101,18 +101,18 @@ myApp.service('apiService', function($http, $q) {
   }
 
   //  Get latest linkfire links
-  this.getLatestLinkfireLinks = function(postData){
+  this.getLatestLinkfireLinks = function(userData, link){
 
     var d = $q.defer();
     // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
     $http({
       method	: 'GET',
-      url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
+      url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/get',
       headers : {'Content-Type' : 'application/json'},
-      params    : {
-        "token":  postData.token,
-        "user_id":postData.user_id,
-        "url":    postData.url
+      params  : {
+        "token"   :  userData.token,
+        "user_id" :  userData.user_id,
+        "id"      :  link.id
       }
     }).success(function(data, status, headers){
       console.log('Your short link is served' + data)

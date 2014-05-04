@@ -1,4 +1,25 @@
 ﻿myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
+
+//  Getting latest links on startup
+  storageCheckService.getAuth(function(user){
+    userData =
+    {
+      'token' : user.token,
+      "user_id" : user.id
+    }
+    //  Get latest links
+    apiService.getAllLinkfireLinks(userData)
+      .then(function(data){
+        apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 1])
+          .then(function(data){
+
+          })
+
+      });
+  });
+
+
+
   $scope.fetching = true;
   $scope.linkCreated = false;
   $scope.imgThumb = 'img/linkfire_logo.png'
@@ -101,7 +122,7 @@
         {
           'token' : user.token,
           "user_id" : user.id,
-          "url" : newUrl,
+          "url" : newUrl
         }
         d.resolve(postData);
       });
