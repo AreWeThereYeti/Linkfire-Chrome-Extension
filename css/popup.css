@@ -15,16 +15,20 @@
 
 html{
     width: 440px;
-    height: 740px;
+    height: 600px;
 }
+
 
 body {
     width: 440px;
-    height: 740px;
+    height: 600px;
     font-family: 'allerregular', sans-serif;
     color: #535353;
     background: #f7f7f7;
+    display: block;
+    overflow: hidden;
 }
+
 
 h1{
     font-size: 22px;
@@ -44,7 +48,7 @@ p{
 
 #popup {
     width: 440px;
-    height: 740px;
+    height: 600px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -79,12 +83,19 @@ p{
     background-color: #ffffff;
     border-radius: 5px;
     padding: 15px;
-    left: 30%;
-    top: 15%;
+    left: 27%;
+    top: 10%;
 }
 
 .imagecontainer{
     margin-left: -20px;
+}
+
+.imagecontainer .top{
+    height: 150px;
+    width: auto;
+    margin: auto auto;
+    display: block;
 }
 
 .url-data{
@@ -210,7 +221,7 @@ button[disabled], html input[disabled]{
 
 /*List items*/
 .list-items{
-
+    margin-bottom: 20px;
 }
 
 .list-items button{
@@ -307,19 +318,21 @@ button[disabled], html input[disabled]{
 .load{
     background-image: url('../img/fetch.gif');
     background-repeat: no-repeat;
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
+    background-size: 16px 16px;
+    width: 16px;
+    height: 16px;
     display: block;
     position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 /*Line*/
 .line{
     border-top: 1px solid #EBEBEB;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: -20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     margin-right: -20px;
 }
 

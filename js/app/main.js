@@ -10,15 +10,29 @@
     //  Get latest links
     apiService.getAllLinkfireLinks(userData)
       .then(function(data){
+
+//      Get 2 latest links
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 1])
           .then(function(data){
+            $scope.firstLink = data.link.url;
+            $scope.firstLinkClick = data.link.stats.clicks;
+            $scope.firstLinkShares = data.link.stats.shares;
+          }, function(error){
+            $scope.firstLink = "Error handling your request!";
+          });
 
-          })
-
+        apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 2])
+          .then(function(data){
+            $scope.secondLink = data.link.url;
+            $scope.secondLinkClick = data.link.stats.clicks;
+            $scope.secondLinkShares = data.link.stats.shares;
+          }, function(error){
+            $scope.secondLink = "Error handling your request!";
+          });
+      }, function(error){
+        console.log = "Error handling your request!";
       });
   });
-
-
 
   $scope.fetching = true;
   $scope.linkCreated = false;
@@ -62,18 +76,20 @@
                   }
 
 /*                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
-                    if(data.thumbnailsPending[i].height > 10){
+                    var imgPlaceholder = new Image();
+                    imgPlaceholder.src = data.thumbnailsPending[i];
+                    console.log(imgPlaceholder.height)
+                    if(imgPlaceholder.height > 150){
                       var img = data.thumbnailsPending[i];
 
-                      alert('Billedet er mindre end 10 i højden');
-                      $scope.imgThumb = data.thumbnailsPending[i];
+                      console.log('Billedet er mindre end 150 i højden');
+                      $scope.imgThumb = imgPlaceholder.src;
                       break;
                     }
-                  }
+                  }*/
 
                   $scope.imgThumb = data.thumbnailsPending[0];
 
- */
 
                   apiService.getLinkfireLink(postData, data)
                     .then(function(data){

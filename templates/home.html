@@ -25,15 +25,34 @@
         <img class="inlineblock" src="img/dummy_list.png" alt="list image"/>
         <div class="inlineblock list-text-container">
             <div class="list-text">
-              <span class="link">{{newLink}}</span>
-              <button class="copy-link" ng-click="copyToClipboard(newLink)">Copy</button>
+              <span ng-class="{load : !firstLink}"></span>
+              <span class="link">{{firstLink}}</span>
+              <button class="copy-link" ng-click="copyToClipboard(firstLink)">Copy</button>
             </div>
             <div class="info">
                 <span class="clicks">
-                    1250 Clicks
+                    {{firstLinkClick}} clicks
                 </span>
                 <span class="shares">
-                    22 Shares
+                    {{firstLinkShares}} shares
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="list-items">
+        <img class="inlineblock" src="img/dummy_list.png" alt="list image"/>
+        <div class="inlineblock list-text-container">
+            <div class="list-text">
+                <span ng-class="{load : !secondLink}"></span>
+                <span class="link">{{secondLink}}</span>
+                <button class="copy-link" ng-click="copyToClipboard(secondLink)">Copy</button>
+            </div>
+            <div class="info">
+                <span class="clicks">
+                    {{secondLinkClick}} clicks
+                </span>
+                <span class="shares">
+                    {{secondLinkShares}} shares
                 </span>
             </div>
         </div>
