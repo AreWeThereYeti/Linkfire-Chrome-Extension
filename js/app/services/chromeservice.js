@@ -50,18 +50,19 @@ myApp.service('pageInfoService', function() {
 
           // Sends 'callback' message to contentscript requesting the Pageinfo action. Response will be object containing meta data(description and thumbnail url) if its available, and nothing if its not.
           chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
-
-            if(response.description){
-              console.log("meta data description added!");
-              model.description = response.description;
-            }else{
-              model.description = "This link was created with the Linkfire Chrome extension";
-            }
-            if(response.thumb){
-              console.log("meta data thumb added!");
-              model.thumb = response.thumb;
-            }else{
-              model.thumb = null;
+            if(response){
+              if(response.description){
+                console.log("meta data description added!");
+                model.description = response.description;
+              }else{
+                model.description = "This link was created with the Linkfire Chrome extension";
+              }
+              if(response.thumb){
+                console.log("meta data thumb added!");
+                model.thumb = response.thumb;
+              }else{
+                model.thumb = null;
+              }
             }
             callback(model);
           });

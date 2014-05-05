@@ -75,18 +75,17 @@
                     $scope.description = data.description;
                   }
 
-/*                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
+                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
+                    console.log('Her')
                     var imgPlaceholder = new Image();
                     imgPlaceholder.src = data.thumbnailsPending[i];
                     console.log(imgPlaceholder.height)
                     if(imgPlaceholder.height > 150){
                       var img = data.thumbnailsPending[i];
-
-                      console.log('Billedet er mindre end 150 i højden');
                       $scope.imgThumb = imgPlaceholder.src;
                       break;
                     }
-                  }*/
+                  }
 
                   $scope.imgThumb = data.thumbnailsPending[0];
 
