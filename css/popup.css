@@ -231,6 +231,9 @@ button[disabled], html input[disabled]{
 
 .list-items img{
     vertical-align: top;
+    width: 100px;
+    height: 100px;
+    background-size: 100px 100px;
 }
 
 .list-items .clicks, .list-items .shares{

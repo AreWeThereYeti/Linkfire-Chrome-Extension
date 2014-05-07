@@ -9,7 +9,8 @@
     }
     $scope.user = user.user;
     $scope.userImage = 'http://linkfire.test.dev.rocketlabs.dk' + user.image;
-
+    $scope.firstLinkImage = 'img/default_link.png';
+    $scope.secondLinkImage = 'img/default_link.png';
     //  Get latest links
     apiService.getAllLinkfireLinks(userData)
       .then(function(data){
@@ -20,6 +21,7 @@
             $scope.firstLink = data.link.url;
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
+            $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image;
           }, function(error){
             $scope.firstLink = "Error handling your request!";
           });
@@ -29,6 +31,7 @@
             $scope.secondLink = data.link.url;
             $scope.secondLinkClick = data.link.stats.clicks;
             $scope.secondLinkShares = data.link.stats.shares;
+            $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image;
           }, function(error){
             $scope.secondLink = "Error handling your request!";
           });
@@ -63,7 +66,7 @@
                   $scope.fetching = false;
 
                   if(data.title == ''){
-                    $scope.title = 'We did not get a title';
+                    $scope.title = 'No title available';
                   }
 
                   else{
@@ -71,7 +74,7 @@
                   }
 
                   if (data.description == ''){
-                    $scope.description = 'We did not get a description';
+                    $scope.description = 'No description available';
                   }
 
                   else{
