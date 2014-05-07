@@ -4,18 +4,20 @@ myApp.service('storageCheckService', function($q) {
     chrome.storage.local.set({
       'user': args.user.email,
       'token': args.token,
-      'id': args.user.id
+      'id': args.user.id,
+      'image' : args.user.image
     });
   };
 
   this.getAuth = function(callback) {
     var user = {};
-    chrome.storage.local.get(['user','token','id'],
+    chrome.storage.local.get(['user','token','id', 'image'],
       function (storage) {
         if (storage.user){
           user.user = storage.user;
           user.token = storage.token;
           user.id = storage.id;
+          user.image = storage.image;
         }
         callback(user);
       }
@@ -24,14 +26,13 @@ myApp.service('storageCheckService', function($q) {
 
   this.getSettings = function(callback) {
     var settings = {};
-    chrome.storage.local.get(['copy', 'url'],
-      function (storage) {
-        if (JSON.stringify(storage).length > 0){
-          settings.copy = storage.copy;
-          settings.url = storage.url;
-          callback(settings);
-        }
-      });
+    chrome.storage.local.get(['copy', 'url'], function (storage) {
+      if (JSON.stringify(storage).length > 0){
+        settings.copy = storage.copy;
+        settings.url = storage.url;
+        callback(settings);
+      }
+    });
   };
 });
 

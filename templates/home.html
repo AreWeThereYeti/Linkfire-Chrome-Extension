@@ -60,8 +60,8 @@
     <div class="line"></div>
     <div id="actionbar">
         <div>
-            <img src="img/user_dummy.png" alt="userdummy"/>
-            <span class="username">Username Username</span>
+            <img class="userimage" ng-src='{{userImage}}' alt="userdummy" ng-cloak/>
+            <span class="username">{{user}}</span>
             <span>
                 <a class="glyphicon glyphicon-cog" href="#/settings"></a>
             </span>

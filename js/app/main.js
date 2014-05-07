@@ -7,6 +7,9 @@
       'token' : user.token,
       "user_id" : user.id
     }
+    $scope.user = user.user;
+    $scope.userImage = 'http://linkfire.test.dev.rocketlabs.dk' + user.image;
+
     //  Get latest links
     apiService.getAllLinkfireLinks(userData)
       .then(function(data){
@@ -75,7 +78,7 @@
                     $scope.description = data.description;
                   }
 
-                  for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
+  /*                for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
                     console.log('Her')
                     var imgPlaceholder = new Image();
                     imgPlaceholder.src = data.thumbnailsPending[i];
@@ -85,10 +88,9 @@
                       $scope.imgThumb = imgPlaceholder.src;
                       break;
                     }
-                  }
+                  }*/
 
                   $scope.imgThumb = data.thumbnailsPending[0];
-
 
                   apiService.getLinkfireLink(postData, data)
                     .then(function(data){

@@ -292,6 +292,13 @@ button[disabled], html input[disabled]{
     color: #6F6E6E;
 }
 
+.userimage{
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+    border-radius: 50%;
+}
+
 .username{
     font-size: 13px;
     color: #9c9c9c;
