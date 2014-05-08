@@ -89,6 +89,7 @@ p{
 }
 
 .imagecontainer{
+    margin-top: 5px;
     margin-left: -20px;
 }
 
@@ -283,6 +284,10 @@ button[disabled], html input[disabled]{
     display: inline-block;
     margin-top: 15px;
     color: #9C9C9C;
+}
+
+#actionbar{
+    margin-top: -5px;
 }
 
 /*Bottom bar*/

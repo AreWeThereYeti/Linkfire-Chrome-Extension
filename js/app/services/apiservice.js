@@ -5,16 +5,18 @@ myApp.service('apiService', function($http, $q) {
 
     var d = $q.defer();
 
+    console.log(data)
     $http({
       method: 'POST',
       url     :   'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
       headers :   {'Content-type': 'application/json'},
       data    :   {
-        "token":  postData.token,
-        "user_id":postData.user_id,
-        "url":    data.url,
-        "title" : data.title,
-        "description" : data.description
+        "token"      :    postData.token,
+        "user_id"    :    postData.user_id,
+        "url"        :    data.url,
+        "description":    data.description,
+        "title"      :    data.title,
+        "thumbnail" :     data.thumbnails[0]
       }
 
     }).success(function (data, status, headers) {
@@ -112,7 +114,8 @@ myApp.service('apiService', function($http, $q) {
       params  : {
         "token"   :  userData.token,
         "user_id" :  userData.user_id,
-        "id"      :  link.id
+        "id"      :  link.id,
+        'image'   :  link.image
       }
     }).success(function(data, status, headers){
       console.log('Your short link is served' + data)

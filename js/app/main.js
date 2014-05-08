@@ -7,10 +7,11 @@
       'token' : user.token,
       "user_id" : user.id
     }
+
     $scope.user = user.user;
     $scope.userImage = 'http://linkfire.test.dev.rocketlabs.dk' + user.image;
-    $scope.firstLinkImage = 'img/default_link.png';
-    $scope.secondLinkImage = 'img/default_link.png';
+/*    $scope.firstLinkImage = 'img/default_link.png';
+    $scope.secondLinkImage = 'img/default_link.png';*/
     //  Get latest links
     apiService.getAllLinkfireLinks(userData)
       .then(function(data){
@@ -18,6 +19,9 @@
 //      Get 2 latest links
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 1])
           .then(function(data){
+
+            console.log('Its always the default image that is being fetched. Why Jess, Why?');
+
             $scope.firstLink = data.link.url;
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
@@ -93,7 +97,11 @@
                     }
                   }*/
 
-                  $scope.imgThumb = data.thumbnailsPending[0];
+                  if (data.thumbnails) {
+                    $scope.imgThumb = data.thumbnails[0];
+                  }
+
+                  console.log(data)
 
                   apiService.getLinkfireLink(postData, data)
                     .then(function(data){
