@@ -13,25 +13,22 @@
     src: url('../fonts/Aller/Light/aller-light-webfont.eot?') format('eot'), url('../fonts/Aller/Light/aller-light-webfont.woff') format('woff'), url('../fonts/Light/Regular/aller-light-webfont.ttf') format('truetype');
 }
 
+html{
+    width: 440px;
+    height: 600px;
+}
+
+
 body {
-  font-family: 'allerregular', sans-serif;
-  color: #ffffff;
-  background: #333943;
+    width: 440px;
+    height: 600px;
+    font-family: 'allerregular', sans-serif;
+    color: #535353;
+    background: #f7f7f7;
+    display: block;
+    overflow: hidden;
 }
 
-
-
-
-.hide,.ng-hide{
-    display: none !important;
-}
-
-
-
-.show, .ng-show{
-
-    display: block !important;
-}
 
 h1{
     font-size: 22px;
@@ -40,83 +37,123 @@ h1{
 }
 
 p{
-    font-family: 'allerlight', sans-serif;
+    font-family: 'aller', sans-serif;
     margin: 0 0 5px;
 }
 
-span{
-    color: #838C9B;
-    margin-left: 10px;
-    display: inline-block;
-}
 
 .container {
-    height: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin: 0px 20px 0px 20px;
 }
 
 #popup {
-    min-width: 300px;
-    width: 300px;
-    height: 250px;
-    margin: 12px;
+    width: 440px;
+    height: 600px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
+/*Login*/
+.logo{
+
+}
+
+.logo img{
+    margin: auto auto;
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.copied:before{
+    content: " ";
+    background-image: url("../img/check.png");
+    background-repeat: no-repeat;
+    background-size: 21px 16px;
+    width: 21px;
+    height: 16px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.copied-container{
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 15px;
+    left: 27%;
+    top: 10%;
+}
+
+.imagecontainer{
+    margin-top: 5px;
+    margin-left: -20px;
+}
+
+.imagecontainer .top{
+    height: 150px;
+    width: auto;
+    margin: auto auto;
+    display: block;
+}
+
+.url-data{
+    margin-top: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    display: block;
+}
+
 .url-data p{
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
-    color: #838C9B;
+    color: #535353;
+    font-size: 14px;
     overflow: hidden;
 }
 
-#logo{
-    background: url("../img/logo.png") no-repeat;
-    background-size: 114px 21px;
-    height: 21px;
-    width: 114px;
-    display: inline-block;
-    vertical-align: middle;
-    float: right;
+input:focus{
+    outline: 0;
 }
 
+input[placeholder] {
+    padding-left: 10px;
+}
 
 input[type="text"], input{
+    border: 0;
     color: black;
     width: 100%;
     margin-bottom: 15px;
-    height: 32px;
+    height: 50px;
 }
 
 input[type="submit"], button{
-    width: 110px;
     display: block;
     background-color: #F04E23;
     cursor: pointer;
+    font-size: 16px;
     -webkit-transition: background-color 0.3s ease-in-out;
     -moz-transition: background-color 0.3s ease-in-out;
     -o-transition: background-color 0.3s ease-in-out;
     transition: background-color 0.3s ease-in-out;
     border: 0;
     color: white;
-    height: 32px;
-    display: inline-block;
+    height: 50px;
+    float: right;
 }
 
 input[type="submit"]:hover, button:hover{
     background-color: #B53C1C;
 }
 
-input.ng-invalid{
-    outline: 1px solid #F04E23;
-}
+/*input.ng-invalid{*/
+    /*outline: 1px solid #F04E23;*/
+/*}*/
 
 button[disabled], html input[disabled]{
     background-color: #C7C7C7;
@@ -134,14 +171,25 @@ button[disabled], html input[disabled]{
     width: 160px
 }
 
+.new-link{
+    background-color: #FFF;
+    margin: auto auto;
+    display: block;
+    width: 100%;
+    height: 50px;
+}
+
 .new-link p, .user-info p {
     margin-right: 15px;
 }
-.new-link .newlink{
+
+.new-link .link{
     margin-right: 15px;
-    color: #F04E23;
-    font-size: 16px;
-    margin-left: 0px;
+    color: #9c9c9c;
+    font-size: 25px;
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 7px;
 }
 
 .new-link span{
@@ -173,30 +221,135 @@ button[disabled], html input[disabled]{
     margin-bottom: 5px;
 }
 
+/*List items*/
+.list-items{
+    margin-bottom: 20px;
+}
 
+.list-items button{
+    background-color: #7c899a;
+}
+
+.list-items img{
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+    background-size: 100px 100px;
+}
+
+.list-items .clicks, .list-items .shares{
+    color: #7c899a;
+    margin-right: 10px;
+}
+
+.list-items .shares:before{
+    content: " ";
+    background-image: url("../img/shares.png");
+    background-repeat: no-repeat;
+    background-size: 12px 14px;
+    width: 12px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.list-items .clicks:before{
+    content: " ";
+    background-image: url("../img/clicks.png");
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.list-items .info{
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.list-text-container{
+    width: 297px;
+}
+
+.list-text{
+    height: 50px;
+    background-color: #FFF;
+    margin-left: 10px;
+    height: 50px;
+}
+
+.list-text .link{
+    margin-left: 15px;
+    display: inline-block;
+    margin-top: 15px;
+    color: #9C9C9C;
+}
 
 #actionbar{
-    height: 26px;
+    margin-top: -5px;
 }
+
+/*Bottom bar*/
 #actionbar a {
     font-size: 2.0rem;
-    color: #ffffff;
+    float: right;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 10px;
+    color: #6F6E6E;
 }
 
-.new-link{
- margin-bottom: 10px;
+.userimage{
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+    border-radius: 50%;
 }
 
-.new-link h1{
-    margin-top: 30px;
+.username{
+    font-size: 13px;
+    color: #9c9c9c;
+    margin-left: 5px;
 }
 
-.onCreatedlink .new-link h1{
-
+/*Helpers*/
+.hide, .ng-hide{
+    display: none !important;
 }
 
-.copy-link h1{
-    margin-top: 0px;
+.show, .ng-show{
+    display: block !important;
+}
+
+.inlineblock{
+    display: inline-block;
+}
+
+.block{
+    display: block;
+}
+
+/*Loader*/
+.load{
+    background-image: url('../img/fetch.gif');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+/*Line*/
+.line{
+    border-top: 1px solid #EBEBEB;
+    margin-top: 15px;
+    margin-left: -20px;
+    margin-bottom: 15px;
+    margin-right: -20px;
 }
 
 /*Animations*/
@@ -236,4 +389,4 @@ button[disabled], html input[disabled]{
 @-o-keyframes fadein {
      0% { opacity: 0; }
      100%   { opacity: 1; }
- }​
+}​
