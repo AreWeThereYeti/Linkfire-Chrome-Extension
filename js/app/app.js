@@ -13,10 +13,6 @@
       templateUrl: 'templates/login.html',
       controller: 'LoginController'
     })
-		.when('/settings', {
-      templateUrl: 'templates/settings.html',
-      controller: 'SettingsCtrl'
-    })
     .otherwise({redirectTo: '/login'});
 });
 

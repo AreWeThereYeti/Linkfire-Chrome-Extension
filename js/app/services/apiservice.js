@@ -6,6 +6,14 @@ myApp.service('apiService', function($http, $q) {
     var d = $q.defer();
 
     console.log(data)
+    var postImage = '';
+    if(data.thumbnails){
+      postImage = data.thumbnails[0];
+    }
+    else{
+      postImage = ''
+    }
+
     $http({
       method: 'POST',
       url     :   'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/Create',
@@ -16,7 +24,7 @@ myApp.service('apiService', function($http, $q) {
         "url"        :    data.url,
         "description":    data.description,
         "title"      :    data.title,
-        "thumbnail" :     data.thumbnails[0]
+        "thumbnail" :     postImage
       }
 
     }).success(function (data, status, headers) {
