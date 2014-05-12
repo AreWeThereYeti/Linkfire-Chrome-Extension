@@ -66,7 +66,21 @@
         $scope.autoCopy =true;
       }
 
-      // initiates extension behavior for default state autoUrl=true
+
+      var duplicate = false;
+      var shortlinkId = {};
+      // check links[] array in chrome.storage.local for duplicate links and sets duplicate true/false accordingly
+      chrome.storage.local.get('links', function (result) {
+        angular.forEach(result.links, function (value, key) {
+          if (value.original_url == postData.url) {
+            duplicate = true;
+            shortlinkId = value.id;
+          }
+        });
+      });
+
+
+        // initiates extension behavior for default state autoUrl=true
 			// gets browser tab info
       pageInfoService.getInfo(function (info) {
           $scope.newLink = "Fetching shortlink";
