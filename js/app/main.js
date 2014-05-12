@@ -60,27 +60,13 @@
     // checking storage for UI settings
     storageCheckService.getSettings(function(settings){
 
+      // initiates extension behavior for default state autoCopy=true
       if(JSON.stringify(settings).length > 2){
         $scope.autoCopy = settings.copy;
       }else{
         $scope.autoCopy =true;
       }
 
-
-      var duplicate = false;
-      var shortlinkId = {};
-      // check links[] array in chrome.storage.local for duplicate links and sets duplicate true/false accordingly
-      chrome.storage.local.get('links', function (result) {
-        angular.forEach(result.links, function (value, key) {
-          if (value.original_url == postData.url) {
-            duplicate = true;
-            shortlinkId = value.id;
-          }
-        });
-      });
-
-
-        // initiates extension behavior for default state autoUrl=true
 			// gets browser tab info
       pageInfoService.getInfo(function (info) {
           $scope.newLink = "Fetching shortlink";
@@ -123,13 +109,18 @@
                   if (data.thumbnails) {
                     $scope.imgThumb = data.thumbnails[0];
                   }
+                  else{
+                    $scope.imgThumb = 'img/linkfire_logo.png'
+                  }
 
                   console.log(data)
 
                   apiService.getLinkfireLink(postData, data)
                     .then(function(data){
                       $scope.newLink = data.link.url;
-                      $scope.copyToClipboard($scope.newLink);
+                      if($scope.autoCopy == true){
+                        $scope.copyToClipboard($scope.newLink);
+                      }
                     }, function(error){
                       console.log(error);
                       $scope.newLink = "Error handling your request!";
