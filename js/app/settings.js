@@ -23,7 +23,7 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
       'copy': $scope.copy,
       'url': $scope.url
 	  }, function(){
-		  $location.path("/home");
+      $scope.showSettings = false;
       $scope.$apply();
 	  });
   };

@@ -98,6 +98,7 @@ p{
     width: auto;
     margin: auto auto;
     display: block;
+    border-radius: 3px;
 }
 
 .url-data{
@@ -367,16 +368,25 @@ button[disabled], html input[disabled]{
     width: 440px;
     height: 600px;
     top: 0px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     left: 0;
 }
 
-/*Blur background image
+.settings_inner{
+    width: 300px;
+    height: 500px;
+    border: 3px solid #FFF;
+    border-radius: 5px;
+    margin: auto auto;
+}
+
+.blur{
 -webkit-filter: blur(5px);
 -moz-filter: blur(5px);
 -o-filter: blur(5px);
 -ms-filter: blur(5px);
-filter: blur(5px);*/
+filter: blur(5px);
+}
 
 @keyframes fadein {
     0% { opacity: 0; }

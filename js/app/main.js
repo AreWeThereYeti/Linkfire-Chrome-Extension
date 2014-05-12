@@ -1,5 +1,7 @@
 ﻿myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
 
+  $scope.showSettings = false;
+
 //  Getting latest links on startup
   storageCheckService.getAuth(function(user){
     userData =
@@ -19,13 +21,16 @@
 //      Get 2 latest links
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 1])
           .then(function(data){
-
-            console.log('Its always the default image that is being fetched. Why Jess, Why?');
-
             $scope.firstLink = data.link.url;
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
-            $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image;
+            if(data.link.image.default){
+              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
+            }
+            else{
+              $scope.firstLinkImage = 'img/default_link.png'
+            }
+
           }, function(error){
             $scope.firstLink = "Error handling your request!";
           });
@@ -35,7 +40,12 @@
             $scope.secondLink = data.link.url;
             $scope.secondLinkClick = data.link.stats.clicks;
             $scope.secondLinkShares = data.link.stats.shares;
-            $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image;
+            if(data.link.image.default){
+            $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
+            }
+            else{
+              $scope.secondLinkImage = 'img/default_link.png'
+            }
           }, function(error){
             $scope.secondLink = "Error handling your request!";
           });
@@ -46,7 +56,7 @@
 
   $scope.fetching = true;
   $scope.linkCreated = false;
-  $scope.imgThumb = 'img/linkfire_logo.png'
+  $scope.imgThumb = 'img/linkfire_logo.png';
 
     // checking storage for UI settings
     storageCheckService.getSettings(function(settings){
