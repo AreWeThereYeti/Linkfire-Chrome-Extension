@@ -23,3 +23,5 @@ myApp.config( [
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
   }
 ]);
+
+
