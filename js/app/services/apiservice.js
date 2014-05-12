@@ -26,7 +26,6 @@ myApp.service('apiService', function($http, $q) {
         "title"      :    data.title,
         "thumbnail" :     postImage
       }
-
     }).success(function (data, status, headers) {
       d.resolve(data);
     }).error(function (data, status, headers) {
@@ -46,10 +45,14 @@ myApp.service('apiService', function($http, $q) {
     return d.promise;
   }
 
+
+
+
   this.getLinkfireData = function(postData){
 
     var d = $q.defer();
     // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
+
     $http({
       method	: 'GET',
       url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
@@ -76,7 +79,7 @@ myApp.service('apiService', function($http, $q) {
       d.reject(status);
     });
     return d.promise;
-  }
+  };
 
   /*Get all links created by user*/
   this.getAllLinkfireLinks = function(postData){
