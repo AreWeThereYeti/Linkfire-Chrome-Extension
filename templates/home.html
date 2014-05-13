@@ -1,11 +1,11 @@
 <div>
-    <div class="test" ng-class="{blur : showSettings}">
+    <div ng-class="{blur : blur}">
         <div class="imagecontainer">
             <div class="copied-container" ng-show="autoCopy && fetching == false">
                 <span class="copied" >Copied to clipboard</span>
             </div>
             <div class="image-overlay">
-                <img class="top" ng-src='{{imgThumb}}' alt="top_img">
+                <img class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
             </div>
         </div>
 
@@ -73,21 +73,21 @@
     </div>
     <div class="settings" ng-controller="SettingsCtrl" ng-show="showSettings" >
         <div class="settings_inner">
-            <div id="actionbar">
-                <a class="glyphicon glyphicon-arrow-left" ng-click="storeChanges()"></a>
-            </div>
-            <h1>Settings</h1>
-            <div class="customize-auto">
-                <form ng-submit="save()">
-                    <label for="auto-copy">Auto copy:</label>
-                    <input id="auto-copy" type="checkbox" ng-model="copy" value="false"/>
-                    <p>Copy new url to clipboard automatically</p>
-                </form>
-            </div>
-            <div class="user-info">
-                <p class="loggedin">Logged in as: </p>
-                <span class="loggedinas">{{userEmail}}</span>
-                <button class="sign-out" ng-click="signOut() && showSettings == false" >Sign out</button>
+            <div class="container">
+                <a class="glyphicon close glyphicon-remove" ng-click="storeChanges()"></a>
+                <h1>Settings</h1>
+                <div class="customize-auto">
+                    <form ng-submit="save()">
+                        <input id="auto-copy" class="css-checkbox" name="checkbox" type="checkbox" ng-model="copy" value="false"/>
+                        <label for="auto-copy" class="css-label"></label>
+                        <span>Copy new url to clipboard automatically</span>
+                    </form>
+                </div>
+                <div class="user-info">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span class="loggedinas">Signed in as: {{userEmail}}</span>
+                    <a class="sign-out" ng-click="signOut() && showSettings == false" >Sign out</a>
+                </div>
             </div>
         </div>
     </div>

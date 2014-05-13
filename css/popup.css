@@ -200,9 +200,12 @@ button[disabled], html input[disabled]{
 }
 
 .customize-auto input{
-    width: 30%;
     height: 14px;
+    width: 20px;
+    display: inline-block;
     vertical-align: baseline;
+    margin: 5px;
+    margin-bottom: 26px;
 }
 
 .user-login h1{
@@ -289,18 +292,44 @@ button[disabled], html input[disabled]{
     color: #9C9C9C;
 }
 
-#actionbar{
-    margin-top: -5px;
+/*Settings*/
+.settings{
+    position: fixed;
+    width: 440px;
+    height: 600px;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    left: 0;
+    display: inline-flex;
 }
 
-/*Bottom bar*/
-#actionbar a {
-    font-size: 2.0rem;
+.settings_inner{
+    width: 400px;
+    height: 200px;
+    border: 3px solid #FFF;
+    border-radius: 5px;
+    margin: auto auto;
+    color: white;
+
+}
+
+.close {
+    font-size: 2.4rem;
     float: right;
     vertical-align: middle;
     display: inline-block;
-    margin-top: 10px;
-    color: #6F6E6E;
+    position: absolute;
+    color: #000;
+    top: 185px;
+    left: 403px;
+    background-color: #FFF;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.close:hover{
+    text-decoration: none;
+    color: gray;
 }
 
 .userimage{
@@ -314,6 +343,36 @@ button[disabled], html input[disabled]{
     font-size: 13px;
     color: #9c9c9c;
     margin-left: 5px;
+}
+
+input[type=checkbox].css-checkbox {
+    display:none;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:55px;
+    height:50px;
+    display:inline-block;
+    line-height:50px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:50px;
+    vertical-align:middle;
+    cursor:pointer;
+
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -50px;
+}
+label.css-label {
+    background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_beae6226c9b3ee8e193b93a969dafe6f.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /*Helpers*/
@@ -365,31 +424,15 @@ button[disabled], html input[disabled]{
     height: 100%;
 }
 
-.settings{
-    position: fixed;
-    width: 440px;
-    height: 600px;
-    top: 0px;
-    background-color: rgba(0, 0, 0, 0.8);
-    left: 0;
-}
-
-.settings_inner{
-    width: 300px;
-    height: 500px;
-    border: 3px solid #FFF;
-    border-radius: 5px;
-    margin: auto auto;
-}
-
 .blur{
 -webkit-filter: blur(5px);
--moz-filter: blur(5px);
--o-filter: blur(5px);
--ms-filter: blur(5px);
 filter: blur(5px);
 }
 
+.unblur{
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+}
 @keyframes fadein {
     0% { opacity: 0; }
     100%   { opacity: 1; }

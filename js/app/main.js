@@ -1,6 +1,10 @@
 ﻿myApp.controller("PageController", function ($scope, pageInfoService, apiService, storageCheckService, $q) {
 
   /*Start settings*/
+  $scope.imgThumb = 'img/linkfire_logo.png';
+  $scope.showSettings = false;
+  $scope.blur = false;
+
 
 //  Getting latest links on startup
   storageCheckService.getAuth(function(user){
@@ -12,6 +16,7 @@
 
     $scope.user = user.user;
     $scope.userImage = 'http://linkfire.test.dev.rocketlabs.dk' + user.image;
+
 
     //  Get latest links
     apiService.getAllLinkfireLinks(userData)
