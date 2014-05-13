@@ -5,15 +5,15 @@
             <h1>Settings</h1>
             <div class="customize-auto">
                 <form ng-submit="save()">
-                    <input id="auto-copy" class="css-checkbox" name="checkbox" type="checkbox" ng-model="copy" value="false"/>
-                    <label for="auto-copy" class="css-label"></label>
+                    <input id="auto-copy" class="css-checkbox" name="checkbox" type="checkbox"/>
+                    <label for="auto-copy"ng-click="toggleAutoCopy()" class="css-label"></label>
                     <span>Copy new url to clipboard automatically</span>
                 </form>
             </div>
             <div class="user-info">
                 <span class="log_out"></span>
                 <span class="loggedinas">Signed in as: {{userEmail}}</span>
-                <a class="sign-out" ng-click="signOut() && showSettings == false" >Sign out</a>
+                <a class="sign-out" ng-click="signOut()" >Sign out</a>
             </div>
         </div>
     </div>

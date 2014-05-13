@@ -295,6 +295,23 @@ button[disabled], html input[disabled]{
     color: #9C9C9C;
 }
 
+.settings_icon{
+    float: right;
+    margin-top: 5px;
+    font-size: 2em;
+}
+
+.settings_icon a {
+    color: #C9C9C9;
+    text-decoration: none;
+}
+
+.settings_icon a:hover{
+    color: #428BCA;
+    -webkit-transition:.2s;
+    transition:.2s;
+    cursor: pointer;
+}
 /*Settings*/
 .settings{
     position: fixed;

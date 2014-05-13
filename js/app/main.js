@@ -2,7 +2,6 @@
 
   /*Start settings*/
   $scope.imgThumb = 'img/linkfire_logo.png';
-  $scope.showPage = 'home';
 
 //  Getting latest links on startup
   storageCheckService.getAuth(function(user){
@@ -146,7 +145,7 @@
 	    	  .then(function(data) {
             $scope.linkCreated = true;
             $scope.newLink = data.link.url;
-            if($scope.autoCopy){
+            if($scope.autoCopy == true){
               // copies generates link to clipboard in default state: autoCopy=true
               $scope.copyToClipboard($scope.newLink);
             }
@@ -155,7 +154,7 @@
             $scope.linkCreated = true;
         });
 			});
-    }
+    };
 
     // function for preparing data for api post in callback. uses storage checks and is therefore async
     $scope.getScrapeData = function(newUrl){
@@ -174,12 +173,22 @@
       return d.promise;
     };
 
-  $scope.openSettings = function(){
-    $scope.showPage = 'settings';
-    console.log('opening modal : ' + $scope.showPage)
-  }
+    $scope.openSettings = function(){
+      $scope.showPage = 'settings';
+    };
 
-    // function for copying to the clipboard
+    /*listener for close settings*/
+    $scope.$on('closemodal', function(event) {
+      $scope.showPage = '';
+    });
+
+    /*listener for close settings*/
+    $scope.$on('toggleAutoCopy', function(event, copy) {
+      $scope.autoCopy = copy;
+    });
+
+
+  // function for copying to the clipboard
     $scope.copyToClipboard = function(text){
 	    var copyDiv = document.createElement('div');
 	    copyDiv.contentEditable = true;

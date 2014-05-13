@@ -1,5 +1,5 @@
 <div>
-    <div>
+    <div ng-class="{blur : showPage ==='settings'}">
         <div class="imagecontainer">
             <div class="copied-container" ng-show="autoCopy && fetching == false">
                 <span class="copied" >Copied to clipboard</span>
@@ -64,10 +64,12 @@
         <div>
             <img class="userimage" ng-src='{{userImage}}' alt="userdummy" ng-cloak/>
             <span class="username">{{user}}</span>
-            <span>
+            <span class="settings_icon">
                 <a class="glyphicon glyphicon-cog" ng-click="openSettings()"></a>
             </span>
         </div>
     </div>
-    <div ng-if="showPage === 'settings'" ng-include="'js/app/partial/settings.html'" ></div>
+    <span ng-show="showPage === 'settings'">
+        <div ng-include="'js/app/partial/settings.html'" ></div>
+    </span>
 </div>
