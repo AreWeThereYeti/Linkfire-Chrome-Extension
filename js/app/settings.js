@@ -1,5 +1,4 @@
 myApp.controller("SettingsCtrl", function ($scope, $location){
-  $scope.blur = true;
 
   //note: I have made a service that gets copy+url settings 'storageCheckService.getSettings(function(settings))'
 	// checks chrome local storage for settings and sets variables accordingly
@@ -20,7 +19,8 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
   });
   // checks chrome local storage for settings and sets variables accordingly
 	$scope.storeChanges = function(){
-    $scope.showSettings = false;
+    $scope.showPage = '';
+    console.log($scope.showPage + ' : Waddafak')
 		chrome.storage.local.set({
       'copy': $scope.copy,
       'url': $scope.url

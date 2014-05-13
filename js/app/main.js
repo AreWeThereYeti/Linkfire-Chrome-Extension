@@ -2,9 +2,7 @@
 
   /*Start settings*/
   $scope.imgThumb = 'img/linkfire_logo.png';
-  $scope.showSettings = false;
-  $scope.blur = false;
-
+  $scope.showPage = 'home';
 
 //  Getting latest links on startup
   storageCheckService.getAuth(function(user){
@@ -12,7 +10,7 @@
     {
       'token' : user.token,
       "user_id" : user.id
-    }
+    };
 
     $scope.user = user.user;
     $scope.userImage = 'http://linkfire.test.dev.rocketlabs.dk' + user.image;
@@ -175,6 +173,11 @@
       });
       return d.promise;
     };
+
+  $scope.openSettings = function(){
+    $scope.showPage = 'settings';
+    console.log('opening modal : ' + $scope.showPage)
+  }
 
     // function for copying to the clipboard
     $scope.copyToClipboard = function(text){

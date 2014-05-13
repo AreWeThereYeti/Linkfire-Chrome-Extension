@@ -171,7 +171,10 @@ button[disabled], html input[disabled]{
 .user-info .loggedinas{
     color: white;
     margin-left: 0px;
-    width: 160px
+    width: 160px;
+    margin-left: 10px;
+    margin-right: 5px;
+    font-size: 12px;
 }
 
 .new-link{
@@ -310,7 +313,16 @@ button[disabled], html input[disabled]{
     border-radius: 5px;
     margin: auto auto;
     color: white;
+}
 
+
+.settings form{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.settings form span{
+    font-size: 12px;
+    margin-left: 10px;
 }
 
 .close {
@@ -332,6 +344,27 @@ button[disabled], html input[disabled]{
     color: gray;
 }
 
+.log_out{
+    background-image: url('../img/log_out.svg');
+    width: 29px;
+    height: 29px;
+    display: inline-block;
+    background-size: 29px 29px;
+    vertical-align: middle;
+}
+
+.sign-out{
+    cursor: pointer;
+
+}
+
+.sign-out:hover{
+    color: white;
+    -webkit-transition:.2s;
+    transition:.2s;
+    text-decoration: underline;
+}
+
 .userimage{
     width: 40px;
     height: 40px;
@@ -350,23 +383,23 @@ input[type=checkbox].css-checkbox {
 }
 
 input[type=checkbox].css-checkbox + label.css-label {
-    padding-left:55px;
-    height:50px;
-    display:inline-block;
-    line-height:50px;
-    background-repeat:no-repeat;
+    height: 29px;
+    width: 29px;
+    display: inline-block;
+    line-height: 30px;
+    background-repeat: no-repeat;
     background-position: 0 0;
-    font-size:50px;
-    vertical-align:middle;
-    cursor:pointer;
-
+    font-size: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+    background-size: 30px 60px;
 }
 
 input[type=checkbox].css-checkbox:checked + label.css-label {
-    background-position: 0 -50px;
+    background-position: 0 -30px;
 }
 label.css-label {
-    background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_beae6226c9b3ee8e193b93a969dafe6f.png);
+    background-image:url('../img/checkbox.png');
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
