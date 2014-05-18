@@ -1,6 +1,7 @@
 // service for performing chrome.storage checks. chrome.storage checks are asynchronous
 myApp.service('storageCheckService', function($q) {
   this.setId = function(args) {
+    console.log('args is ' + args)
     chrome.storage.local.set({
       'user': args.user.email,
       'token': args.token,

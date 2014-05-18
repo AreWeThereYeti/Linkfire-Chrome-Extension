@@ -141,8 +141,6 @@ input[type="submit"], button{
     cursor: pointer;
     font-size: 16px;
     -webkit-transition: background-color 0.3s ease-in-out;
-    -moz-transition: background-color 0.3s ease-in-out;
-    -o-transition: background-color 0.3s ease-in-out;
     transition: background-color 0.3s ease-in-out;
     border: 0;
     color: white;
@@ -382,6 +380,10 @@ button[disabled], html input[disabled]{
     text-decoration: underline;
 }
 
+.footer{
+    margin-top: -5px;
+}
+
 .userimage{
     width: 40px;
     height: 40px;
@@ -442,6 +444,25 @@ label.css-label {
     display: block;
 }
 
+/*Form validation*/
+.loginform input.ng-valid.ng-dirty {
+
+
+}
+
+.error{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    background-color: #a20e12;
+    color: white;
+    left: 0;
+    padding: 10px;
+    margin: auto auto;
+    text-align: center;
+    -webkit-animation: fadeinout 4s forwards; /* Safari and Chrome */
+}
+
 /*Loader*/
 .load{
     background-image: url('../img/fetch.gif');
@@ -483,31 +504,23 @@ filter: blur(5px);
     -webkit-filter: blur(0px);
     filter: blur(0px);
 }
-@keyframes fadein {
-    0% { opacity: 0; }
-    100%   { opacity: 1; }
-}
-
-/* Firefox */
-@-moz-keyframes fadein {
-    0% { opacity: 0; }
-    100%   { opacity: 1; }
-}
 
 /* Safari and Chrome */
 @-webkit-keyframes fadein {
-    0% { opacity: 0; }
-    100%   { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-/* Internet Explorer */
-@-ms-keyframes fadein {
-    0% { opacity: 0; }
-    100%   { opacity: 1; }
-}​
-
-/* Opera */
-@-o-keyframes fadein {
-     0% { opacity: 0; }
-     100%   { opacity: 1; }
-}​
+/* Safari and Chrome */
+@-webkit-keyframes fadeinout {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+}

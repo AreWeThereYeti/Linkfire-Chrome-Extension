@@ -2,7 +2,7 @@
     <div class="logo">
         <img src="img/logo.png" alt="logo"/>
     </div>
-	<form name="loginform" ng-submit="login(user)" novalidate>
+	<form class="loginform" name="loginform" ng-submit="login(user)" novalidate>
 	  <input type="email" ng-model="user.email" placeholder="E-mail" required/>
 	  <input type="password" ng-model="user.pass" placeholder="Password" required/>
         <p class="modal-error" ng-show="loginform.user.email.$dirty && loginform.user.email.$invalid">
@@ -13,7 +13,7 @@
 	    <input ng-disabled="loginform.$invalid" type="submit" value="Sign in" />
         <a href="" ng-click= "goToLinkfire()">Don't have a Linkfire account yet?</a>
     </form>
-    <span ng-show="login_in == false">There was an error login in</span>
+    <span class="error" ng-show="login_in === false">There was an error login in</span>
     <div class="line"></div>
     <!--<span>Or sign in with your social profiles</span>-->
 
