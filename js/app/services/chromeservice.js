@@ -25,20 +25,20 @@ myApp.service('storageCheckService', function($q) {
     );
   };
 
-  this.setLink = function(args) {
-    console.log('Sætter linket : ' + args)
+  this.setLink = function(original_link, shortlink) {
     chrome.storage.local.set({
-      'url': args
+      'original_url': original_link,
+      'shortlink' : shortlink
     });
   };
 
   this.getLink = function(callback) {
-    var settings = {};
-    chrome.storage.local.get(['url'], function (storage) {
+    var linkdata = {};
+    chrome.storage.local.get(['original_url', 'shortlink'], function (storage) {
       if (JSON.stringify(storage).length > 0){
-        console.log('Get Link. Link er : '+ storage.url)
-        settings.url = storage.url;
-        callback(settings);
+        linkdata.original_url = storage.original_url;
+        linkdata.shortlink = storage.shortlink;
+        callback(linkdata);
       }
     });
   };

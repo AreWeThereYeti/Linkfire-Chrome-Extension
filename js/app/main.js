@@ -13,46 +13,6 @@
 
     $scope.user = user.user;
     $scope.userImage = 'http://linkfire.test.dev.rocketlabs.dk' + user.image;
-
-
-    //  Get latest links
-    apiService.getAllLinkfireLinks(userData)
-      .then(function(data){
-
-//      Get 2 latest links
-        apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 1])
-          .then(function(data){
-            $scope.firstLink = data.link.url;
-            $scope.firstLinkClick = data.link.stats.clicks;
-            $scope.firstLinkShares = data.link.stats.shares;
-            if(data.link.image.default){
-              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
-            }
-            else{
-              $scope.firstLinkImage = 'img/default_link.png'
-            }
-
-          }, function(error){
-            $scope.firstLink = "Error handling your request!";
-          });
-
-        apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - 2])
-          .then(function(data){
-            $scope.secondLink = data.link.url;
-            $scope.secondLinkClick = data.link.stats.clicks;
-            $scope.secondLinkShares = data.link.stats.shares;
-            if(data.link.image.default){
-            $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
-            }
-            else{
-              $scope.secondLinkImage = 'img/default_link.png'
-            }
-          }, function(error){
-            $scope.secondLink = "Error handling your request!";
-          });
-      }, function(error){
-        console.log = "Error handling your request!";
-      });
   });
 
   $scope.fetching = true;
@@ -116,27 +76,28 @@
                   }
 
                   storageCheckService.getLink(function(previous){
-                    console.log(previous.url);
-                    if(previous.url === data.url){
-                      console.log('Urlen existerer allerede i db. previous.url er : ' + previous.url + 'og data.url er : ' + data.url)
+                    if(previous.original_url === data.url){
+                      $scope.newLink = previous.shortlink;
+                      console.log('Urlen existerer allerede i db. previous.url er : ' + previous.original_url + 'og data.url er : ' + data.url)
+                      $scope.getHistory(userData,2,3);
                     }
                     else{
-                      console.log('URLen existerer ikke. Den oprettes nu previous.url er : ' + previous.url + 'og data.url er : ' + data.url);
+                      console.log('URLen existerer ikke. Den oprettes nu previous.url er : ' + previous.original_url + 'og data.url er : ' + data.url);
+                      apiService.createLinkfireLink(postData, data)
+                        .then(function(data){
+                          //  Get latest links
+                          $scope.getHistory(userData, 2, 3);
+                          storageCheckService.setLink(data.link.original_url, data.link.url);
+                          $scope.newLink = data.link.url;
+                          if($scope.autoCopy == true){
+                            $scope.copyToClipboard($scope.newLink);
+                          }
+                        }, function(error){
+                          console.log(error);
+                          $scope.newLink = "Error handling your request!";
+                        })
                     }
                   });
-
-                  apiService.createLinkfireLink(postData, data)
-                    .then(function(data){
-                      storageCheckService.setLink(data.link.original_url);
-
-                      $scope.newLink = data.link.url;
-                      if($scope.autoCopy == true){
-                        $scope.copyToClipboard($scope.newLink);
-                      }
-                    }, function(error){
-                      console.log(error);
-                      $scope.newLink = "Error handling your request!";
-                    })
                 },function(error){
                     console.log(error);
                     $scope.newLink = "Error handling your request!";
@@ -144,29 +105,6 @@
             });
       });
   });
-
-/*
-   // function for creating/retrieving link for setting state: autoUrl = false
-    $scope.createLink = function(input){
-   	  // prepares data for api post in callback. !!!does not consider the thumbnail of the requested links original url!!!
-    	$scope.getPostData(input.url, input.title, input.description)
-   	  .then(function(postData) {
-   		  // queries api with callback postData
-	      apiService.createLinkfireLink(postData)
-	    	  .then(function(data) {
-            storageCheckService.setLink(data);
-            $scope.linkCreated = true;
-            $scope.newLink = data.link.url;
-            if($scope.autoCopy == true){
-              // copies generates link to clipboard in default state: autoCopy=true
-              $scope.copyToClipboard($scope.newLink);
-            }
-          }, function(error){
-            $scope.newLink = "Error handling your request!";
-            $scope.linkCreated = true;
-        });
-			});
-    };*/
 
     // function for preparing data for api post in callback. uses storage checks and is therefore async
     $scope.getScrapeData = function(newUrl){
@@ -210,7 +148,47 @@
 	    document.execCommand('SelectAll');
 	    document.execCommand("Copy", false, null);
 	    document.body.removeChild(copyDiv);
-	}
+	};
+
+  $scope.getHistory = function (userdata, selector1, selector2) {
+    //  Get latest links
+    apiService.getAllLinkfireLinks(userData)
+      .then(function(data){
+//      Get 2 latest links
+        apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector1])
+          .then(function(data){
+            $scope.firstLink = data.link.url;
+            $scope.firstLinkClick = data.link.stats.clicks;
+            $scope.firstLinkShares = data.link.stats.shares;
+            if(data.link.image.default){
+              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
+            }
+            else{
+              $scope.firstLinkImage = 'img/default_link.png'
+            }
+
+          }, function(error){
+            $scope.firstLink = "Error handling your request!";
+          });
+
+        apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector2])
+          .then(function(data){
+            $scope.secondLink = data.link.url;
+            $scope.secondLinkClick = data.link.stats.clicks;
+            $scope.secondLinkShares = data.link.stats.shares;
+            if(data.link.image.default){
+              $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
+            }
+            else{
+              $scope.secondLinkImage = 'img/default_link.png'
+            }
+          }, function(error){
+            $scope.secondLink = "Error handling your request!";
+          });
+      }, function(error){
+        console.log = "Error handling your request!";
+      });
+  }
 });
 
 
