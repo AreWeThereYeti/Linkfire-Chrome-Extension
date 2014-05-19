@@ -1,11 +1,11 @@
 // sevice for contacting the linkfire api
 myApp.service('apiService', function($http, $q) {
 
-  this.getLinkfireLink = function(postData, data) {
+//  Creates link using information from the scrape function
+  this.createLinkfireLink = function(postData, data) {
 
+//    Check here for existing link
     var d = $q.defer();
-
-    console.log(data)
     var postImage = '';
     if(data.thumbnails){
       postImage = data.thumbnails[0];
@@ -43,16 +43,12 @@ myApp.service('apiService', function($http, $q) {
       d.reject(status);
     });
     return d.promise;
-  }
+  };
 
-
-
-
+//  Scrapes Url for All relevant information from server.
   this.getLinkfireData = function(postData){
 
     var d = $q.defer();
-    // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
-
     $http({
       method	: 'GET',
       url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
@@ -63,7 +59,10 @@ myApp.service('apiService', function($http, $q) {
         "url":    postData.url
       }
     }).success(function(data, status, headers){
-      console.log('Your short link is served' + data)
+      console.log('Scrape data er : ' + data);
+//      save linkdata in db
+
+
       d.resolve(data);
 
     }).error(function(data, status, headers){

@@ -2,8 +2,10 @@
   "name": "Linkfire Chrome Extension",
   "version": "0.1",
   "manifest_version": 2,
-  "description": "Linkfire extensions with AngularJS",
+  "description": "Linkfire  Chrome extensions",
   "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
     "128": "icon128.png"
   },
   "content_scripts": [
@@ -16,7 +18,7 @@
   "browser_action": {
     "default_icon": "img/defaultIcon19x19.png",
     "default_popup": "popup.html",
-    "default_title": "AngularJSChromeEx"
+    "default_title": "Linkfire Chrome Extension"
   },
   "minimum_chrome_version": "18",
   "permissions": [ "http://*/*", "storage", "tabs"],

@@ -65,6 +65,8 @@ p{
     display: block;
     margin-top: 40px;
     margin-bottom: 40px;
+    height: 77px;
+    width: 108px;
 }
 
 .copied:before{
@@ -87,6 +89,8 @@ p{
     left: 29%;
     top: 10%;
     box-shadow: 0px 0px 10px 3px #757575;
+    -webkit-animation: fadein 0.2s; /* Safari and Chrome */
+    animation: fadein 0.2s;
 }
 
 .imagecontainer{
@@ -488,16 +492,13 @@ label.css-label {
 /*Animations*/
 .layout-default, .layout-custom-url, .settings{
     -webkit-animation: fadein 0.2s; /* Safari and Chrome */
-    -moz-animation: fadein 0.2s; /* Firefox */
-    -ms-animation: fadein 0.2s; /* Internet Explorer */
-    -o-animation: fadein 0.2s; /* Opera */
     animation: fadein 0.2s;
     height: 100%;
 }
 
 .blur{
--webkit-filter: blur(5px);
-filter: blur(5px);
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
 }
 
 .unblur{

@@ -11,7 +11,6 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
       $scope.$apply();
   });
 
-
   $scope.toggleAutoCopy = function(){
     $scope.copy = !$scope.copy;
     $scope.$emit('toggleAutoCopy', $scope.copy);

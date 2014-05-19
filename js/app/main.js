@@ -58,7 +58,6 @@
   $scope.fetching = true;
   $scope.linkCreated = false;
 
-
     // checking storage for UI settings
     storageCheckService.getSettings(function(settings){
 
@@ -78,6 +77,7 @@
               // queries api with callback postData
               apiService.getLinkfireData(postData)
                 .then(function(data) {
+
                   $scope.fetching = false;
 
                   if(data.title == ''){
@@ -115,10 +115,20 @@
                     $scope.imgThumb = 'img/linkfire_logo.png'
                   }
 
-                  console.log(data)
+                  storageCheckService.getLink(function(previous){
+                    console.log(previous.url);
+                    if(previous.url === data.url){
+                      console.log('Urlen existerer allerede i db. previous.url er : ' + previous.url + 'og data.url er : ' + data.url)
+                    }
+                    else{
+                      console.log('URLen existerer ikke. Den oprettes nu previous.url er : ' + previous.url + 'og data.url er : ' + data.url);
+                    }
+                  });
 
-                  apiService.getLinkfireLink(postData, data)
+                  apiService.createLinkfireLink(postData, data)
                     .then(function(data){
+                      storageCheckService.setLink(data.link.original_url);
+
                       $scope.newLink = data.link.url;
                       if($scope.autoCopy == true){
                         $scope.copyToClipboard($scope.newLink);
@@ -134,15 +144,17 @@
             });
       });
   });
-  
+
+/*
    // function for creating/retrieving link for setting state: autoUrl = false
     $scope.createLink = function(input){
    	  // prepares data for api post in callback. !!!does not consider the thumbnail of the requested links original url!!!
     	$scope.getPostData(input.url, input.title, input.description)
    	  .then(function(postData) {
    		  // queries api with callback postData
-	      apiService.getLinkfireLink(postData)
+	      apiService.createLinkfireLink(postData)
 	    	  .then(function(data) {
+            storageCheckService.setLink(data);
             $scope.linkCreated = true;
             $scope.newLink = data.link.url;
             if($scope.autoCopy == true){
@@ -154,7 +166,7 @@
             $scope.linkCreated = true;
         });
 			});
-    };
+    };*/
 
     // function for preparing data for api post in callback. uses storage checks and is therefore async
     $scope.getScrapeData = function(newUrl){
@@ -186,7 +198,6 @@
     $scope.$on('toggleAutoCopy', function(event, copy) {
       $scope.autoCopy = copy;
     });
-
 
   // function for copying to the clipboard
     $scope.copyToClipboard = function(text){

@@ -25,6 +25,24 @@ myApp.service('storageCheckService', function($q) {
     );
   };
 
+  this.setLink = function(args) {
+    console.log('Sætter linket : ' + args)
+    chrome.storage.local.set({
+      'url': args
+    });
+  };
+
+  this.getLink = function(callback) {
+    var settings = {};
+    chrome.storage.local.get(['url'], function (storage) {
+      if (JSON.stringify(storage).length > 0){
+        console.log('Get Link. Link er : '+ storage.url)
+        settings.url = storage.url;
+        callback(settings);
+      }
+    });
+  };
+
   this.getSettings = function(callback) {
     var settings = {};
     chrome.storage.local.get(['copy', 'url'], function (storage) {
@@ -56,7 +74,9 @@ myApp.service('pageInfoService', function() {
               if(response.description){
                 console.log("meta data description added!");
                 model.description = response.description;
-              }else{
+              }
+
+              else{
                 model.description = "This link was created with the Linkfire Chrome extension";
               }
               if(response.thumb){
