@@ -2,7 +2,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
   // checking auth status. will redirect to /home if user is logged in
 	storageCheckService.getAuth(function(status){
 
-		if(JSON.stringify(status.user).length>0){
+		if(status.user){
 			$location.path("/home");
 			$scope.$apply();
 		}
@@ -13,7 +13,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 		var post = {
 			email: user.email,
 			password: user.pass
-		}
+		};
 
 		loginService.login(post)
 			.then(function(data){
@@ -44,10 +44,10 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 myApp.service('loginService', function LoginService($rootScope, $http, $q, $window) {
     
     // defines the api url could be moved to config for consistency
-    var API_ENDPOINT =  'http://linkfire.com'
-    var urlAuth = API_ENDPOINT + '/api/1.0/auth/login';
+  var API_ENDPOINT =  'http://linkfire.test.dev.rocketlabs.dk'
+  var urlAuth = API_ENDPOINT + '/api/1.0/auth/login';
 
-    this.login = function (params) {
+  this.login = function (params) {
     	
       var pass = CryptoJS.SHA1(params.password);
       var d = $q.defer();

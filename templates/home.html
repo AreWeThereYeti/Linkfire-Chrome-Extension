@@ -1,24 +1,76 @@
 <div>
-	<div id="actionbar">
-        <a class="glyphicon glyphicon-cog" href="#/settings"></a>
-	</div>
+    <div ng-class="{blur : showPage ==='settings'}">
+        <div class="imagecontainer">
+            <div class="image-overlay">
+                <div class="copied-container" ng-show="autoCopy && fetching == false">
+                    <span class="copied" >Copied to clipboard</span>
+                </div>
+                <img class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
+            </div>
+        </div>
 
-	<div class="layout-default" ng-class="{hide:!autoUrl}" >
-		<div class="onCreatedlink">
-			<h1>Original link</h1>
-			<div class="url-thumbnail"></div>
-			<div class="url-data">
-				    <p>{{title}}</p>
-					<p>{{url}}</p>
-			</div>
-
-			<div class="new-link">
-			    <h1>Linkfired link</h1>
-				<span class="newlink">{{newLink}}</span>
-                <span ng-show="autoCopy && fetching == false">Copied to clipboard</span>
-                <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-show="!autoCopy && fetching == false">Copy Link</button>
-			</div>
-		</div>
-	</div>
-
+        <div class="layout-default">
+            <div class="onCreatedlink">
+                <div class="url-thumbnail"></div>
+                <div class="url-data">
+                    <span ng-class="{load : fetching}"></span>
+                    <p>{{title}}</p>
+                    <p>{{description}}</p>
+                </div>
+                <div class="new-link">
+                    <span class="link">{{newLink}}</span>
+                    <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching" ng-show="!autoCopy" ng-cloak>Copy</button>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <h2 class="recent">Recent links</h2>
+        <div class="list-items">
+            <img class="inlineblock" ng-src="{{firstLinkImage}}" alt="list image"/>
+            <div class="inlineblock list-text-container">
+                <div class="list-text">
+                  <span ng-class="{load : !firstLink}"></span>
+                  <span class="link"><span>{{firstLink}}</span></span>
+                  <button class="copy-link" ng-click="copyToClipboard(firstLink)">Copy</button>
+                </div>
+                <div class="info">
+                    <span class="clicks">
+                        {{firstLinkClick}} clicks
+                    </span>
+                    <span class="shares">
+                        {{firstLinkShares}} shares
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="list-items">
+            <img class="inlineblock list-image" ng-src="{{secondLinkImage}}" alt="list image"/>
+            <div class="inlineblock list-text-container">
+                <div class="list-text">
+                    <span ng-class="{load : !secondLink}"></span>
+                    <span class="link">{{secondLink}}</span>
+                    <button class="copy-link" ng-click="copyToClipboard(secondLink)">Copy</button>
+                </div>
+                <div class="info">
+                    <span class="clicks">
+                        {{secondLinkClick}} clicks
+                    </span>
+                    <span class="shares">
+                        {{secondLinkShares}} shares
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="footer">
+            <img class="userimage" ng-src='{{userImage}}' alt="userdummy" ng-cloak/>
+            <span class="username">{{user}}</span>
+            <span class="settings_icon">
+                <a class="glyphicon glyphicon-cog" ng-click="openSettings()"></a>
+            </span>
+        </div>
+    </div>
+    <span ng-show="showPage === 'settings'">
+        <div ng-include="'js/app/partial/settings.html'" ></div>
+    </span>
 </div>

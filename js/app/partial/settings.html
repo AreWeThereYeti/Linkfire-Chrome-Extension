@@ -1,0 +1,20 @@
+<div class="settings" ng-controller="SettingsCtrl">
+    <div class="settings_inner">
+        <div class="container">
+            <a class="glyphicon close glyphicon-remove" ng-click="storeChanges()"></a>
+            <h1>Settings</h1>
+            <div class="customize-auto">
+                <form ng-submit="save()">
+                    <input id="auto-copy" class="css-checkbox" name="checkbox" type="checkbox"/>
+                    <label for="auto-copy" ng-click="toggleAutoCopy()" class="css-label"></label>
+                    <span>Copy new url to clipboard automatically</span>
+                </form>
+            </div>
+            <div class="user-info">
+                <span class="log_out"></span>
+                <span class="loggedinas">Signed in as: {{user}}</span>
+                <a class="sign-out" ng-click="signOut()" >Sign out</a>
+            </div>
+        </div>
+    </div>
+</div>

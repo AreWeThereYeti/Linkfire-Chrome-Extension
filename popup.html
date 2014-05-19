@@ -9,13 +9,14 @@
     </head>
     <body id="popup" ng-cloak>
     <div class="container">
-       <div id="logo"></div>
        <div ng-view></div>
     </div>
+        <!--<script src="js/lib/background.js"></script>-->
         <script src="js/lib/sha1.js"></script>
-        <script src="js/app/popup.js"></script>
+        <script src="js/app/main.js"></script>
         <script src="js/app/settings.js"></script>
         <script src="js/app/login.js"></script>        
-        <script src="js/app/load.js"></script>  
+        <script src="js/app/services/apiservice.js"></script>
+        <script src="js/app/services/chromeservice.js"></script>
     </body>
 </html>
