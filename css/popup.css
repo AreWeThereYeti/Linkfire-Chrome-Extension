@@ -83,14 +83,14 @@ p{
 
 .copied-container{
     position: absolute;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
     padding: 15px;
     left: 29%;
-    top: 10%;
+    top: 9%;
     box-shadow: 0px 0px 10px 3px #757575;
-    -webkit-animation: fadein 0.2s; /* Safari and Chrome */
-    animation: fadein 0.2s;
+    -webkit-animation: fadein 0.4s; /* Safari and Chrome */
+    animation: fadein 0.4s;
 }
 
 .imagecontainer{
@@ -260,6 +260,8 @@ button[disabled], html input[disabled]{
 .list-items .clicks, .list-items .shares{
     color: #7c899a;
     margin-right: 15px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .list-items .shares:before{

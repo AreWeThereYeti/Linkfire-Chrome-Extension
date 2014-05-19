@@ -1,8 +1,8 @@
 ﻿{
-  "name": "Linkfire Chrome Extension",
+  "name": "Linkfire",
   "version": "0.1",
   "manifest_version": 2,
-  "description": "Linkfire  Chrome extensions",
+  "description": "Create and share your links with the Linkfire Chrome extension.",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

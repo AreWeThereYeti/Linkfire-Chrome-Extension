@@ -20,12 +20,11 @@
 
     // checking storage for UI settings
     storageCheckService.getSettings(function(settings){
-
       // initiates extension behavior for default state autoCopy=true
-      if(JSON.stringify(settings).length > 2){
+      if(JSON.stringify(settings)){
         $scope.autoCopy = settings.copy;
       }else{
-        $scope.autoCopy =true;
+        $scope.autoCopy = false;
       }
 
 			// gets browser tab info
