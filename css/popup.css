@@ -94,12 +94,12 @@ p{
 }
 
 .imagecontainer{
-    margin-top: 5px;
-    margin-left: -20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .imagecontainer .top{
-    height: 150px;
+    height: 125px;
     width: auto;
     margin: auto auto;
     display: block;
@@ -108,9 +108,8 @@ p{
 }
 
 .url-data{
-    margin-top: 10px;
     height: 45px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: block;
 }
 
@@ -232,25 +231,35 @@ button[disabled], html input[disabled]{
     margin-bottom: 5px;
 }
 
+.recent{
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #7C899A;
+}
+
 /*List items*/
 .list-items{
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .list-items button{
     background-color: #7c899a;
 }
 
+.list-items button:hover{
+    background-color: #5b6470;
+}
+
 .list-items img{
     vertical-align: top;
-    width: 100px;
-    height: 100px;
-    background-size: 100px 100px;
+    width: 80px;
+    height: 80px;
+    background-size: 80px 80px;
 }
 
 .list-items .clicks, .list-items .shares{
     color: #7c899a;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .list-items .shares:before{
@@ -276,11 +285,11 @@ button[disabled], html input[disabled]{
 
 .list-items .info{
     margin-left: 10px;
-    margin-top: 15px;
+    margin-top: 13px;
 }
 
 .list-text-container{
-    width: 297px;
+    width: 317px;
 }
 
 .list-text{
@@ -310,8 +319,8 @@ button[disabled], html input[disabled]{
 
 .settings_icon a:hover{
     color: #428BCA;
-    -webkit-transition:.2s;
-    transition:.2s;
+    -webkit-transition: .2s;
+    transition: .2s;
     cursor: pointer;
 }
 /*Settings*/
@@ -385,7 +394,7 @@ button[disabled], html input[disabled]{
 }
 
 .footer{
-    margin-top: -5px;
+
 }
 
 .userimage{

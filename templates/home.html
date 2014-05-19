@@ -1,10 +1,10 @@
 <div>
     <div ng-class="{blur : showPage ==='settings'}">
         <div class="imagecontainer">
-            <div class="copied-container" ng-show="autoCopy && fetching == false">
-                <span class="copied" >Copied to clipboard</span>
-            </div>
             <div class="image-overlay">
+                <div class="copied-container" ng-show="autoCopy && fetching == false">
+                    <span class="copied" >Copied to clipboard</span>
+                </div>
                 <img class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
             </div>
         </div>
@@ -24,6 +24,7 @@
             </div>
         </div>
         <div class="line"></div>
+        <h2 class="recent">Recent links</h2>
         <div class="list-items">
             <img class="inlineblock" ng-src="{{firstLinkImage}}" alt="list image"/>
             <div class="inlineblock list-text-container">

@@ -56,6 +56,7 @@
                     $scope.description = data.description;
                   }
 
+
   /*                for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
                     console.log('Her')
                     var imgPlaceholder = new Image();
