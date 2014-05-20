@@ -76,6 +76,7 @@
                   }
 
                   storageCheckService.getLink(function(previous){
+                    $scope.copied = false;
                     if(previous.original_url === data.url){
                       $scope.newLink = previous.shortlink;
                       console.log('Urlen existerer allerede i db. previous.url er : ' + previous.original_url + 'og data.url er : ' + data.url)
@@ -135,10 +136,12 @@
     /*listener for close settings*/
     $scope.$on('toggleAutoCopy', function(event, copy) {
       $scope.autoCopy = copy;
+      console.log('Vi lytter på toggleAutoCopy og sætter autoCopy til : ' + $scope.autoCopy);
     });
 
   // function for copying to the clipboard
     $scope.copyToClipboard = function(text){
+      $scope.copied = true;
 	    var copyDiv = document.createElement('div');
 	    copyDiv.contentEditable = true;
 	    document.body.appendChild(copyDiv);

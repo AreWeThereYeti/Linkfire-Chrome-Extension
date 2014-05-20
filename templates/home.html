@@ -2,7 +2,7 @@
     <div ng-class="{blur : showPage ==='settings'}">
         <div class="imagecontainer">
             <div class="image-overlay">
-                <div class="copied-container" ng-show="autoCopy && fetching == false">
+                <div class="copied-container" ng-show="copied === true">
                     <span class="copied" >Copied to clipboard</span>
                 </div>
                 <img class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="new-link">
                     <span class="link">{{newLink}}</span>
-                    <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching" ng-show="!autoCopy" ng-cloak>Copy</button>
+                    <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching" ng-show="autoCopy === false" ng-cloak>Copy</button>
                 </div>
             </div>
         </div>
