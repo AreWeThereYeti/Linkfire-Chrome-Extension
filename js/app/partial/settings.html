@@ -5,9 +5,9 @@
             <h1>Settings</h1>
             <div class="customize-auto">
                 <form ng-submit="save()">
-                    <input id="auto-copy" class="css-checkbox" name="checkbox" type="checkbox"/>
+                    <input id="auto-copy" class="css-checkbox" ng-checked="autoCopy" name="checkbox" type="checkbox"/>
                     <label for="auto-copy" ng-click="toggleAutoCopy()" class="css-label"></label>
-                    <span>Copy new url to clipboard automatically</span>
+                    <span>Copy new url to clipboard automatically {{autoCopy}}</span>
                 </form>
             </div>
             <div class="user-info">

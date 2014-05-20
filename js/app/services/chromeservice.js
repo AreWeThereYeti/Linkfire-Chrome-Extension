@@ -46,11 +46,9 @@ myApp.service('storageCheckService', function($q) {
   this.getSettings = function(callback) {
     var settings = {};
     chrome.storage.local.get(['copy', 'url'], function (storage) {
-      if (JSON.stringify(storage).length > 0){
         settings.copy = storage.copy;
         settings.url = storage.url;
         callback(settings);
-      }
     });
   };
 });

@@ -79,11 +79,9 @@
                     $scope.copied = false;
                     if(previous.original_url === data.url){
                       $scope.newLink = previous.shortlink;
-                      console.log('Urlen existerer allerede i db. previous.url er : ' + previous.original_url + 'og data.url er : ' + data.url)
                       $scope.getHistory(userData,2,3);
                     }
                     else{
-                      console.log('URLen existerer ikke. Den oprettes nu previous.url er : ' + previous.original_url + 'og data.url er : ' + data.url);
                       apiService.createLinkfireLink(postData, data)
                         .then(function(data){
                           //  Get latest links
@@ -126,6 +124,12 @@
 
     $scope.openSettings = function(){
       $scope.showPage = 'settings';
+      //note: I have made a service that gets copy+url settings 'storageCheckService.getSettings(function(settings))'
+      // checks chrome local storage for settings and sets variables accordingly
+      chrome.storage.local.get(['copy'], function(result) {
+        $scope.copy = result.copy;
+        $scope.$apply();
+      });
     };
 
     /*listener for close settings*/

@@ -1,33 +1,28 @@
 myApp.controller("SettingsCtrl", function ($scope, $location){
 
-  //note: I have made a service that gets copy+url settings 'storageCheckService.getSettings(function(settings))'
-	// checks chrome local storage for settings and sets variables accordingly
-	chrome.storage.local.get(['copy'], function(result) {
-    $scope.copy = result.copy;
-    $scope.$apply();
-  });
-
-  console.log('copy er : ' + $scope.copy);
-
   $scope.toggleAutoCopy = function(){
-    $scope.copy = !$scope.copy;
-    console.log( '$scope.copy i toggleautocopy er : ' + $scope.copy);
-    $scope.$emit('toggleAutoCopy', $scope.copy);
+    if($scope.autoCopy == true){
+      $scope.autoCopy = false;
+    }
+    else{
+      $scope.autoCopy = true;
+    }
+    $scope.$emit('toggleAutoCopy', $scope.autoCopy);
     chrome.storage.local.set({
-      'copy': $scope.copy
+      'copy': $scope.autoCopy
     }, function(){
       $scope.$apply();
     });
-};
+  };
 
   // checks chrome local storage for settings and sets variables accordingly
 	$scope.storeChanges = function(){
-    $scope.$emit('closemodal');
     chrome.storage.local.set({
       'copy': $scope.copy
     }, function(){
       $scope.$apply();
     });
+    $scope.$emit('closemodal');
   };
 
   // sign out user and clear all data in chrome local storage
