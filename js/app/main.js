@@ -73,12 +73,14 @@
 
 //                  Set thumbnail to first thumbnail in array
                   if (data.thumbnails) {
-                    if($scope.doesFileExist(data.thumbnails[0]) === true) {
-                      $scope.imgThumb = data.thumbnails[0];
+                    try{
+                        if($scope.doesFileExist(data.thumbnails[0])){
+                          $scope.imgThumb = data.thumbnails[0];
+                        }
+                    }catch (err){
+                      console.log('error : ' + err);
+                      $scope.imgThumb = 'img/linkfire_logo.png'
                     }
-                    else{
-                        $scope.imgThumb = 'img/linkfire_logo.png'
-                      }
                   }
                   else{
                     $scope.imgThumb = 'img/linkfire_logo.png'
@@ -236,10 +238,15 @@
     xhr.open('HEAD', url, false);
     xhr.send();
 
-    if (xhr.status == "404") {
-      return false;
-    } else {
-      return true;
+    try{
+      if (xhr.status == "404") {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    catch(err){
+
     }
   }
 });
