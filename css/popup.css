@@ -1,6 +1,5 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
-    opacity: 0;
 }
 
 @font-face {
@@ -13,15 +12,22 @@
     src: url('../fonts/Aller/Light/aller-light-webfont.eot?') format('eot'), url('../fonts/Aller/Light/aller-light-webfont.woff') format('woff'), url('../fonts/Light/Regular/aller-light-webfont.ttf') format('truetype');
 }
 
+*{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    outline: 0;
+    -webkit-font-smoothing: antialiased;
+    zoom: 1;
+}
+
 html{
     width: 440px;
-    height: 600px;
+    height: 580px;
 }
 
 
 body {
     width: 440px;
-    height: 600px;
+    height: 580px;
     font-family: 'allerregular', sans-serif;
     color: #535353;
     background: #f7f7f7;
@@ -48,11 +54,12 @@ p{
 
 #popup {
     width: 440px;
-    height: 600px;
+    height: 580px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    overflow: hidden;
 }
 
 /*Login*/
@@ -89,8 +96,8 @@ p{
     left: 29%;
     top: 9%;
     box-shadow: 0px 0px 10px 3px #757575;
-    -webkit-animation: fadein 0.4s; /* Safari and Chrome */
-    animation: fadein 0.4s;
+    -webkit-animation: fadeinout 4s forwards; /* Safari and Chrome */
+    animation: fadeinout 43s forwards;
 }
 
 .imagecontainer{
@@ -413,10 +420,10 @@ button[disabled], html input[disabled]{
 }
 
 input[type=checkbox].css-checkbox {
-    /*display:none;*/
+    display:none;
 }
 
-input[type=checkbox].css-checkbox + label.css-label {
+.customize-auto .css-label{
     height: 29px;
     width: 29px;
     display: inline-block;
@@ -429,7 +436,7 @@ input[type=checkbox].css-checkbox + label.css-label {
     background-size: 30px 60px;
 }
 
-input[type=checkbox].css-checkbox:checked + label.css-label {
+.customize-auto .checked {
     background-position: 0 -30px;
 }
 

@@ -1,4 +1,4 @@
-<div>
+<div ng-cloak>
     <div ng-class="{blur : showPage ==='settings'}">
         <div class="imagecontainer">
             <div class="image-overlay">
@@ -26,7 +26,7 @@
         <div class="line"></div>
         <h2 class="recent">Recent links</h2>
         <div class="list-items">
-            <img class="inlineblock" ng-src="{{firstLinkImage}}" alt="list image"/>
+            <img class="inlineblock" ng-class="{fadein : firstLinkImage}" ng-src="{{firstLinkImage}}" alt="list image"/>
             <div class="inlineblock list-text-container">
                 <div class="list-text">
                   <span ng-class="{load : !firstLink}"></span>

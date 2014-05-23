@@ -18,7 +18,7 @@ myApp.controller("SettingsCtrl", function ($scope, $location){
   // checks chrome local storage for settings and sets variables accordingly
 	$scope.storeChanges = function(){
     chrome.storage.local.set({
-      'copy': $scope.copy
+      'copy': $scope.autoCopy
     }, function(){
       $scope.$apply();
     });
