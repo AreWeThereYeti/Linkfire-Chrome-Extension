@@ -4,7 +4,6 @@
   "manifest_version": 2,
   "description": "Create and share your links with the Linkfire Chrome extension.",
   "icons": {
-    "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
   },
