@@ -1,5 +1,6 @@
 // service for performing chrome.storage checks. chrome.storage checks are asynchronous
 myApp.service('storageCheckService', function($q) {
+  //  Set user data
   this.setId = function(args) {
     console.log('args is ' + args)
     chrome.storage.local.set({
@@ -10,6 +11,7 @@ myApp.service('storageCheckService', function($q) {
     });
   };
 
+//  Get user data
   this.getAuth = function(callback) {
     var user = {};
     chrome.storage.local.get(['user','token','id', 'image'],
@@ -25,6 +27,7 @@ myApp.service('storageCheckService', function($q) {
     );
   };
 
+//  Set original link and shortened link in chrome local storage
   this.setLink = function(original_link, shortlink) {
     chrome.storage.local.set({
       'original_url': original_link,
@@ -32,6 +35,7 @@ myApp.service('storageCheckService', function($q) {
     });
   };
 
+//  Get original link and shortened link from chrome local storage
   this.getLink = function(callback) {
     var linkdata = {};
     chrome.storage.local.get(['original_url', 'shortlink'], function (storage) {
@@ -43,14 +47,13 @@ myApp.service('storageCheckService', function($q) {
     });
   };
 
+//  Get settingss
   this.getSettings = function(callback) {
     var settings = {};
     chrome.storage.local.get(['copy', 'url'], function (storage) {
-      if (JSON.stringify(storage).length > 0){
         settings.copy = storage.copy;
         settings.url = storage.url;
         callback(settings);
-      }
     });
   };
 });
