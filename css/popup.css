@@ -285,8 +285,9 @@ button[disabled], html input[disabled]{
     float: right;
     margin-top: 9px;
     /* height: 20px; */
-    width: 77%;
+    width: 81%;
     vertical-align: middle;
+    margin-right: -20px;
 }
 
 /*List items*/
