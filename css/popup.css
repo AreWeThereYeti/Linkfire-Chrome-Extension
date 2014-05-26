@@ -129,6 +129,11 @@ p{
     overflow: hidden;
 }
 
+.url-data .title{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 input:focus{
     outline: 0;
 }
@@ -432,7 +437,6 @@ button[disabled], html input[disabled]{
     width: 40px;
     height: 40px;
     background-size: 40px 40px;
-    border-radius: 50%;
 }
 
 .username{

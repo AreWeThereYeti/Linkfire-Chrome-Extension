@@ -56,6 +56,13 @@ myApp.service('storageCheckService', function($q) {
         callback(settings);
     });
   };
+
+  //  Set original link and shortened link in chrome local storage
+  this.setSettings = function(copy) {
+    chrome.storage.local.set({
+      'copy': copy
+    });
+  };
 });
 
 // service for retrieving info from the active browser tab
