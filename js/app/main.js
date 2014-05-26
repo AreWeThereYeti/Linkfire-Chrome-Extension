@@ -74,18 +74,18 @@
 
 //                  Set thumbnail to first thumbnail in array
                   if (data.thumbnails) {
-                    try{
-                        if($scope.doesFileExist(data.thumbnails[0])){
+                      if($scope.checkIfRemoteFileExists(data.thumbnails[0])){
                           $scope.imgThumb = data.thumbnails[0];
-                        }
-                    }catch (err){
-                      console.log('error : ' + err);
-                      $scope.imgThumb = 'img/linkfire_logo.png'
-                    }
+                      }
+                    else{
+                        $scope.imgThumb = 'img/linkfire_logo.png'
+                      }
+
                   }
                   else{
                     $scope.imgThumb = 'img/linkfire_logo.png'
                   }
+
 
 //                  getlink services. Fetching shortened and original link from db
                   storageCheckService.getLink(function(previous){
@@ -105,6 +105,15 @@
                       $scope.getHistory(userData,2,3);
                     }
                     else{
+
+
+//                      CHECK OM FILEN EXISTERER!
+                      if($scope.doesFileExist(data.thumbnails[0])){
+                        console.log('nottin')
+//                        data.thumbnails[0] =$scope.imgThumb = 'img/linkfire_logo.png'
+                      }else{
+                        data.thumbnails[0] = $scope.imgThumb = 'img/linkfire_logo.png'
+                      };
 
 //                      If link is not duplicate, use fetchdata to create a new shortlink and fetch it from linkfire
                       apiService.createLinkfireLink(postData, data)
@@ -171,15 +180,17 @@
     });
 
   // function for copying to the clipboard
-    $scope.copyToClipboard = function(text){
-      $scope.copied = true;
-      if($scope.copied = true){
-        var timer = $timeout(
-          function() {
-            $scope.copied = false;
-          },
-          4000
-        );
+    $scope.copyToClipboard = function(text, showCopy){
+      if(showCopy === true){
+        $scope.copied = true;
+        if($scope.copied = true){
+          var timer = $timeout(
+            function() {
+              $scope.copied = false;
+            },
+            4000
+          );
+        }
       }
 	    var copyDiv = document.createElement('div');
 	    copyDiv.contentEditable = true;
@@ -240,24 +251,31 @@
       }, function(error){
         console.log = "Error handling your request!";
       });
+  };
+
+  $scope.doesFileExist = function(fileToCheck)
+  {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', fileToCheck, false);
+    http.send();
+    return http.status!=404;
   }
 
-  $scope.doesFileExist = function(url){
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', url, false);
-    xhr.send();
+  $scope.checkIfRemoteFileExists = function(fileToCheck)
+  {
+    var tmp=new Image;
+    tmp.src=fileToCheck;
 
-    try{
-      if (xhr.status == "404") {
-        return false;
-      } else {
-        return true;
-      }
+    if(tmp.complete){
+      console.log(fileToCheck+" is available");
+      return true;
     }
-    catch(err){
-
+    else{
+      console.log(fileToCheck+" is not available");
+      return false;
     }
   }
+
 });
 
 

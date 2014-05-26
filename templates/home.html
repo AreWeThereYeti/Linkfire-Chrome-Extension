@@ -3,12 +3,11 @@
         <div class="imagecontainer">
             <div class="image-overlay">
                 <div class="copied-container" ng-show="copied === true">
-                    <span class="copied" >Copied to clipboard</span>
+                    <span class="copied" >Shortened and copied to clipboard</span>
                 </div>
                 <img  ng-class="{fadein : imgThumb, hide : imgThumb === undefined}" class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
             </div>
         </div>
-
         <div class="layout-default">
             <div class="onCreatedlink">
                 <div class="url-thumbnail"></div>
@@ -19,7 +18,7 @@
                 </div>
                 <div class="new-link">
                     <span  class="link">{{newLink}}</span>
-                    <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching"  ng-show="autoCopy === false" ng-cloak>Copy</button>
+                    <button class="copy-link" ng-click="copyToClipboard(newLink, true)" ng-disabled="fetching"  ng-show="autoCopy === false" ng-cloak>Copy</button>
                 </div>
             </div>
         </div>
@@ -40,8 +39,7 @@
                         {{firstLinkShares}} shares
                     </span>
                 </div>
-                <button class="copy-link" ng-click="copyToClipboard(firstLink)">Copy</button>
-
+                <button class="copy-link" ng-click="copyToClipboard(firstLink, false)">Copy</button>
             </div>
         </div>
         <div class="list-items">
@@ -60,7 +58,7 @@
                         {{secondLinkShares}} shares
                     </span>
                 </div>
-                <button class="copy-link" ng-click="copyToClipboard(secondLink)">Copy</button>
+                <button class="copy-link" ng-click="copyToClipboard(secondLink, false)">Copy</button>
             </div>
         </div>
         <div class="line"></div>

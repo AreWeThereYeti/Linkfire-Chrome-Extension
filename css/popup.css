@@ -1,4 +1,4 @@
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+[ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
 }
 
@@ -112,14 +112,14 @@ p{
 
 .copied-container{
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(124, 137, 154, 0.85);
+    color: #FFF;
     border-radius: 5px;
-    padding: 15px;
-    left: 29%;
+    padding: 17px;
+    left: 18%;
     top: 9%;
-    box-shadow: 0px 0px 10px 3px #757575;
-    -webkit-animation: fadeinout 4s forwards; /* Safari and Chrome */
-    animation: fadeinout 43s forwards;
+     -webkit-animation: fadeinout 4s forwards;
+    animation: fadeinout 4s forwards;
     z-index: 5;
 }
 
@@ -330,6 +330,8 @@ button[disabled], html input[disabled]{
     display: inline-block;
     vertical-align: middle;
 }
+
+
 .list-items .clicks:before{
     content: " ";
     background-image: url("../img/clicks.png");
@@ -339,6 +341,19 @@ button[disabled], html input[disabled]{
     height: 14px;
     display: inline-block;
     vertical-align: middle;
+}
+
+.list-items .check-link-copied{
+    background-image: url("../img/check.png");
+    background-repeat: no-repeat;
+    height: 32px;
+    width: 44px;
+    position: absolute;
+    left: 40px;
+    top: 345px;
+}
+.list-items .check-link-copied.second{
+    top: 450px;
 }
 
 .list-items .info{
