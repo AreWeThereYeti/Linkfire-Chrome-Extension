@@ -35,8 +35,6 @@ html{
 }
 
 body {
-    width: 440px;
-    height: 580px;
     font-family: 'allerregular', sans-serif;
     color: #535353;
     background: #f7f7f7;
@@ -62,7 +60,6 @@ p{
 }
 
 #popup {
-    width: 440px;
     height: 580px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -83,6 +80,22 @@ p{
     margin-bottom: 40px;
     height: 77px;
     width: 108px;
+}
+
+.social-placeholder{
+    background-image: url("../img/facebooktwitter.jpg");
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 50px;
+}
+
+.social-placeholder-text{
+    font-size: 16px;
+    text-align: center;
+    color: #9C9C9C;
+    width: 400px;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .copied:before{
@@ -107,11 +120,12 @@ p{
     box-shadow: 0px 0px 10px 3px #757575;
     -webkit-animation: fadeinout 4s forwards; /* Safari and Chrome */
     animation: fadeinout 43s forwards;
+    z-index: 5;
 }
 
 .imagecontainer{
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .imagecontainer .top{
@@ -136,6 +150,11 @@ p{
     color: #535353;
     font-size: 14px;
     overflow: hidden;
+}
+
+.url-data .title{
+    font-size: 16px;
+    font-weight: bold;
 }
 
 input:focus{
@@ -213,6 +232,8 @@ button[disabled], html input[disabled]{
     display: inline-block;
     margin-left: 15px;
     margin-top: 7px;
+    -webkit-user-select: initial;
+    user-select: initial;
 }
 
 .new-link span{
@@ -258,13 +279,24 @@ button[disabled], html input[disabled]{
     color: #7C899A;
 }
 
+.recent:after{
+    content: " ";
+    border-top: 1px solid #EBEBEB;
+    float: right;
+    margin-top: 9px;
+    /* height: 20px; */
+    width: 77%;
+    vertical-align: middle;
+}
+
 /*List items*/
 .list-items{
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .list-items button{
     background-color: #7c899a;
+    margin-top: -60px;
 }
 
 .list-items button:hover{
@@ -272,10 +304,12 @@ button[disabled], html input[disabled]{
 }
 
 .list-items img{
+    opacity: 0;
     vertical-align: top;
     width: 80px;
     height: 80px;
     background-size: 80px 80px;
+    -webkit-transition: all 0.3s ease;
 }
 
 .list-items .clicks, .list-items .shares{
@@ -317,16 +351,26 @@ button[disabled], html input[disabled]{
 
 .list-text{
     height: 50px;
-    background-color: #FFF;
     margin-left: 10px;
-    height: 50px;
+    height: 35px;
+    margin-top: 5px;
 }
 
 .list-text .link{
-    margin-left: 15px;
     display: inline-block;
-    margin-top: 15px;
     color: #9C9C9C;
+}
+
+.link-title{
+    width: 230px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: -10px;
+    color: #7C899A;
+    font-weight: bold;
 }
 
 .settings_icon{
@@ -406,7 +450,7 @@ button[disabled], html input[disabled]{
 
 .sign-out{
     cursor: pointer;
-
+    font-size: 12px;
 }
 
 .sign-out:hover{
@@ -424,7 +468,6 @@ button[disabled], html input[disabled]{
     width: 40px;
     height: 40px;
     background-size: 40px 40px;
-    border-radius: 50%;
 }
 
 .username{
@@ -464,9 +507,18 @@ label.css-label {
     user-select: none;
 }
 
+.fadeinds{
+    color: red;
+}
+
 /*Helpers*/
+
+.imagehide{
+    opacity: 0;
+}
+
 .hide, .ng-hide{
-    display: none !important;
+    visibility: hidden !important;
 }
 
 .show, .ng-show{
@@ -488,16 +540,17 @@ label.css-label {
 }
 
 .error{
+    transition: all 1s ease-in;
+    opacity: 0;
     position: absolute;
     top: 0px;
     width: 100%;
-    background-color: #a20e12;
+    background-color: #d45c5c;
     color: white;
     left: 0;
     padding: 10px;
     margin: auto auto;
     text-align: center;
-    -webkit-animation: fadeinout 4s forwards; /* Safari and Chrome */
 }
 
 /*Loader*/
@@ -518,7 +571,7 @@ label.css-label {
     border-top: 1px solid #EBEBEB;
     margin-top: 15px;
     margin-left: -20px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     margin-right: -20px;
 }
 
@@ -537,6 +590,19 @@ label.css-label {
 .unblur{
     -webkit-filter: blur(0px);
     filter: blur(0px);
+}
+
+.fadein {
+    opacity:0;  /* make things invisible upon start */
+
+    -webkit-animation:fadein ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    animation:fadein ease-in 1;
+
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    animation-fill-mode:forwards;
+
+    -webkit-animation-duration: 0.3s;
+    animation-duration:         0.3s;
 }
 
 /* Safari and Chrome */

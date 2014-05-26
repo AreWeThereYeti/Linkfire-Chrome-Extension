@@ -23,10 +23,11 @@
     // checking storage for UI settings
     storageCheckService.getSettings(function(settings){
       // initiates extension behavior for default state autoCopy=true
-      if(JSON.stringify(settings)){
+      if(JSON.stringify(settings.copy) !== undefined){
         $scope.autoCopy = settings.copy;
-      }else{
+      }else if(JSON.stringify(settings.copy) === undefined){
         $scope.autoCopy = false;
+        storageCheckService.setSettings($scope.autoCopy)
       }
 
 			// gets browser tab info
@@ -73,12 +74,14 @@
 
 //                  Set thumbnail to first thumbnail in array
                   if (data.thumbnails) {
-                    if($scope.doesFileExist(data.thumbnails[0]) === true) {
-                      $scope.imgThumb = data.thumbnails[0];
+                    try{
+                        if($scope.doesFileExist(data.thumbnails[0])){
+                          $scope.imgThumb = data.thumbnails[0];
+                        }
+                    }catch (err){
+                      console.log('error : ' + err);
+                      $scope.imgThumb = 'img/linkfire_logo.png'
                     }
-                    else{
-                        $scope.imgThumb = 'img/linkfire_logo.png'
-                      }
                   }
                   else{
                     $scope.imgThumb = 'img/linkfire_logo.png'
@@ -165,7 +168,6 @@
     /*listener for close settings*/
     $scope.$on('toggleAutoCopy', function(event, copy) {
       $scope.autoCopy = copy;
-      console.log('Vi lytter på toggleAutoCopy og sætter autoCopy til : ' + $scope.autoCopy);
     });
 
   // function for copying to the clipboard
@@ -175,7 +177,6 @@
         var timer = $timeout(
           function() {
             $scope.copied = false;
-            console.log('Vi er i timer og copied er : ' + $scope.copied)
           },
           4000
         );
@@ -198,6 +199,11 @@
 //      Get 2 latest links
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector1])
           .then(function(data){
+            if(data.link.title === ''){
+              $scope.firstLinkTitle ='No title available';
+            }else{
+              $scope.firstLinkTitle = data.link.title;
+            }
             $scope.firstLink = data.link.url;
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
@@ -214,6 +220,11 @@
 
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector2])
           .then(function(data){
+            if(data.link.title === ''){
+              $scope.secondLinkTitle ='No title available';
+            }else{
+              $scope.secondLinkTitle = data.link.title;
+            }
             $scope.secondLink = data.link.url;
             $scope.secondLinkClick = data.link.stats.clicks;
             $scope.secondLinkShares = data.link.stats.shares;
@@ -236,10 +247,15 @@
     xhr.open('HEAD', url, false);
     xhr.send();
 
-    if (xhr.status == "404") {
-      return false;
-    } else {
-      return true;
+    try{
+      if (xhr.status == "404") {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    catch(err){
+
     }
   }
 });

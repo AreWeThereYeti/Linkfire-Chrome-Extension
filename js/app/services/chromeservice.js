@@ -2,7 +2,6 @@
 myApp.service('storageCheckService', function($q) {
   //  Set user data
   this.setId = function(args) {
-    console.log('args is ' + args)
     chrome.storage.local.set({
       'user': args.user.email,
       'token': args.token,
@@ -54,6 +53,13 @@ myApp.service('storageCheckService', function($q) {
         settings.copy = storage.copy;
         settings.url = storage.url;
         callback(settings);
+    });
+  };
+
+  //  Set original link and shortened link in chrome local storage
+  this.setSettings = function(copy) {
+    chrome.storage.local.set({
+      'copy': copy
     });
   };
 });

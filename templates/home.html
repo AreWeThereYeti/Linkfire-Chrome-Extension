@@ -5,7 +5,7 @@
                 <div class="copied-container" ng-show="copied === true">
                     <span class="copied" >Copied to clipboard</span>
                 </div>
-                <img class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
+                <img  ng-class="{fadein : imgThumb, hide : imgThumb === undefined}" class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
             </div>
         </div>
 
@@ -14,24 +14,23 @@
                 <div class="url-thumbnail"></div>
                 <div class="url-data">
                     <span ng-class="{load : fetching}"></span>
-                    <p>{{title}}</p>
-                    <p>{{description}}</p>
+                    <p ng-class="{fadein : title, hide : title === undefined}" class="title">{{title}}</p>
+                    <p ng-class="{fadein : description, hide : description === undefined}" class="description">{{description}}</p>
                 </div>
                 <div class="new-link">
-                    <span class="link">{{newLink}}</span>
-                    <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching" ng-show="autoCopy === false" ng-cloak>Copy</button>
+                    <span  class="link">{{newLink}}</span>
+                    <button class="copy-link" ng-click="copyToClipboard(newLink)" ng-disabled="fetching"  ng-show="autoCopy === false" ng-cloak>Copy</button>
                 </div>
             </div>
         </div>
-        <div class="line"></div>
         <h2 class="recent">Recent links</h2>
         <div class="list-items">
-            <img class="inlineblock" ng-class="{fadein : firstLinkImage}" ng-src="{{firstLinkImage}}" alt="list image"/>
+            <img class="inlineblock" ng-class="{fadein : firstLinkImage, imagehide : firstLinkImage === undefined}" ng-src="{{firstLinkImage}}" alt="list image"/>
             <div class="inlineblock list-text-container">
                 <div class="list-text">
                   <span ng-class="{load : !firstLink}"></span>
-                  <span class="link"><span>{{firstLink}}</span></span>
-                  <button class="copy-link" ng-click="copyToClipboard(firstLink)">Copy</button>
+                    <span class="link-title">{{firstLinkTitle}}</span>
+                    <span class="link"><span>{{firstLink}}</span></span>
                 </div>
                 <div class="info">
                     <span class="clicks">
@@ -41,15 +40,17 @@
                         {{firstLinkShares}} shares
                     </span>
                 </div>
+                <button class="copy-link" ng-click="copyToClipboard(firstLink)">Copy</button>
+
             </div>
         </div>
         <div class="list-items">
-            <img class="inlineblock list-image" ng-src="{{secondLinkImage}}" alt="list image"/>
+            <img class="inlineblock list-image" ng-class="{fadein : secondLinkImage, imagehide : secondLinkImage === undefined}" ng-src="{{secondLinkImage}}" alt="list image"/>
             <div class="inlineblock list-text-container">
                 <div class="list-text">
                     <span ng-class="{load : !secondLink}"></span>
+                    <span class="link-title">{{secondLinkTitle}}</span>
                     <span class="link">{{secondLink}}</span>
-                    <button class="copy-link" ng-click="copyToClipboard(secondLink)">Copy</button>
                 </div>
                 <div class="info">
                     <span class="clicks">
@@ -59,6 +60,7 @@
                         {{secondLinkShares}} shares
                     </span>
                 </div>
+                <button class="copy-link" ng-click="copyToClipboard(secondLink)">Copy</button>
             </div>
         </div>
         <div class="line"></div>

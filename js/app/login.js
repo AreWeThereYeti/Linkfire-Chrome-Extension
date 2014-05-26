@@ -1,4 +1,4 @@
-myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope){
+myApp.controller("LoginController", function ($location, loginService, storageCheckService, $scope, $timeout){
   // checking auth status. will redirect to /home if user is logged in
 	storageCheckService.getAuth(function(status){
 
@@ -22,6 +22,13 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 				$location.path("/home");			
 			},function(error){
         $scope.login_in = false;
+        var timer = $timeout(
+          function() {
+            $scope.login_in = true;
+          },
+          4000
+        );
+
         //handle Error
 				if(error==400){
 					console.log("Error: "+error+". Missing or invalid parameters.");
