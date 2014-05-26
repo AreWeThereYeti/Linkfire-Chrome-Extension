@@ -357,8 +357,10 @@ button[disabled], html input[disabled]{
     white-space: nowrap;
     overflow: hidden;
     display: inline-block;
-    font-size: 17px;
+    font-size: 15px;
     margin-bottom: -10px;
+    color: #7C899A;
+    font-weight: bold;
 }
 
 .settings_icon{
