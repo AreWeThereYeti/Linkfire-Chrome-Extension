@@ -101,8 +101,8 @@ p{
 }
 
 .imagecontainer{
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .imagecontainer .top{
@@ -249,13 +249,24 @@ button[disabled], html input[disabled]{
     color: #7C899A;
 }
 
+.recent:after{
+    content: " ";
+    border-top: 1px solid #EBEBEB;
+    float: right;
+    margin-top: 9px;
+    /* height: 20px; */
+    width: 77%;
+    vertical-align: middle;
+}
+
 /*List items*/
 .list-items{
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .list-items button{
     background-color: #7c899a;
+    margin-top: -60px;
 }
 
 .list-items button:hover{
@@ -330,16 +341,24 @@ button[disabled], html input[disabled]{
 
 .list-text{
     height: 50px;
-    background-color: #FFF;
     margin-left: 10px;
-    height: 50px;
+    height: 35px;
+    margin-top: 5px;
 }
 
 .list-text .link{
-    margin-left: 15px;
     display: inline-block;
-    margin-top: 15px;
     color: #9C9C9C;
+}
+
+.link-title{
+    width: 230px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 17px;
+    margin-bottom: -10px;
 }
 
 .settings_icon{
@@ -419,7 +438,7 @@ button[disabled], html input[disabled]{
 
 .sign-out{
     cursor: pointer;
-
+    font-size: 12px;
 }
 
 .sign-out:hover{
@@ -532,7 +551,7 @@ label.css-label {
     border-top: 1px solid #EBEBEB;
     margin-top: 15px;
     margin-left: -20px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     margin-right: -20px;
 }
 
