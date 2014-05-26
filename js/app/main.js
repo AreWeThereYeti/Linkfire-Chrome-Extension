@@ -177,7 +177,6 @@
         var timer = $timeout(
           function() {
             $scope.copied = false;
-            console.log('Vi er i timer og copied er : ' + $scope.copied)
           },
           4000
         );
