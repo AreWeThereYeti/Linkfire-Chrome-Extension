@@ -25,7 +25,7 @@
         </div>
         <h2 class="recent">Recent links</h2>
         <div class="list-items">
-            <img class="inlineblock" ng-class="{fadein : firstLinkImage, hide : firstLinkImage === undefined}" ng-src="{{firstLinkImage}}" alt="list image"/>
+            <img class="inlineblock" ng-class="{fadein : firstLinkImage, imagehide : firstLinkImage === undefined}" ng-src="{{firstLinkImage}}" alt="list image"/>
             <div class="inlineblock list-text-container">
                 <div class="list-text">
                   <span ng-class="{load : !firstLink}"></span>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="list-items">
-            <img class="inlineblock list-image" ng-class="{fadein : secondLinkImage, hide : secondLinkImage === undefined}" ng-src="{{secondLinkImage}}" alt="list image"/>
+            <img class="inlineblock list-image" ng-class="{fadein : secondLinkImage, imagehide : secondLinkImage === undefined}" ng-src="{{secondLinkImage}}" alt="list image"/>
             <div class="inlineblock list-text-container">
                 <div class="list-text">
                     <span ng-class="{load : !secondLink}"></span>

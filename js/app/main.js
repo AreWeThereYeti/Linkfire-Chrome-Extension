@@ -168,7 +168,6 @@
     /*listener for close settings*/
     $scope.$on('toggleAutoCopy', function(event, copy) {
       $scope.autoCopy = copy;
-      console.log('Vi lytter på toggleAutoCopy og sætter autoCopy til : ' + $scope.autoCopy);
     });
 
   // function for copying to the clipboard

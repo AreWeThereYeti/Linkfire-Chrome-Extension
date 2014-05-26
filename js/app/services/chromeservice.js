@@ -2,7 +2,6 @@
 myApp.service('storageCheckService', function($q) {
   //  Set user data
   this.setId = function(args) {
-    console.log('args is ' + args)
     chrome.storage.local.set({
       'user': args.user.email,
       'token': args.token,

@@ -111,6 +111,7 @@ p{
     box-shadow: 0px 0px 10px 3px #757575;
     -webkit-animation: fadeinout 4s forwards; /* Safari and Chrome */
     animation: fadeinout 43s forwards;
+    z-index: 5;
 }
 
 .imagecontainer{
@@ -498,10 +499,12 @@ label.css-label {
 
 /*Helpers*/
 
-.hide, .ng-hide{
+.imagehide{
     opacity: 0;
+}
+
+.hide, .ng-hide{
     visibility: hidden !important;
-    /*display: none !important;*/
 }
 
 .show, .ng-show{
@@ -577,14 +580,15 @@ label.css-label {
 
 .fadein {
     opacity:0;  /* make things invisible upon start */
+
     -webkit-animation:fadein ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
     animation:fadein ease-in 1;
 
     -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
     animation-fill-mode:forwards;
 
-    -webkit-animation-duration:0.2s;
-    animation-duration: 0.2s;
+    -webkit-animation-duration: 0.3s;
+    animation-duration:         0.3s;
 }
 
 /* Safari and Chrome */

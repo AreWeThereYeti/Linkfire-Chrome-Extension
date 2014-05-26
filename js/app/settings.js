@@ -1,7 +1,6 @@
 myApp.controller("SettingsCtrl", function ($scope, $location){
 
-  console.log('autocopy er : ' + $scope.autoCopy);
-
+//  Toggles autoCopy on click on parent
   $scope.toggleAutoCopy = function(){
     if($scope.autoCopy == true){
       $scope.autoCopy = false;
