@@ -106,7 +106,6 @@
                     }
                     else{
 
-
 //                      CHECK OM FILEN EXISTERER!
                       if($scope.doesFileExist(data.thumbnails[0])){
                         console.log('nottin')
