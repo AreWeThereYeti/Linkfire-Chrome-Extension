@@ -200,7 +200,11 @@
 //      Get 2 latest links
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector1])
           .then(function(data){
-            $scope.firstLinkTitle = data.link.title;
+            if(data.link.title === ''){
+              $scope.firstLinkTitle ='No title available';
+            }else{
+              $scope.firstLinkTitle = data.link.title;
+            }
             $scope.firstLink = data.link.url;
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
@@ -217,7 +221,11 @@
 
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector2])
           .then(function(data){
-            $scope.secondLinkTitle = data.link.title;
+            if(data.link.title === ''){
+              $scope.secondLinkTitle ='No title available';
+            }else{
+              $scope.secondLinkTitle = data.link.title;
+            }
             $scope.secondLink = data.link.url;
             $scope.secondLinkClick = data.link.stats.clicks;
             $scope.secondLinkShares = data.link.stats.shares;

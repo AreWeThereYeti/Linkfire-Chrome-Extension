@@ -26,8 +26,6 @@ html{
 
 
 body {
-    width: 440px;
-    height: 580px;
     font-family: 'allerregular', sans-serif;
     color: #535353;
     background: #f7f7f7;
@@ -53,7 +51,6 @@ p{
 }
 
 #popup {
-    width: 440px;
     height: 580px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -74,6 +71,22 @@ p{
     margin-bottom: 40px;
     height: 77px;
     width: 108px;
+}
+
+.social-placeholder{
+    background-image: url("../img/facebooktwitter.jpg");
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 50px;
+}
+
+.social-placeholder-text{
+    font-size: 16px;
+    text-align: center;
+    color: #9C9C9C;
+    width: 400px;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .copied:before{
@@ -209,6 +222,8 @@ button[disabled], html input[disabled]{
     display: inline-block;
     margin-left: 15px;
     margin-top: 7px;
+    -webkit-user-select: initial;
+    user-select: initial;
 }
 
 .new-link span{
@@ -274,32 +289,12 @@ button[disabled], html input[disabled]{
 }
 
 .list-items img{
-    opacity: 1;
+    opacity: 0;
     vertical-align: top;
     width: 80px;
     height: 80px;
     background-size: 80px 80px;
     -webkit-transition: all 0.3s ease;
-}
-.fade-hide, .fade-show {
-    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-}
-
-.fade-hide {
-    opacity:1;
-}
-.fade-hide.fade-hide-active {
-    opacity:0;
-}
-
-.fade-show {
-    opacity:0;
-}
-.fade-show.fade-show-active {
-    opacity:1;
 }
 
 .list-items .clicks, .list-items .shares{
@@ -497,7 +492,12 @@ label.css-label {
     user-select: none;
 }
 
+.fadeinds{
+    color: red;
+}
+
 /*Helpers*/
+
 .hide, .ng-hide{
     opacity: 0;
     visibility: hidden !important;
@@ -523,16 +523,17 @@ label.css-label {
 }
 
 .error{
+    transition: all 1s ease-in;
+    opacity: 0;
     position: absolute;
     top: 0px;
     width: 100%;
-    background-color: #a20e12;
+    background-color: #d45c5c;
     color: white;
     left: 0;
     padding: 10px;
     margin: auto auto;
     text-align: center;
-    -webkit-animation: fadeinout 4s; /* Safari and Chrome */
 }
 
 /*Loader*/
@@ -572,6 +573,18 @@ label.css-label {
 .unblur{
     -webkit-filter: blur(0px);
     filter: blur(0px);
+}
+
+.fadein {
+    opacity:0;  /* make things invisible upon start */
+    -webkit-animation:fadein ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    animation:fadein ease-in 1;
+
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    animation-fill-mode:forwards;
+
+    -webkit-animation-duration:0.2s;
+    animation-duration: 0.2s;
 }
 
 /* Safari and Chrome */
