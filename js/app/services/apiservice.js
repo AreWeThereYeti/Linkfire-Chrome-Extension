@@ -7,11 +7,19 @@ myApp.service('apiService', function($http, $q) {
 //    Check here for existing link
     var d = $q.defer();
     var postImage = '';
+    var postVideo = '';
+//    check for image
     if(data.thumbnails){
       postImage = data.thumbnails[0];
     }
     else{
       postImage = ''
+    }
+//    check for video
+    if(data.media !=undefined && data.media.opengraph != undefined && data.media.opengraph.video != undefined){
+      postVideo = data.media.opengraph.video;
+    }else{
+      postVideo = '';
     }
 
     $http({
@@ -24,6 +32,7 @@ myApp.service('apiService', function($http, $q) {
         "url"        :    data.url,
         "description":    data.description,
         "title"      :    data.title,
+        "video"      :    postVideo,
         "thumbnail" :     postImage
       }
     }).success(function (data, status, headers) {
@@ -59,10 +68,6 @@ myApp.service('apiService', function($http, $q) {
         "url":    postData.url
       }
     }).success(function(data, status, headers){
-      console.log('Scrape data er : ' + data);
-//      save linkdata in db
-
-
       d.resolve(data);
 
     }).error(function(data, status, headers){

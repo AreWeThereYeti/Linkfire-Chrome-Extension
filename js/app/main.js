@@ -79,7 +79,7 @@
                     $scope.copied = false;
 
 //                    Check if link is duplicate
-                    if(previous.original_url === data.url){
+                    if(previous.original_url === !data.url){
 
 //                      Set link to previous link if original url is duplicate
                       $scope.newLink = previous.shortlink;
