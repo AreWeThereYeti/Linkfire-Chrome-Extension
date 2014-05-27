@@ -21,7 +21,6 @@
 
 html{
     width: 440px;
-    height: 600px;
     overflow: hidden;
 }
 
@@ -96,6 +95,13 @@ p{
     width: 400px;
     display: inline-block;
     margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+
+/*main*/
+.main{
+    height: 600px;
 }
 
 .copied:before{
@@ -257,7 +263,8 @@ button[disabled], html input[disabled]{
     color: #F04E23;
     text-decoration: none;
     font-size: 10px;
-    margin-left: 10px;
+    display: block;
+    margin-bottom: 20px;
 }
 
 .user-login a:hover{
@@ -298,7 +305,7 @@ button[disabled], html input[disabled]{
 
 .list-items button{
     background-color: #7c899a;
-    margin-top: -67px;
+    margin-top: -69px;
 }
 
 .list-items button:hover{
@@ -359,7 +366,7 @@ button[disabled], html input[disabled]{
 
 .list-items .info{
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 23px;
 }
 
 .list-text-container{
@@ -376,7 +383,7 @@ button[disabled], html input[disabled]{
 .list-text .link{
     display: inline-block;
     color: #9C9C9C;
-    margin-top: 5px;
+    margin-top: 7px;
 }
 
 .link-title{
@@ -479,7 +486,7 @@ button[disabled], html input[disabled]{
 }
 
 .footer{
-
+    margin-top: -2px;
 }
 
 .userimage{
@@ -637,8 +644,13 @@ label.css-label {
     -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
     animation-fill-mode:forwards;
 
-    -webkit-animation-duration: 0.3s;
-    animation-duration:         0.3s;
+    -webkit-animation-duration: 0.4s;
+    animation-duration:         0.4s;
+}
+
+.quick {
+    -webkit-animation-duration: 0.2s;
+    animation-duration:         0.2s;
 }
 
 /* Safari and Chrome */
@@ -648,6 +660,19 @@ label.css-label {
     }
     100% {
         opacity: 1;
+    }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes scale {
+    0% {
+        -webkit-transform: scale(0.5); /* Chrome, Safari, Opera */
+    }
+    90% {
+        -webkit-transform: scale(1.2); /* Chrome, Safari, Opera */
+    }
+    100% {
+        -webkit-transform: scale(1); /* Chrome, Safari, Opera */
     }
 }
 
