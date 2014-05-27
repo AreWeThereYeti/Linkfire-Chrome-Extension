@@ -43,7 +43,7 @@ myApp.controller("LoginController", function ($location, loginService, storageCh
 	}
 	
 	$scope.goToLinkfire = function(){
-	  var newURL = "http://linkfire.com/";
+	  var newURL = "http://linkfire.com?mode=signup";
 		chrome.tabs.create({ url: newURL });	
 	}
 });

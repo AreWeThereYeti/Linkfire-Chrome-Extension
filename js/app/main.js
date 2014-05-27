@@ -59,33 +59,20 @@
                     $scope.description = data.description;
                   }
 
-//                  Check for dimensions of image. not being used now as it causes extension to crash
-  /*                for (i = data.thumbnailsPending.length - 1; i >= 0; i++) {
-                    console.log('Her')
-                    var imgPlaceholder = new Image();
-                    imgPlaceholder.src = data.thumbnailsPending[i];
-                    console.log(imgPlaceholder.height)
-                    if(imgPlaceholder.height > 150){
-                      var img = data.thumbnailsPending[i];
-                      $scope.imgThumb = imgPlaceholder.src;
-                      break;
-                    }
-                  }*/
-
 //                  Set thumbnail to first thumbnail in array
-                  if (data.thumbnails) {
-                      if($scope.checkIfRemoteFileExists(data.thumbnails[0])){
+                  if (data.thumbnails !== undefined) {
+                      if($scope.doesFileExist(data.thumbnails[0])){
                           $scope.imgThumb = data.thumbnails[0];
                       }
                     else{
+//                        data.thumbnails[0]) is not defined. Set image to default and data.thumbnails[0] to ''
                         $scope.imgThumb = 'img/linkfire_logo.png'
+                        data.thumbnails[0] = '';
                       }
-
                   }
                   else{
                     $scope.imgThumb = 'img/linkfire_logo.png'
                   }
-
 
 //                  getlink services. Fetching shortened and original link from db
                   storageCheckService.getLink(function(previous){
@@ -105,14 +92,6 @@
                       $scope.getHistory(userData,2,3);
                     }
                     else{
-
-//                      CHECK OM FILEN EXISTERER!
-                      if($scope.doesFileExist(data.thumbnails[0])){
-                        console.log('nottin')
-//                        data.thumbnails[0] =$scope.imgThumb = 'img/linkfire_logo.png'
-                      }else{
-                        data.thumbnails[0] = $scope.imgThumb = 'img/linkfire_logo.png'
-                      };
 
 //                      If link is not duplicate, use fetchdata to create a new shortlink and fetch it from linkfire
                       apiService.createLinkfireLink(postData, data)
@@ -178,7 +157,7 @@
       $scope.autoCopy = copy;
     });
 
-  // function for copying to the clipboard
+  // function for copying to the clipboard. Also resets
     $scope.copyToClipboard = function(text, showCopy){
       if(showCopy === true){
         $scope.copied = true;
@@ -202,6 +181,7 @@
 	    document.body.removeChild(copyDiv);
 	};
 
+//  Get recent links. Selector1 and Selector2 specifies the link you want to fetch. Selector1 is the latest
   $scope.getHistory = function (userdata, selector1, selector2) {
     //  Get latest links
     apiService.getAllLinkfireLinks(userData)
@@ -209,6 +189,7 @@
 //      Get 2 latest links
         apiService.getLatestLinkfireLinks(userData,data.links[data.links.length - selector1])
           .then(function(data){
+            // Set link title, description and image to data
             if(data.link.title === ''){
               $scope.firstLinkTitle ='No title available';
             }else{
@@ -252,6 +233,7 @@
       });
   };
 
+//  Checks existence of file/url
   $scope.doesFileExist = function(fileToCheck)
   {
     var http = new XMLHttpRequest();
@@ -259,22 +241,6 @@
     http.send();
     return http.status!=404;
   }
-
-  $scope.checkIfRemoteFileExists = function(fileToCheck)
-  {
-    var tmp=new Image;
-    tmp.src=fileToCheck;
-
-    if(tmp.complete){
-      console.log(fileToCheck+" is available");
-      return true;
-    }
-    else{
-      console.log(fileToCheck+" is not available");
-      return false;
-    }
-  }
-
 });
 
 

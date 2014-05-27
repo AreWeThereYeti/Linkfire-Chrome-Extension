@@ -1,22 +1,26 @@
 ﻿<!DOCTYPE html>
 <html ng-app="AngularChromeEx" ng-csp>
     <head>
-        <script src="js/lib/angular.min.js"></script>
-        <script src="js/lib/angular-route.min.js"></script>
+        <!-- build:css css/app-name.min.css -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/popup.css">
+        <!-- endbuild -->
+
+        <!-- build:js js/app-name.min.js -->
+        <script src="js/lib/angular.min.js"></script>
+        <script src="js/lib/angular-route.min.js"></script>
         <script src="js/app/app.js"></script>
+        <script src="js/lib/sha1.js"></script>
+        <script src="js/app/main.js"></script>
+        <script src="js/app/settings.js"></script>
+        <script src="js/app/login.js"></script>
+        <script src="js/app/services/apiservice.js"></script>
+        <script src="js/app/services/chromeservice.js"></script>
+        <!-- endbuild -->
     </head>
     <body id="popup" ng-cloak>
     <div class="container">
        <div ng-view></div>
     </div>
-        <!--<script src="js/lib/background.js"></script>-->
-        <script src="js/lib/sha1.js"></script>
-        <script src="js/app/main.js"></script>
-        <script src="js/app/settings.js"></script>
-        <script src="js/app/login.js"></script>        
-        <script src="js/app/services/apiservice.js"></script>
-        <script src="js/app/services/chromeservice.js"></script>
     </body>
 </html>
