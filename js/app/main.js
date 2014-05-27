@@ -199,7 +199,7 @@
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
             if(data.link.image.default){
-              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk/api' + data.link.image.default;
+              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
             }
             else{
               $scope.firstLinkImage = 'img/default_link.png'
@@ -220,7 +220,7 @@
             $scope.secondLinkClick = data.link.stats.clicks;
             $scope.secondLinkShares = data.link.stats.shares;
             if(data.link.image.default){
-              $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk/api' + data.link.image.default;
+              $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
             }
             else{
               $scope.secondLinkImage = 'img/default_link.png'
@@ -236,6 +236,7 @@
 //  Checks existence of file/url
   $scope.doesFileExist = function(fileToCheck)
   {
+
     var http = new XMLHttpRequest();
     http.open('HEAD', fileToCheck, false);
     http.send();
