@@ -531,17 +531,19 @@ label.css-label {
     background-size: 21px 16px;
     height: 16px;
     width: 21px;
+    -webkit-animation-duration: 0.1s;
+    animation-duration:         0.1s;
 }
 
 .second-recent{
     position: absolute;
-    top: 345px;
+    top: 350px;
     left: 345px;
 }
 
 .third-recent{
     position: absolute;
-    top: 445px;
+    top: 450px;
     left: 345px;
 }
 
