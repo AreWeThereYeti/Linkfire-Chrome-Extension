@@ -158,18 +158,7 @@
     });
 
   // function for copying to the clipboard. Also resets
-    $scope.copyToClipboard = function(text, showCopy){
-      if(showCopy === true){
-        $scope.copied = true;
-        if($scope.copied = true){
-          var timer = $timeout(
-            function() {
-              $scope.copied = false;
-            },
-            4000
-          );
-        }
-      }
+    $scope.copyToClipboard = function(text){
 	    var copyDiv = document.createElement('div');
 	    copyDiv.contentEditable = true;
 	    document.body.appendChild(copyDiv);
@@ -180,6 +169,18 @@
 	    document.execCommand("Copy", false, null);
 	    document.body.removeChild(copyDiv);
 	};
+
+  $scope.showCopied = function(elm){
+    $scope.showCopy = elm;
+    if($scope.showCopy !== ''){
+      var timer = $timeout(
+        function() {
+          $scope.showCopy = '';
+        },
+        4000
+      );
+    }
+  };
 
 //  Get recent links. Selector1 and Selector2 specifies the link you want to fetch. Selector1 is the latest
   $scope.getHistory = function (userdata, selector1, selector2) {

@@ -2,7 +2,7 @@
     <div ng-class="{blur : showPage ==='settings'}">
         <div class="imagecontainer">
             <div class="image-overlay">
-                <div class="copied-container" ng-show="copied === true">
+                <div class="copied-container" ng-show="showCopy == 'first'">
                     <span class="copied" >Shortened and copied to clipboard</span>
                 </div>
                 <img  ng-class="{fadein : imgThumb, hide : imgThumb === undefined}" class="top" ng-src='{{imgThumb}}' alt="top_img" ng-cloak>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="new-link">
                     <span  class="link">{{newLink}}</span>
-                    <button class="copy-link" ng-click="copyToClipboard(newLink, true)" ng-disabled="fetching"  ng-show="autoCopy === false" ng-cloak>Copy</button>
+                    <button class="copy-link" ng-click="copyToClipboard(newLink); showCopied('first')" ng-disabled="fetching"  ng-show="autoCopy === false" ng-cloak>Copy</button>
                 </div>
             </div>
         </div>
@@ -39,7 +39,8 @@
                         {{firstLinkShares}} shares
                     </span>
                 </div>
-                <button class="copy-link" ng-click="copyToClipboard(firstLink, false)">Copy</button>
+                <span class="recent-copied second-recent" ng-class="{fadein : showCopy == 'second', imagehide : showCopy != 'second'}" ></span>
+                <button class="copy-link" ng-click="copyToClipboard(firstLink); showCopied('second')">Copy</button>
             </div>
         </div>
         <div class="list-items">
@@ -58,7 +59,8 @@
                         {{secondLinkShares}} shares
                     </span>
                 </div>
-                <button class="copy-link" ng-click="copyToClipboard(secondLink, false)">Copy</button>
+                <span class="recent-copied third-recent" ng-class="{fadein : showCopy == 'third', imagehide : showCopy != 'third'}" ></span>
+                <button class="copy-link" ng-click="copyToClipboard(secondLink); showCopied('third')">Copy</button>
             </div>
         </div>
         <div class="line"></div>

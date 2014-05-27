@@ -61,7 +61,6 @@ p{
 }
 
 #popup {
-    height: 580px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -526,8 +525,24 @@ label.css-label {
     user-select: none;
 }
 
-.fadeinds{
-    color: red;
+.recent-copied{
+    background-image: url("../img/check.png");
+    background-repeat: no-repeat;
+    background-size: 21px 16px;
+    height: 16px;
+    width: 21px;
+}
+
+.second-recent{
+    position: absolute;
+    top: 345px;
+    left: 345px;
+}
+
+.third-recent{
+    position: absolute;
+    top: 445px;
+    left: 345px;
 }
 
 /*Helpers*/
