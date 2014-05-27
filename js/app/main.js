@@ -79,7 +79,7 @@
                     $scope.copied = false;
 
 //                    Check if link is duplicate
-                    if(previous.original_url === !data.url){
+                    if(previous.original_url === data.url){
 
 //                      Set link to previous link if original url is duplicate
                       $scope.newLink = previous.shortlink;
@@ -199,7 +199,7 @@
             $scope.firstLinkClick = data.link.stats.clicks;
             $scope.firstLinkShares = data.link.stats.shares;
             if(data.link.image.default){
-              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
+              $scope.firstLinkImage = 'http://linkfire.test.dev.rocketlabs.dk/api' + data.link.image.default;
             }
             else{
               $scope.firstLinkImage = 'img/default_link.png'
@@ -220,7 +220,7 @@
             $scope.secondLinkClick = data.link.stats.clicks;
             $scope.secondLinkShares = data.link.stats.shares;
             if(data.link.image.default){
-              $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk' + data.link.image.default;
+              $scope.secondLinkImage = 'http://linkfire.test.dev.rocketlabs.dk/api' + data.link.image.default;
             }
             else{
               $scope.secondLinkImage = 'img/default_link.png'

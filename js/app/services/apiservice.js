@@ -1,9 +1,9 @@
 // sevice for contacting the linkfire api
 myApp.service('apiService', function($http, $q) {
 
-  //Api domain
-  var testdomain = 'http://linkfire.test.dev.rocketlabs.dk';
-  var livedomain = 'http://linkfire.com/api';
+  //Apis
+  var test = 'http://linkfire.test.dev.rocketlabs.dk/api';
+  var live = 'http://linkfire.com/api';
 
 //  Creates link using information from the scrape function
   this.createLinkfireLink = function(postData, data) {
@@ -31,7 +31,7 @@ myApp.service('apiService', function($http, $q) {
 
     $http({
       method: 'POST',
-      url     :   testdomain + '/1.0/links/create',
+      url     :   test + '/1.0/links/create',
       headers :   {'Content-type': 'application/json'},
       data    :   {
         "token"      :    postData.token,
@@ -67,7 +67,7 @@ myApp.service('apiService', function($http, $q) {
     var d = $q.defer();
     $http({
       method	: 'GET',
-      url		  : testdomain + '/1.0/links/scrape',
+      url		  : test + '/1.0/links/scrape',
       headers : {'Content-Type' : 'application/json'},
       params    : {
         "token":  postData.token,
@@ -99,7 +99,7 @@ myApp.service('apiService', function($http, $q) {
     // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
     $http({
       method	: 'GET',
-      url		  : testdomain + '/1.0/links/get-created-by-user',
+      url		  : test + '/1.0/links/get-created-by-user',
       headers : {'Content-Type' : 'application/json'},
       params    : {
         "token":  postData.token,
@@ -130,7 +130,7 @@ myApp.service('apiService', function($http, $q) {
     // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
     $http({
       method	: 'GET',
-      url		  : testdomain + '/1.0/links/get',
+      url		  : test + '/1.0/links/get',
       headers : {'Content-Type' : 'application/json'},
       params  : {
         "token"   :  userData.token,
