@@ -1,19 +1,26 @@
 // sevice for contacting the linkfire api
 myApp.service('apiService', function($http, $q) {
 
+  //Api domain
+  var testdomain = 'http://linkfire.test.dev.rocketlabs.dk';
+  var livedomain = 'http://linkfire.com/api';
+
 //  Creates link using information from the scrape function
   this.createLinkfireLink = function(postData, data) {
 
 //    Check here for existing link
     var d = $q.defer();
+
+//    media containers
     var postImage = '';
     var postVideo = '';
+
 //    check for image
     if(data.thumbnails){
       postImage = data.thumbnails[0];
     }
     else{
-      postImage = ''
+      postImage = '';
     }
 //    check for video
     if(data.media !=undefined && data.media.opengraph != undefined && data.media.opengraph.video != undefined){
@@ -24,7 +31,7 @@ myApp.service('apiService', function($http, $q) {
 
     $http({
       method: 'POST',
-      url     :   'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/create',
+      url     :   testdomain + '/1.0/links/create',
       headers :   {'Content-type': 'application/json'},
       data    :   {
         "token"      :    postData.token,
@@ -60,7 +67,7 @@ myApp.service('apiService', function($http, $q) {
     var d = $q.defer();
     $http({
       method	: 'GET',
-      url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/scrape',
+      url		  : testdomain + '/1.0/links/scrape',
       headers : {'Content-Type' : 'application/json'},
       params    : {
         "token":  postData.token,
@@ -92,7 +99,7 @@ myApp.service('apiService', function($http, $q) {
     // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
     $http({
       method	: 'GET',
-      url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/get-created-by-user',
+      url		  : testdomain + '/1.0/links/get-created-by-user',
       headers : {'Content-Type' : 'application/json'},
       params    : {
         "token":  postData.token,
@@ -123,7 +130,7 @@ myApp.service('apiService', function($http, $q) {
     // queries /api/1.0/links/create for new link when no previous link has been created from the current url during this user login session
     $http({
       method	: 'GET',
-      url		  : 'http://linkfire.test.dev.rocketlabs.dk/api/1.0/links/get',
+      url		  : testdomain + '/1.0/links/get',
       headers : {'Content-Type' : 'application/json'},
       params  : {
         "token"   :  userData.token,
